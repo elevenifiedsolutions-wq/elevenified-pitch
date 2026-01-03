@@ -1062,12 +1062,31 @@
             /* Slide 4 - Flow diagram mobile fix */
             #slide-4>div[style*="display: flex"] {
                 flex-direction: column !important;
-                gap: 20px !important;
+                gap: 16px !important;
+                max-width: 100% !important;
             }
 
-            #slide-4>div[style*="display: flex"]>div[style*="font-size: 2rem"] {
+            /* Arrows between flow elements - rotate to point down */
+            #slide-4>div>div[style*="font-size: 2rem"] {
                 transform: rotate(90deg);
                 margin: 0 !important;
+                font-size: 1.5rem !important;
+            }
+
+            /* Flow element boxes - make smaller on mobile */
+            #slide-4>div>div[style*="text-align: center"]>div[style*="width: 100px"] {
+                width: 80px !important;
+                height: 80px !important;
+            }
+
+            /* Flow element icons - make smaller */
+            #slide-4>div>div[style*="text-align: center"]>div>div[style*="font-size: 3.5rem"] {
+                font-size: 2.5rem !important;
+            }
+
+            /* Flow element labels */
+            #slide-4>div>div[style*="text-align: center"]>h3 {
+                font-size: 0.9rem !important;
             }
         }
     </style>
