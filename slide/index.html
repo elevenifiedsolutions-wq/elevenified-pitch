@@ -8,6 +8,8 @@
     <link rel="icon" type="image/svg+xml" href="../assets/icons/fav-icon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="../design/colors.css">
+    <link rel="stylesheet" href="../design/components.css">
     <style>
         :root {
             /* Backgrounds */
@@ -535,32 +537,11 @@
         }
 
         /* Standardized Primary Button applied to CTA */
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        /* Slide Deck Specific Overrides */
+        .btn-primary.slide-cta {
             padding: 20px 48px;
-            border-radius: 100px;
-            font-weight: 700;
             font-size: 1.5rem;
-            letter-spacing: 0.5px;
-            text-decoration: none;
             margin-top: 40px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: none;
-
-            /* Neon Volt Solid (Standard Primary) */
-            background: var(--primary);
-            /* using slide's equivalent of neon-volt */
-            color: #000;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
-        }
-
-        .cta-button:hover {
-            background: #2ECC40;
-            box-shadow: 0 0 35px rgba(57, 255, 20, 0.6);
-            transform: translateY(-2px);
         }
 
         /* Navigation */
@@ -706,25 +687,8 @@
             align-items: center;
         }
 
-        .unified-nav .nav-link {
-            padding: 8px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            text-decoration: none;
-            color: var(--text);
-            background: rgba(255, 255, 255, 0.08);
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .unified-nav .nav-link:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #FFFFFF;
-            color: #FFFFFF;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        }
+        /* Standardized Nav Button - See ../design/components.css */
+        /* .nav-link replaced by .btn-nav */
 
         /* Ensure nav sits above slide navigation */
         .nav-dots,
@@ -1117,7 +1081,7 @@
 
             <!-- Navigation Links -->
             <div class="nav-links">
-                <a href="mailto:siddharth@elevenified.com" class="nav-link">Contact</a>
+                <a href="mailto:siddharth@elevenified.com" class="btn-nav">Contact</a>
             </div>
         </div>
     </nav>
@@ -1557,7 +1521,7 @@
                     </div>
                 </div>
                 <a href="https://forms.gle/ghjHV3ko32tfwD1J9" target="_blank" rel="noopener noreferrer"
-                    class="cta-button">Apply for Pilot Partnership →</a>
+                    class="btn-primary slide-cta">Apply for Pilot Partnership →</a>
             </div>
         </div>
 
