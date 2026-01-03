@@ -534,23 +534,33 @@
             font-weight: 600;
         }
 
+        /* Standardized Primary Button applied to CTA */
         .cta-button {
-            display: inline-block;
-            background: var(--gradient-synergy);
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px 48px;
             border-radius: 100px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
             text-decoration: none;
             margin-top: 40px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+
+            /* Neon Volt Solid (Standard Primary) */
+            background: var(--primary);
+            /* using slide's equivalent of neon-volt */
+            color: #000;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
         }
 
         .cta-button:hover {
+            background: #2ECC40;
+            box-shadow: 0 0 35px rgba(57, 255, 20, 0.6);
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
         }
 
         /* Navigation */
@@ -709,9 +719,11 @@
         }
 
         .unified-nav .nav-link:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(57, 255, 20, 0.05);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #FFFFFF;
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         /* Ensure nav sits above slide navigation */

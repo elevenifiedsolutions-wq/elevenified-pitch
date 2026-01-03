@@ -130,22 +130,30 @@
             background-clip: text;
         }
 
+        /* Standardized Mini-Button (Nav) */
         .nav-btn {
+            display: inline-flex;
+            align-items: center;
             padding: 8px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            text-decoration: none;
-            color: var(--text-main);
-            background: rgba(255, 255, 255, 0.08);
-            font-size: 0.95rem;
+            border-radius: 100px;
             font-weight: 600;
-            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Secondary "Ghost" Style */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-main);
         }
 
         .nav-btn:hover {
+            background: rgba(57, 255, 20, 0.1);
             border-color: var(--neon-volt);
             color: var(--neon-volt);
-            background: rgba(57, 255, 20, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
         }
 
         /* --- HERO SECTION --- */
@@ -239,40 +247,59 @@
             margin-bottom: 60px;
         }
 
+        /* Standardized Primary Button */
         .btn-primary {
-            background: var(--neon-volt);
-            color: #000;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 16px 40px;
-            border-radius: 50px;
-            text-decoration: none;
+            border-radius: 100px;
             font-weight: 700;
             font-size: 1.1rem;
-            box-shadow: 0 0 20px var(--neon-volt-glow);
-            transition: transform 0.2s;
-            border: none;
+            letter-spacing: 0.5px;
+            text-decoration: none;
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+
+            /* Neon Volt Solid */
+            background: var(--neon-volt);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-volt-glow);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 40px var(--neon-volt-glow);
+            box-shadow: 0 0 35px var(--neon-volt-glow);
+            background: #2ECC40;
+            /* Slightly darker/richer on hover or keep same */
         }
 
+        /* Standardized Secondary Button */
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.12);
-            color: var(--text-main);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
+            border-radius: 100px;
             font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.2s;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Glassy Ghost */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-main);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: var(--text-main);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #FFFFFF;
+            color: #FFFFFF;
             transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         /* --- SECTIONS --- */
