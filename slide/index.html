@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elevenified - Pilot Proposal</title>
-    <link rel="icon" type="image/svg+xml" href="SVG/fav-icon.svg">
+    <link rel="icon" type="image/svg+xml" href="../SVG/fav-icon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
@@ -777,11 +777,242 @@
             .slide {
                 padding: 90px 40px 40px;
             }
+
+            /* Typography - Tablet */
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            .logo-text {
+                font-size: 4rem;
+            }
+
+            .tagline {
+                font-size: 1.8rem;
+            }
+
+            .eleven-equation {
+                font-size: 3.5rem;
+                gap: 16px;
+            }
+
+            .eleven-equation .result {
+                font-size: 4.5rem;
+            }
+
+            .stat-highlight {
+                font-size: 4rem;
+            }
+
+            /* Grid layouts - Tablet */
+            .pain-points,
+            .solution-grid,
+            .tech-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .demo-steps {
+                flex-wrap: wrap;
+            }
+
+            .demo-step {
+                flex: 1 1 calc(50% - 10px);
+            }
+
+            .ux-container {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .cta-offers {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            /* Navigation controls */
+            .nav-arrows {
+                right: 20px;
+                bottom: 20px;
+            }
+
+            .slide-number {
+                left: 20px;
+                bottom: 20px;
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 640px) {
             .slide {
-                padding: 84px 30px 30px;
+                padding: 84px 20px 30px;
+            }
+
+            /* Typography - Mobile */
+            h1 {
+                font-size: 2.2rem;
+                margin-bottom: 16px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+            }
+
+            p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+            .logo-text {
+                font-size: 2.8rem;
+            }
+
+            .tagline {
+                font-size: 1.4rem;
+            }
+
+            .eleven-equation {
+                font-size: 2.5rem;
+                gap: 12px;
+                margin: 24px 0;
+            }
+
+            .eleven-equation .result {
+                font-size: 3.2rem;
+            }
+
+            .stat-highlight {
+                font-size: 3rem;
+                margin: 16px 0;
+            }
+
+            /* Grid layouts - Mobile (single column) */
+            .pain-points,
+            .solution-grid,
+            .tech-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .demo-steps {
+                flex-direction: column;
+            }
+
+            .demo-step {
+                width: 100%;
+            }
+
+            .demo-step:not(:last-child)::after {
+                display: none;
+            }
+
+            /* Cards */
+            .premium-card {
+                padding: 20px;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .card-desc {
+                font-size: 0.9rem;
+            }
+
+            .icon-box {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+            }
+
+            /* Language slide */
+            .hinglish-example {
+                padding: 24px;
+            }
+
+            .hinglish-example .quote {
+                font-size: 1.3rem;
+            }
+
+            .language-flags {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            /* UX cards */
+            .ux-card {
+                padding: 28px 24px;
+            }
+
+            .ux-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .ux-card p {
+                font-size: 1rem;
+            }
+
+            .ux-icon {
+                font-size: 3.5rem;
+            }
+
+            /* CTA slide */
+            .cta-button {
+                font-size: 1.2rem;
+                padding: 16px 32px;
+            }
+
+            /* Navigation controls - smaller on mobile */
+            .nav-dots {
+                bottom: 20px;
+                gap: 8px;
+            }
+
+            .nav-dot {
+                width: 8px;
+                height: 8px;
+            }
+
+            .nav-arrows {
+                right: 12px;
+                bottom: 12px;
+                gap: 8px;
+            }
+
+            .nav-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .slide-number {
+                left: 12px;
+                bottom: 12px;
+                font-size: 0.75rem;
+            }
+
+            /* Remove decorative glow elements on mobile for performance */
+            .slide::before,
+            .slide::after {
+                display: none;
             }
         }
     </style>
@@ -793,7 +1024,7 @@
         <div class="nav-container">
             <!-- Logo + Brand -->
             <a href="https://www.elevenified.com" class="nav-logo" aria-label="Elevenified Home">
-                <img src="SVG/master-icon.svg" alt="Elevenified Logo">
+                <img src="../SVG/master-icon.svg" alt="Elevenified Logo">
                 <span class="nav-brand-text" aria-hidden="true">Elevenified</span>
             </a>
 
