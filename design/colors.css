@@ -43,13 +43,13 @@
   --gradient-brand: linear-gradient(90deg, var(--synergy-gold) 0%, var(--synergy-blue) 40%, var(--neon-volt) 100%);
 }
 
-/* Gradients that use the variables */
+/* Helper classes that use the brand gradient */
 .synergy-gradient {
-  background: linear-gradient(135deg, var(--synergy-blue), var(--synergy-gold));
+  background: var(--gradient-brand);
 }
 
 .synergy-text {
-  background: linear-gradient(135deg, var(--synergy-blue), var(--synergy-gold));
+  background: var(--gradient-brand);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
