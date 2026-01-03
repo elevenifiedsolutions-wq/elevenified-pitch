@@ -39,8 +39,8 @@
   --transition-normal: 300ms;
   --transition-slow: 500ms;
   /* Brand Identity (Gold → Blue → Green: Human + AI = Result) */
-  /* Color stops tuned for natural flow: Gold-Blue is ~35%, Blue-Green fills rest (adjacent on color wheel) */
-  --gradient-brand: linear-gradient(90deg, var(--synergy-gold) 0%, var(--synergy-blue) 35%, var(--neon-volt) 100%);
+  /* Color stops tuned for natural flow: Gold-Blue is ~40%, Blue-Green fills rest (adjacent on color wheel) */
+  --gradient-brand: linear-gradient(90deg, var(--synergy-gold) 0%, var(--synergy-blue) 40%, var(--neon-volt) 100%);
 }
 
 /* Gradients that use the variables */
