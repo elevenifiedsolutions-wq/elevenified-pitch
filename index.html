@@ -108,6 +108,18 @@
             width: 32px;
         }
 
+        /* SVG/Image Responsiveness */
+        img,
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .logo img {
+            /* Override for nav logo - maintain specific sizing */
+            max-width: none;
+        }
+
         .brand-text {
             font-weight: 800;
             font-size: 1.35rem;
@@ -580,6 +592,94 @@
             .loop-arrow {
                 transform: rotate(90deg);
                 margin: -10px 0;
+            }
+        }
+
+        /* MOBILE OPTIMIZATIONS - Tablets & Large Phones */
+        @media (max-width: 768px) {
+            nav {
+                height: 64px;
+            }
+
+            .logo img {
+                height: 32px;
+                width: 32px;
+            }
+
+            .brand-text {
+                font-size: 1.2rem;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                min-height: 48px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* MOBILE OPTIMIZATIONS - Small Phones */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            h1 {
+                font-size: 2.2rem !important;
+                line-height: 1.2;
+            }
+
+            .big-equation {
+                font-size: 2rem;
+                gap: 10px;
+            }
+
+            p.subtitle {
+                font-size: 1.05rem;
+            }
+
+            .section-spacer {
+                padding: 60px 0;
+            }
+
+            .split-content h2 {
+                font-size: 2rem;
+            }
+
+            .stat-highlight {
+                font-size: 3.5rem;
+            }
+
+            .card {
+                padding: 28px;
+            }
+
+            .loop-card {
+                width: 100%;
+                max-width: 280px;
+                padding: 24px 20px;
+            }
+
+            .founder-section {
+                padding: 50px 0;
+            }
+
+            .founder-quote {
+                font-size: 1.3rem;
+                line-height: 1.4;
+            }
+
+            .tech-tag {
+                margin: 6px 4px;
             }
         }
     </style>
