@@ -12,43 +12,18 @@
     <link rel="stylesheet" href="../design/components.css">
     <style>
         :root {
-            /* Backgrounds */
-            --dark: #1A1C20;
-            --dark-card: #25282D;
-            --dark-card-light: #2D3138;
-
-            /* --- NEW BRAND PALETTE --- */
+            /* --- SLIDE-SPECIFIC VARIABLES --- */
 
             /* 1. Structural Frame (Dark Grey) */
             --industrial-grey: #3A3E45;
 
-            /* 2. Output/Result (Neon Volt Green) */
-            --primary: #39FF14;
-            --primary-glow: rgba(57, 255, 20, 0.4);
+            /* 2. Local Gradient Variants */
             --gradient-volt: linear-gradient(135deg, #39FF14 0%, #2ECC40 100%);
-
-            /* 3. AI/Tech (Synergy Blue Gradient) */
-            --ai-blue: #00C9FF;
             --gradient-blue: linear-gradient(180deg, #00C9FF 0%, #0077B5 100%);
-            --ai-blue-glow: rgba(0, 201, 255, 0.3);
-
-            /* 4. Human/Worker (Synergy Gold Gradient) */
-            --accent-gold: #FFD700;
             --gradient-gold: linear-gradient(180deg, #FFD700 0%, #DAA520 100%);
-            --accent-gold-glow: rgba(255, 215, 0, 0.3);
 
-            /* Alerts */
-            --error: #FF3333;
-            --error-glow: rgba(255, 51, 51, 0.4);
-
-            /* Text */
-            --text: #E8E8E8;
-            --text-muted: #8A8D93;
-
-            /* Hero Background */
+            /* 3. Hero Background */
             --gradient-hero: linear-gradient(135deg, #1A1C20 0%, #25282D 50%, #1A1C20 100%);
-
-            /* Legacy --gradient-synergy removed - now using --gradient-brand from colors.css */
         }
 
         * {
@@ -59,8 +34,8 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--dark);
-            color: var(--text);
+            background: var(--bg-deep-slate);
+            color: var(--foreground);
             overflow: hidden;
         }
 
@@ -97,7 +72,7 @@
             right: -20%;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, var(--ai-blue-glow) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--synergy-blue-glow) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -108,7 +83,7 @@
             left: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--synergy-gold-glow) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -128,20 +103,20 @@
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 32px;
-            color: var(--text);
+            color: var(--foreground);
         }
 
         h3 {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 16px;
-            color: var(--text);
+            color: var(--foreground);
         }
 
         p {
             font-size: 1.5rem;
             font-weight: 400;
-            color: var(--text-muted);
+            color: var(--foreground-muted);
             line-height: 1.6;
             max-width: 800px;
             text-align: center;
@@ -167,7 +142,7 @@
         .tagline {
             font-size: 2.5rem;
             font-weight: 300;
-            color: var(--text);
+            color: var(--foreground);
             margin-bottom: 32px;
         }
 
@@ -194,7 +169,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-size: 6rem;
-            text-shadow: 0 0 60px var(--primary-glow);
+            text-shadow: 0 0 60px var(--neon-volt-glow);
         }
 
         /* Problem Slide */
@@ -207,7 +182,7 @@
         .stat-highlight {
             font-size: 6rem;
             font-weight: 800;
-            color: var(--error);
+            color: var(--industrial-red);
             margin: 24px 0;
             text-shadow: 0 0 30px rgba(255, 51, 51, 0.2);
         }
@@ -221,7 +196,7 @@
 
         /* Shared Card Components - UPDATED WITH INDUSTRIAL FRAME */
         .premium-card {
-            background: var(--dark-card);
+            background: var(--bg-rubber);
             border-radius: 12px;
             padding: 24px;
             /* The Industrial Frame Look */
@@ -265,13 +240,13 @@
             font-size: 1.1rem;
             margin: 0;
             font-weight: 600;
-            color: var(--text);
+            color: var(--foreground);
             text-align: left;
         }
 
         .card-desc {
             font-size: 0.95rem;
-            color: var(--text-muted);
+            color: var(--foreground-muted);
             margin: 0;
             line-height: 1.6;
             text-align: left;
@@ -279,7 +254,7 @@
 
         /* Card Variations */
         .pain-card {
-            border-top: 3px solid var(--error);
+            border-top: 3px solid var(--industrial-red);
         }
 
         .pain-card .icon-box {
@@ -296,7 +271,7 @@
         }
 
         .premium-card[data-color="blue"] {
-            border-top: 3px solid var(--ai-blue) !important;
+            border-top: 3px solid var(--synergy-blue) !important;
         }
 
         .premium-card[data-color="blue"] .icon-box {
@@ -305,7 +280,7 @@
         }
 
         .premium-card[data-color="gold"] {
-            border-top: 3px solid var(--accent-gold) !important;
+            border-top: 3px solid var(--synergy-gold) !important;
         }
 
         .premium-card[data-color="gold"] .icon-box {
@@ -314,7 +289,7 @@
         }
 
         .premium-card[data-color="green"] {
-            border-top: 3px solid var(--primary) !important;
+            border-top: 3px solid var(--neon-volt) !important;
         }
 
         .premium-card[data-color="green"] .icon-box {
@@ -330,11 +305,11 @@
         }
 
         .hinglish-example {
-            background: var(--dark-card);
+            background: var(--bg-rubber);
             border-radius: 16px;
             padding: 40px;
             margin: 32px 0 16px 0;
-            border-left: 4px solid var(--accent-gold);
+            border-left: 4px solid var(--synergy-gold);
             border: 1px solid var(--industrial-grey);
             /* Added industrial frame */
             border-left-width: 4px;
@@ -350,8 +325,8 @@
         .hinglish-example .avatar {
             width: 48px;
             height: 48px;
-            background: var(--accent-gold);
-            color: var(--dark);
+            background: var(--synergy-gold);
+            color: var(--bg-deep-slate);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -362,7 +337,7 @@
         .hinglish-example .quote {
             font-size: 1.8rem;
             font-style: italic;
-            color: var(--text);
+            color: var(--foreground);
             line-height: 1.5;
         }
 
@@ -374,7 +349,7 @@
         }
 
         .flag-badge {
-            background: var(--dark-card);
+            background: var(--bg-rubber);
             border-radius: 12px;
             padding: 16px 24px;
             display: flex;
@@ -394,7 +369,7 @@
 
         .demo-step {
             flex: 1;
-            background: var(--dark-card);
+            background: var(--bg-rubber);
             border-radius: 16px;
             padding: 24px 16px;
             text-align: center;
@@ -421,7 +396,7 @@
             justify-content: center;
             font-weight: 700;
             font-size: 1rem;
-            color: var(--dark);
+            color: var(--bg-deep-slate);
         }
 
         /* Connector Line */
@@ -469,11 +444,11 @@
 
         .ux-card {
             flex: 1;
-            background: var(--dark-card);
+            background: var(--bg-rubber);
             border-radius: 20px;
             padding: 40px;
             border: 1px solid var(--industrial-grey);
-            border-top: 6px solid var(--accent-gold);
+            border-top: 6px solid var(--synergy-gold);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -482,7 +457,7 @@
         .ux-card h3 {
             font-size: 1.8rem;
             margin: 24px 0 16px;
-            color: var(--accent-gold);
+            color: var(--synergy-gold);
         }
 
         .ux-card p {
@@ -507,7 +482,7 @@
         .cta-badge {
             display: inline-block;
             background: var(--gradient-volt);
-            color: var(--dark);
+            color: var(--bg-deep-slate);
             font-weight: 700;
             font-size: 1rem;
             padding: 8px 20px;
@@ -561,7 +536,7 @@
         }
 
         .nav-dot.active {
-            background: var(--primary);
+            background: var(--neon-volt);
             transform: scale(1.2);
         }
 
@@ -578,9 +553,9 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: var(--dark-card);
+            background: var(--bg-rubber);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text);
+            color: var(--foreground);
             font-size: 1.5rem;
             cursor: pointer;
             display: flex;
@@ -590,8 +565,8 @@
         }
 
         .nav-arrow:hover {
-            background: var(--primary);
-            border-color: var(--primary);
+            background: var(--neon-volt);
+            border-color: var(--neon-volt);
         }
 
         .slide-number {
@@ -599,7 +574,7 @@
             bottom: 32px;
             left: 40px;
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--foreground-muted);
             z-index: 100;
         }
 
@@ -614,8 +589,8 @@
         .tech-item .status {
             display: inline-block;
             background: rgba(57, 255, 20, 0.08);
-            color: var(--primary);
-            border: 1px solid var(--primary);
+            color: var(--neon-volt);
+            border: 1px solid var(--neon-volt);
             font-size: 0.7rem;
             font-weight: 700;
             padding: 4px 12px;
@@ -1254,40 +1229,40 @@
             <div style="display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 32px;">
                 <div style="text-align: center;">
                     <div
-                        style="width: 100px; height: 100px; background: rgba(255, 215, 0, 0.05); border: 1px solid var(--accent-gold); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);">
+                        style="width: 100px; height: 100px; background: rgba(255, 215, 0, 0.05); border: 1px solid var(--synergy-gold); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);">
                         <div style="font-size: 3.5rem;">📄</div>
                     </div>
-                    <h3 style="font-size: 1rem; color: var(--accent-gold);">PDF Manuals</h3>
+                    <h3 style="font-size: 1rem; color: var(--synergy-gold);">PDF Manuals</h3>
                 </div>
 
-                <div style="font-size: 2rem; color: var(--text-muted); opacity: 0.5;">➝</div>
+                <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
 
                 <div style="text-align: center;">
                     <div
-                        style="width: 100px; height: 100px; background: rgba(0, 201, 255, 0.1); border: 1px solid var(--ai-blue); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(0, 201, 255, 0.2);">
+                        style="width: 100px; height: 100px; background: rgba(0, 201, 255, 0.1); border: 1px solid var(--synergy-blue); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(0, 201, 255, 0.2);">
                         <div style="font-size: 3.5rem;">⚡</div>
                     </div>
-                    <h3 style="font-size: 1rem; color: var(--ai-blue);">AI Processing</h3>
+                    <h3 style="font-size: 1rem; color: var(--synergy-blue);">AI Processing</h3>
                 </div>
 
-                <div style="font-size: 2rem; color: var(--text-muted); opacity: 0.5;">➝</div>
+                <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
 
                 <div style="text-align: center;">
                     <div
-                        style="width: 100px; height: 100px; background: rgba(255, 215, 0, 0.1); border: 2px solid var(--accent-gold); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);">
+                        style="width: 100px; height: 100px; background: rgba(255, 215, 0, 0.1); border: 2px solid var(--synergy-gold); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);">
                         <div style="font-size: 3.5rem;">🛡️</div>
                     </div>
-                    <h3 style="font-size: 1rem; color: var(--accent-gold);">Human Verified</h3>
+                    <h3 style="font-size: 1rem; color: var(--synergy-gold);">Human Verified</h3>
                 </div>
 
-                <div style="font-size: 2rem; color: var(--text-muted); opacity: 0.5;">➝</div>
+                <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
 
                 <div style="text-align: center;">
                     <div
-                        style="width: 100px; height: 100px; background: rgba(57, 255, 20, 0.1); border: 1px solid var(--primary); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 40px rgba(57, 255, 20, 0.3);">
+                        style="width: 100px; height: 100px; background: rgba(57, 255, 20, 0.1); border: 1px solid var(--neon-volt); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 40px rgba(57, 255, 20, 0.3);">
                         <div style="font-size: 3.5rem;">🧠</div>
                     </div>
-                    <h3 style="font-size: 1rem; color: var(--primary);">Company Brain</h3>
+                    <h3 style="font-size: 1rem; color: var(--neon-volt);">Company Brain</h3>
                 </div>
             </div>
         </div>
@@ -1307,7 +1282,7 @@
                     </div>
                 </div>
                 <p
-                    style="margin-top: 24px; color: var(--text-muted); font-size: 1.1rem; border: 1px dashed rgba(255,255,255,0.2); padding: 12px; border-radius: 8px; display: inline-block;">
+                    style="margin-top: 24px; color: var(--foreground-muted); font-size: 1.1rem; border: 1px dashed rgba(255,255,255,0.2); padding: 12px; border-radius: 8px; display: inline-block;">
                     Bridging the gap between <i>"Floor Talk"</i> (Symptoms) and <i>"Technical Manuals"</i> (Solutions).
                 </p>
                 <div style="margin-top: 32px;">
@@ -1359,42 +1334,46 @@
             <div class="demo-steps">
 
                 <div class="demo-step"
-                    style="border-top: 3px solid var(--error); box-shadow: 0 0 20px rgba(255,51,51,0.1);">
-                    <div class="step-num" style="background: var(--error); color: white;">1</div>
-                    <div class="icon" style="background: rgba(255,51,51,0.1); border: 1px solid var(--error);">🔍</div>
-                    <h3 style="color: var(--error);">Search Gap</h3>
+                    style="border-top: 3px solid var(--industrial-red); box-shadow: 0 0 20px rgba(255,51,51,0.1);">
+                    <div class="step-num" style="background: var(--industrial-red); color: white;">1</div>
+                    <div class="icon" style="background: rgba(255,51,51,0.1); border: 1px solid var(--industrial-red);">
+                        🔍</div>
+                    <h3 style="color: var(--industrial-red);">Search Gap</h3>
                     <p>New issue. Manual has nothing. (Problem)</p>
                 </div>
 
-                <div class="demo-step" style="border-top: 3px solid var(--accent-gold);">
-                    <div class="step-num" style="background: var(--accent-gold); color: black;">2</div>
-                    <div class="icon" style="background: rgba(255,215,0,0.1); border: 1px solid var(--accent-gold);">🗣️
+                <div class="demo-step" style="border-top: 3px solid var(--synergy-gold);">
+                    <div class="step-num" style="background: var(--synergy-gold); color: black;">2</div>
+                    <div class="icon" style="background: rgba(255,215,0,0.1); border: 1px solid var(--synergy-gold);">
+                        🗣️
                     </div>
-                    <h3 style="color: var(--accent-gold);">Capture</h3>
+                    <h3 style="color: var(--synergy-gold);">Capture</h3>
                     <p>Voice <b>OR</b> Text. Hinglish supported.</p>
                 </div>
 
-                <div class="demo-step" style="border-top: 3px solid var(--ai-blue);">
-                    <div class="step-num" style="background: var(--ai-blue); color: black;">3</div>
-                    <div class="icon" style="background: rgba(0,201,255,0.1); border: 1px solid var(--ai-blue);">🤖
+                <div class="demo-step" style="border-top: 3px solid var(--synergy-blue);">
+                    <div class="step-num" style="background: var(--synergy-blue); color: black;">3</div>
+                    <div class="icon" style="background: rgba(0,201,255,0.1); border: 1px solid var(--synergy-blue);">🤖
                     </div>
-                    <h3 style="color: var(--ai-blue);">AI Polish</h3>
+                    <h3 style="color: var(--synergy-blue);">AI Polish</h3>
                     <p>Standardizes text & translates before validation.</p>
                 </div>
 
                 <div class="demo-step"
-                    style="border-top: 3px solid var(--accent-gold); box-shadow: 0 0 30px rgba(255,215,0,0.15);">
-                    <div class="step-num" style="background: var(--accent-gold); color: black;">4</div>
-                    <div class="icon" style="background: rgba(255,215,0,0.1); border: 1px solid var(--accent-gold);">🛡️
+                    style="border-top: 3px solid var(--synergy-gold); box-shadow: 0 0 30px rgba(255,215,0,0.15);">
+                    <div class="step-num" style="background: var(--synergy-gold); color: black;">4</div>
+                    <div class="icon" style="background: rgba(255,215,0,0.1); border: 1px solid var(--synergy-gold);">
+                        🛡️
                     </div>
-                    <h3 style="color: var(--accent-gold);">Expert Gate</h3>
+                    <h3 style="color: var(--synergy-gold);">Expert Gate</h3>
                     <p>Review clean data. Validated by experts.</p>
                 </div>
 
-                <div class="demo-step" style="border-top: 3px solid var(--primary);">
-                    <div class="step-num" style="background: var(--primary); color: black;">5</div>
-                    <div class="icon" style="background: rgba(57,255,20,0.1); border: 1px solid var(--primary);">✨</div>
-                    <h3 style="color: var(--primary);">Unified Result</h3>
+                <div class="demo-step" style="border-top: 3px solid var(--neon-volt);">
+                    <div class="step-num" style="background: var(--neon-volt); color: black;">5</div>
+                    <div class="icon" style="background: rgba(57,255,20,0.1); border: 1px solid var(--neon-volt);">✨
+                    </div>
+                    <h3 style="color: var(--neon-volt);">Unified Result</h3>
                     <p>Hindi search now finds this proven tip!</p>
                 </div>
             </div>
@@ -1402,7 +1381,8 @@
 
         <div class="slide" id="slide-8">
             <h2 style="margin-bottom: 16px;">Not Another Corporate App.</h2>
-            <h3 style="margin-bottom: 32px; font-weight: 300; color: var(--text);">Built for <i>Your</i> Reality.</h3>
+            <h3 style="margin-bottom: 32px; font-weight: 300; color: var(--foreground);">Built for <i>Your</i> Reality.
+            </h3>
 
             <div class="ux-container">
                 <div class="ux-card">
@@ -1534,7 +1514,7 @@
                     <span class="equals">=</span>
                     <span class="result" style="color: #39FF14; text-shadow: 0 0 40px rgba(57, 255, 20, 0.6);">11</span>
                 </div>
-                <p style="font-size: 2rem; color: var(--text); margin-top: 32px;">
+                <p style="font-size: 2rem; color: var(--foreground); margin-top: 32px;">
                     <span style="color: #00C9FF;">AI</span> + <span style="color: #FFD700;">Human</span> = <span
                         style="color: #39FF14;">Amplified. Not Replaced.</span>
                 </p>

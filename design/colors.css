@@ -23,7 +23,9 @@
 
   /* The "11" Accent (AI Synergy Gradient) */
   --synergy-blue: #00C9FF;
+  --synergy-blue-glow: rgba(0, 201, 255, 0.3);
   --synergy-gold: #FFD700;
+  --synergy-gold-glow: rgba(255, 215, 0, 0.3);
 
   /* Shadows for Tactile Depth */
   --shadow-highlight: rgba(255, 255, 255, 0.1);
