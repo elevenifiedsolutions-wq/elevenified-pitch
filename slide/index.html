@@ -1058,6 +1058,17 @@
             .hero-content {
                 width: 100%;
             }
+
+            /* Slide 4 - Flow diagram mobile fix */
+            #slide-4>div[style*="display: flex"] {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            #slide-4>div[style*="display: flex"]>div[style*="font-size: 2rem"] {
+                transform: rotate(90deg);
+                margin: 0 !important;
+            }
         }
     </style>
 </head>
