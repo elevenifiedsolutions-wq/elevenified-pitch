@@ -1,0 +1,37 @@
+/* Synced from elevenified-design - DO NOT EDIT DIRECTLY */
+:root {
+  /* Backgrounds */
+  --bg-deep-slate: #1A1C20;
+  --bg-rubber: #25282D;
+  --bg-rubber-light: #2D3138;
+
+  /* Text */
+  --foreground: #E8E8E8;
+  --foreground-muted: #8A8D93;
+
+  /* Semantic Colors */
+  --neon-volt: #39FF14;
+  --synergy-blue: #00C9FF;
+  --synergy-gold: #FFD700;
+  --electric-amber: #FFC000;
+  --industrial-red: #FF3333;
+
+  /* Glows */
+  --neon-volt-glow: rgba(57, 255, 20, 0.4);
+  --ai-blue-glow: rgba(0, 201, 255, 0.3);
+  --accent-gold-glow: rgba(255, 215, 0, 0.3);
+  --electric-amber-glow: rgba(255, 192, 0, 0.4);
+  --industrial-red-glow: rgba(255, 51, 51, 0.4);
+
+  /* Gradients */
+  --gradient-synergy: linear-gradient(135deg, #00C9FF, #FFD700);
+}
+
+/* Compatibility Layer for existing index.html */
+:root {
+  --deep-slate: var(--bg-deep-slate);
+  --rubber: var(--bg-rubber);
+  --text-main: var(--foreground);
+  --text-muted: var(--foreground-muted);
+  --synergy-gold-glow: var(--accent-gold-glow);
+}
