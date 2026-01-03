@@ -774,8 +774,17 @@
 
         /* Mobile slide padding adjustments */
         @media (max-width: 768px) {
+
+            /* Enable vertical scroll on mobile */
+            body {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
             .slide {
                 padding: 90px 40px 40px;
+                min-height: 100vh;
+                height: auto;
             }
 
             /* Typography - Tablet */
@@ -793,6 +802,7 @@
 
             p {
                 font-size: 1.2rem;
+                max-width: 100%;
             }
 
             .logo-text {
@@ -856,8 +866,23 @@
         }
 
         @media (max-width: 640px) {
+
+            /* Enable vertical scroll on mobile */
+            body {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .slides-container {
+                height: auto;
+                overflow: visible;
+            }
+
             .slide {
-                padding: 84px 20px 30px;
+                padding: 84px 20px 80px;
+                min-height: 100vh;
+                height: auto;
+                justify-content: flex-start;
             }
 
             /* Typography - Mobile */
@@ -879,6 +904,7 @@
             p {
                 font-size: 1rem;
                 line-height: 1.5;
+                max-width: 100%;
             }
 
             .logo-text {
@@ -893,6 +919,7 @@
                 font-size: 2.5rem;
                 gap: 12px;
                 margin: 24px 0;
+                flex-wrap: wrap;
             }
 
             .eleven-equation .result {
@@ -958,6 +985,10 @@
             }
 
             /* UX cards */
+            .ux-container {
+                margin-top: 24px;
+            }
+
             .ux-card {
                 padding: 28px 24px;
             }
@@ -978,9 +1009,10 @@
             .cta-button {
                 font-size: 1.2rem;
                 padding: 16px 32px;
+                white-space: normal;
             }
 
-            /* Navigation controls - smaller on mobile */
+            /* Navigation controls - fixed at bottom */
             .nav-dots {
                 bottom: 20px;
                 gap: 8px;
@@ -1013,6 +1045,18 @@
             .slide::before,
             .slide::after {
                 display: none;
+            }
+
+            /* Make content containers more mobile-friendly */
+            .problem-content,
+            .language-hero,
+            .cta-content {
+                max-width: 100%;
+            }
+
+            /* Ensure hero content centers properly */
+            .hero-content {
+                width: 100%;
             }
         }
     </style>
