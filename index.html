@@ -324,7 +324,7 @@
 
         /* --- FOUNDER SECTION --- */
         .founder-section {
-            background: #15171a;
+            background: var(--bg-deep-slate);
             padding: 80px 0;
             border-top: 1px solid var(--shadow-highlight);
             text-align: center;
@@ -392,7 +392,7 @@
         footer {
             border-top: 1px solid var(--shadow-highlight);
             padding: 60px 0;
-            background: #0D0F12;
+            background: var(--bg-void);
             text-align: center;
         }
 
@@ -527,7 +527,6 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="design/colors.css">
 </head>
 
 <body>
@@ -574,7 +573,58 @@
         </div>
     </header>
 
-    <section class="section-spacer" style="background: linear-gradient(to bottom, var(--deep-slate), #0D0F12);">
+    <!-- Industry 5.0 Section -->
+    <section id="industry-5" class="section-spacer" style="background: var(--bg-rubber);">
+        <div class="container">
+            <h2 class="section-title">Built for Industry 5.0</h2>
+            <p
+                style="text-align: center; max-width: 700px; margin: -30px auto 50px; color: var(--foreground-muted); font-size: 1.1rem;">
+                The global standard for human-first manufacturing. Placing <span
+                    style="color: var(--synergy-gold);">worker wellbeing</span> at the center, while driving <span
+                    style="color: var(--neon-volt);">sustainability</span> and <span
+                    style="color: var(--synergy-blue);">resilience</span>.
+            </p>
+            <div class="cards-grid">
+                <div class="card-industrial" data-accent="gold">
+                    <span class="icon" role="img" aria-label="Worker icon">🧑‍🔧</span>
+                    <h3>Human-Centricity</h3>
+                    <p>We capture knowledge, not jobs. Your senior workers become teachers, their legacy preserved
+                        forever.</p>
+                    <blockquote
+                        style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.9rem;">
+                        "When Ramesh retires, his 20 years stays in the system. He's not replaced—he's immortalized."
+                    </blockquote>
+                </div>
+                <div class="card-industrial" data-accent="green">
+                    <span class="icon" role="img" aria-label="Sustainability icon">🌱</span>
+                    <h3>Sustainability</h3>
+                    <p>Reduced turnover, faster onboarding, less scrap. Sustainability isn't just about energy—it's
+                        about keeping your people.</p>
+                    <blockquote
+                        style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.9rem;">
+                        "Hiring + Training = carbon footprint. Preserving expertise = the overlooked green factor."
+                    </blockquote>
+                </div>
+                <div class="card-industrial" data-accent="blue">
+                    <span class="icon" role="img" aria-label="Resilience icon">🛡️</span>
+                    <h3>Resilience</h3>
+                    <p>Organizational memory that survives disruptions. If an expert is sick, retires, or a lockdown
+                        hits—the plant keeps running.</p>
+                    <blockquote
+                        style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.9rem;">
+                        "COVID lockdown? Senior can't come? Knowledge accessible. Plant keeps operating."
+                    </blockquote>
+                </div>
+            </div>
+            <!-- Micro-CTA -->
+            <p style="text-align: center; margin-top: 50px;">
+                <a href="#solve" class="btn-secondary">See How It Works →</a>
+            </p>
+        </div>
+    </section>
+
+    <section class="section-spacer"
+        style="background: linear-gradient(to bottom, var(--bg-deep-slate), var(--bg-void));">
         <div class="container">
             <div class="split-grid">
                 <div class="split-content">
@@ -604,7 +654,7 @@
         </div>
     </section>
 
-    <section class="section-spacer">
+    <section id="solve" class="section-spacer">
         <div class="container">
             <h2 class="section-title">How Elevenified Solves It</h2>
             <div class="cards-grid">
@@ -708,7 +758,8 @@
 
             <p class="founder-bio">
                 <span class="founder-name-gradient">Siddharth</span> is a technologist passionate about <strong
-                    style="color: #fff;">Intelligent Process Automation</strong>. He applies modern digital solutions to
+                    style="color: var(--foreground);">Intelligent Process Automation</strong>. He applies modern digital
+                solutions to
                 solve hard, persistent problems in manufacturing.
             </p>
 
@@ -726,7 +777,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Elevenified Solutions. Built for Indian Manufacturing 🇮🇳</p>
+            <p>&copy; 2026 Elevenified Solutions | An Industry 5.0 Solution 🇮🇳</p>
             <p class="small">Secure • Scalable • Enterprise Ready</p>
         </div>
     </footer>

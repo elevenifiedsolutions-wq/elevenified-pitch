@@ -7,7 +7,14 @@
   /* Background (Eye Comfort in Low Light) */
   --bg-deep-slate: #1A1C20;
   --bg-rubber: #25282D;
+  --bg-void: #0D0F12;
+  --fg-primary: #FFFFFF;
   --bg-rubber-light: #2D3138;
+
+  /* Darker Background for Gradients */
+
+  /* Alias for backward compatibility */
+  --deep-slate: var(--bg-deep-slate);
 
   /* Foreground */
   --foreground: #E8E8E8;
