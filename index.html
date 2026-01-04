@@ -231,65 +231,39 @@
             gap: 30px;
         }
 
-        .card {
-            background: var(--bg-rubber);
-            border: 1px solid var(--shadow-highlight);
-            padding: 40px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+        /* Card layout handled by design system (.card-industrial) */
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
+        /* Typography for cards - local overrides */
+        .card-industrial h3 {
             margin-bottom: 16px;
             font-size: 1.3rem;
             color: var(--foreground);
         }
 
-        .card p {
+        .card-industrial p {
             color: var(--foreground-muted);
             font-size: 0.95rem;
             line-height: 1.6;
             flex-grow: 1;
         }
 
+        /* Icon emoji styling */
         .icon {
             font-size: 2.5rem;
             margin-bottom: 24px;
             display: inline-block;
         }
 
-        .card-human:hover {
-            border-color: var(--synergy-gold);
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15);
-        }
-
-        .card-human .icon {
+        /* Icon glow effects for cards based on accent color */
+        .card-industrial[data-accent="gold"] .icon {
             text-shadow: 0 0 20px var(--synergy-gold-glow);
         }
 
-        .card-ai:hover {
-            border-color: var(--synergy-blue);
-            box-shadow: 0 10px 40px rgba(0, 201, 255, 0.15);
-        }
-
-        .card-ai .icon {
+        .card-industrial[data-accent="blue"] .icon {
             text-shadow: 0 0 20px var(--synergy-blue-glow);
         }
 
-        .card-result:hover {
-            border-color: var(--neon-volt);
-            box-shadow: 0 10px 40px rgba(57, 255, 20, 0.15);
-        }
-
-        .card-result .icon {
+        .card-industrial[data-accent="green"] .icon {
             text-shadow: 0 0 20px var(--neon-volt-glow);
         }
 
@@ -304,43 +278,14 @@
         }
 
         .loop-card {
-            background: var(--bg-rubber);
-            border: 1px solid var(--shadow-highlight);
             padding: 30px 20px;
-            border-radius: 16px;
             text-align: center;
             width: 220px;
-            position: relative;
-            transition: transform 0.3s ease;
         }
 
-        .loop-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .loop-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--foreground);
-        }
-
-        .loop-card p {
-            font-size: 0.9rem;
-            color: var(--foreground-muted);
-            line-height: 1.4;
-        }
-
+        /* icon-box styling now comes from design/components.css */
         .loop-card .icon-box {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
             margin: 0 auto 20px;
-            border-width: 2px;
-            border-style: solid;
         }
 
         .loop-arrow {
@@ -558,7 +503,7 @@
                 font-size: 3.5rem;
             }
 
-            .card {
+            .card-industrial {
                 padding: 28px;
             }
 
@@ -664,33 +609,33 @@
             <h2 class="section-title">How Elevenified Solves It</h2>
             <div class="cards-grid">
 
-                <div class="card card-ai">
+                <div class="card-industrial" data-accent="blue">
                     <span class="icon">📄</span>
                     <h3>SOP Auto-Extraction</h3>
                     <p><span style="color: var(--synergy-blue)">AI</span> extracts knowledge from your existing PDF
                         manuals automatically.</p>
                 </div>
 
-                <div class="card card-human">
+                <div class="card-industrial" data-accent="gold">
                     <span class="icon">🗣️</span>
                     <h3>Hinglish First</h3>
                     <p>Workers speak naturally. No translation needed. We capture the raw "floor talk."</p>
                 </div>
 
-                <div class="card card-human">
+                <div class="card-industrial" data-accent="gold">
                     <span class="icon">⌨️</span>
                     <h3>Voice OR Text</h3>
                     <p>Not everyone wants to speak. Workers can type or talk. We remove the friction.</p>
                 </div>
 
-                <div class="card card-ai">
+                <div class="card-industrial" data-accent="blue">
                     <span class="icon">🧠</span>
                     <h3>Intent Classification</h3>
                     <p>Our <span style="color: var(--synergy-blue)">AI</span> knows: Is this a search? A new capture?
                         Smart disambiguation.</p>
                 </div>
 
-                <div class="card card-ai">
+                <div class="card-industrial" data-accent="blue">
                     <span class="icon">🔍</span>
                     <h3>Cross-Language Search</h3>
                     <p>Senior speaks in Hinglish. Trainee searches in English. The system finds the
@@ -698,7 +643,7 @@
                     </p>
                 </div>
 
-                <div class="card card-result">
+                <div class="card-industrial" data-accent="green">
                     <span class="icon">🏆</span>
                     <h3>Gamification</h3>
                     <p>Leaderboards drive adoption. The <span style="color: var(--neon-volt)">Result</span> is a smarter
@@ -720,41 +665,34 @@
             </p>
 
             <div class="loop-grid">
-                <div class="loop-card"
-                    style="border-color: rgba(255, 215, 0, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-                    <div class="icon-box"
-                        style="border-color: var(--synergy-gold); background: rgba(255, 215, 0, 0.1);">🗣️</div>
+                <div class="card-industrial loop-card" data-accent="gold">
+                    <div class="icon-box icon-box-lg icon-box-circle" data-color="gold">🗣️</div>
                     <h3>Capture</h3>
                     <p>Worker records a tip via voice or text.</p>
                 </div>
 
                 <div class="loop-arrow">➝</div>
 
-                <div class="loop-card"
-                    style="border-color: rgba(0, 201, 255, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-                    <div class="icon-box"
-                        style="border-color: var(--synergy-blue); background: rgba(0, 201, 255, 0.1);">⚡</div>
+                <div class="card-industrial loop-card" data-accent="blue">
+                    <div class="icon-box icon-box-lg icon-box-circle" data-color="blue">⚡</div>
                     <h3>AI Processing</h3>
                     <p>Standardizes grammar, tags equipment, checks safety.</p>
                 </div>
 
                 <div class="loop-arrow">➝</div>
 
-                <div class="loop-card featured-gate">
+                <div class="card-industrial loop-card featured-gate" data-accent="gold">
                     <div class="gate-badge">HUMAN LOOP</div>
-                    <div class="icon-box"
-                        style="border-color: var(--synergy-gold); background: rgba(255, 215, 0, 0.1); box-shadow: 0 0 20px var(--synergy-gold-glow);">
-                        🛡️</div>
+                    <div class="icon-box icon-box-lg icon-box-circle" data-color="gold"
+                        style="box-shadow: 0 0 20px var(--synergy-gold-glow);">🛡️</div>
                     <h3 style="color: var(--synergy-gold);">Expert Gate</h3>
                     <p>A senior supervisor reviews and approves the insight.</p>
                 </div>
 
                 <div class="loop-arrow">➝</div>
 
-                <div class="loop-card"
-                    style="border-color: rgba(57, 255, 20, 0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-                    <div class="icon-box" style="border-color: var(--neon-volt); background: rgba(57, 255, 20, 0.1);">📚
-                    </div>
+                <div class="card-industrial loop-card" data-accent="green">
+                    <div class="icon-box icon-box-lg icon-box-circle" data-color="green">📚</div>
                     <h3>Asset</h3>
                     <p>Saved forever. Searchable by everyone.</p>
                 </div>

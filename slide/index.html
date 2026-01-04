@@ -15,15 +15,14 @@
             /* --- SLIDE-SPECIFIC VARIABLES --- */
 
             /* 1. Structural Frame (Dark Grey) */
-            --industrial-grey: #3A3E45;
+            /* --industrial-grey replaced by --border-industrial in colors.css */
 
             /* 2. Local Gradient Variants */
-            --gradient-volt: linear-gradient(135deg, #39FF14 0%, #2ECC40 100%);
-            --gradient-blue: linear-gradient(180deg, #00C9FF 0%, #0077B5 100%);
-            --gradient-gold: linear-gradient(180deg, #FFD700 0%, #DAA520 100%);
+            /* Moved to design/colors.css */
+            /* --gradient-volt, --gradient-blue, --gradient-gold now standardized */
 
             /* 3. Hero Background */
-            --gradient-hero: linear-gradient(135deg, #1A1C20 0%, #25282D 50%, #1A1C20 100%);
+            --gradient-hero: linear-gradient(135deg, var(--bg-deep-slate) 0%, var(--bg-rubber) 50%, var(--bg-deep-slate) 100%);
         }
 
         * {
@@ -194,46 +193,18 @@
             margin-top: 24px;
         }
 
-        /* Shared Card Components - UPDATED WITH INDUSTRIAL FRAME */
-        .premium-card {
-            background: var(--bg-rubber);
-            border-radius: 12px;
-            padding: 24px;
-            /* The Industrial Frame Look */
-            border: 2px solid var(--industrial-grey);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            text-align: left;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
+        /* =============================================
+           CARD COMPONENTS - Now using design system
+           Base: .card-industrial from design/components.css
+           Premium: .card-industrial.card-premium
+           ============================================= */
 
-        .premium-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
+        /* Card sub-elements (local to slides) */
         .card-header {
             display: flex;
             align-items: center;
             gap: 16px;
             margin-bottom: 12px;
-        }
-
-        .icon-box {
-            font-size: 1.5rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .card-title {
@@ -252,15 +223,21 @@
             text-align: left;
         }
 
-        /* Card Variations */
-        .pain-card {
-            border-top: 3px solid var(--industrial-red);
+        /* =============================================
+           ICON BOX - Now using design system
+           Slide-specific size override for 44x44px
+           ============================================= */
+
+        /* Local override for default icon-box size inside cards */
+        .card-industrial .icon-box {
+            width: 44px;
+            height: 44px;
+            font-size: 1.5rem;
         }
 
-        .pain-card .icon-box {
-            background: rgba(255, 51, 51, 0.1);
-            border: 1px solid rgba(255, 51, 51, 0.2);
-        }
+        /* =============================================
+           GRID LAYOUTS
+           ============================================= */
 
         .solution-grid {
             display: grid;
@@ -268,33 +245,6 @@
             gap: 20px;
             max-width: 1100px;
             margin: 0 auto;
-        }
-
-        .premium-card[data-color="blue"] {
-            border-top: 3px solid var(--synergy-blue) !important;
-        }
-
-        .premium-card[data-color="blue"] .icon-box {
-            background: rgba(0, 201, 255, 0.1);
-            border: 1px solid rgba(0, 201, 255, 0.2);
-        }
-
-        .premium-card[data-color="gold"] {
-            border-top: 3px solid var(--synergy-gold) !important;
-        }
-
-        .premium-card[data-color="gold"] .icon-box {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-        }
-
-        .premium-card[data-color="green"] {
-            border-top: 3px solid var(--neon-volt) !important;
-        }
-
-        .premium-card[data-color="green"] .icon-box {
-            background: rgba(57, 255, 20, 0.1);
-            border: 1px solid rgba(57, 255, 20, 0.2);
         }
 
         /* Language Slide */
@@ -310,7 +260,7 @@
             padding: 40px;
             margin: 32px 0 16px 0;
             border-left: 4px solid var(--synergy-gold);
-            border: 1px solid var(--industrial-grey);
+            border: 1px solid var(--border-industrial);
             /* Added industrial frame */
             border-left-width: 4px;
         }
@@ -356,7 +306,7 @@
             align-items: center;
             gap: 12px;
             font-size: 1.1rem;
-            border: 1px solid var(--industrial-grey);
+            border: 1px solid var(--border-industrial);
         }
 
         /* Demo Slide */
@@ -369,19 +319,11 @@
 
         .demo-step {
             flex: 1;
-            background: var(--bg-rubber);
-            border-radius: 16px;
             padding: 24px 16px;
             text-align: center;
-            border: 1px solid var(--industrial-grey);
-            /* Industrial Frame */
-            position: relative;
-            transition: all 0.3s ease;
         }
 
-        .demo-step:hover {
-            transform: translateY(-4px);
-        }
+
 
         .demo-step .step-num {
             position: absolute;
@@ -444,14 +386,8 @@
 
         .ux-card {
             flex: 1;
-            background: var(--bg-rubber);
-            border-radius: 20px;
             padding: 40px;
-            border: 1px solid var(--industrial-grey);
-            border-top: 6px solid var(--synergy-gold);
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
         .ux-card h3 {
@@ -892,9 +828,7 @@
             }
 
             /* Cards */
-            .premium-card {
-                padding: 20px;
-            }
+
 
             .card-title {
                 font-size: 1rem;
@@ -1056,12 +990,12 @@
                     style="margin-bottom: 24px; filter: drop-shadow(0 0 60px rgba(255, 215, 0, 0.3)) drop-shadow(0 0 40px rgba(0, 201, 255, 0.2));">
                     <defs>
                         <linearGradient id="goldFill" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#FFD700" />
-                            <stop offset="100%" stop-color="#DAA520" />
+                            <stop offset="0%" stop-color="var(--synergy-gold)" />
+                            <stop offset="100%" stop-color="var(--synergy-gold-dark)" />
                         </linearGradient>
                         <linearGradient id="blueFill" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#00C9FF" />
-                            <stop offset="100%" stop-color="#0077B5" />
+                            <stop offset="0%" stop-color="var(--synergy-blue)" />
+                            <stop offset="100%" stop-color="var(--synergy-blue-dark)" />
                         </linearGradient>
                         <filter id="neonBolt" x="-50%" y="-50%" width="200%" height="200%">
                             <feGaussianBlur stdDeviation="2" result="blur" />
@@ -1070,24 +1004,29 @@
                     </defs>
                     <rect x="6" y="24" width="8" height="52" rx="4" fill="url(#goldFill)" />
                     <rect x="86" y="24" width="8" height="52" rx="4" fill="url(#blueFill)" />
-                    <path d="M10 28 L50 5 L90 28" fill="none" stroke="#3A3E45" stroke-width="8" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M10 72 L50 95 L90 72" fill="none" stroke="#3A3E45" stroke-width="8" stroke-linecap="round"
-                        stroke-linejoin="round" />
+                    <path d="M10 28 L50 5 L90 28" fill="none" stroke="var(--border-industrial)" stroke-width="8"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10 72 L50 95 L90 72" fill="none" stroke="var(--border-industrial)" stroke-width="8"
+                        stroke-linecap="round" stroke-linejoin="round" />
                     <g>
-                        <circle cx="10" cy="28" r="3.5" fill="url(#blueFill)" stroke="#1A1C20" stroke-width="0.5" />
-                        <circle cx="10" cy="28" r="1.5" fill="#1A1C20" />
-                        <circle cx="10" cy="72" r="3.5" fill="url(#blueFill)" stroke="#1A1C20" stroke-width="0.5" />
-                        <circle cx="10" cy="72" r="1.5" fill="#1A1C20" />
-                        <circle cx="90" cy="28" r="3.5" fill="url(#goldFill)" stroke="#1A1C20" stroke-width="0.5" />
-                        <circle cx="90" cy="28" r="1.5" fill="#1A1C20" />
-                        <circle cx="90" cy="72" r="3.5" fill="url(#goldFill)" stroke="#1A1C20" stroke-width="0.5" />
-                        <circle cx="90" cy="72" r="1.5" fill="#1A1C20" />
+                        <circle cx="10" cy="28" r="3.5" fill="url(#blueFill)" stroke="var(--bg-deep-slate)"
+                            stroke-width="0.5" />
+                        <circle cx="10" cy="28" r="1.5" fill="var(--bg-deep-slate)" />
+                        <circle cx="10" cy="72" r="3.5" fill="url(#blueFill)" stroke="var(--bg-deep-slate)"
+                            stroke-width="0.5" />
+                        <circle cx="10" cy="72" r="1.5" fill="var(--bg-deep-slate)" />
+                        <circle cx="90" cy="28" r="3.5" fill="url(#goldFill)" stroke="var(--bg-deep-slate)"
+                            stroke-width="0.5" />
+                        <circle cx="90" cy="28" r="1.5" fill="var(--bg-deep-slate)" />
+                        <circle cx="90" cy="72" r="3.5" fill="url(#goldFill)" stroke="var(--bg-deep-slate)"
+                            stroke-width="0.5" />
+                        <circle cx="90" cy="72" r="1.5" fill="var(--bg-deep-slate)" />
                     </g>
                     <g filter="url(#neonBolt)">
-                        <rect x="32" y="46" width="36" height="8" rx="4" fill="#39FF14" />
-                        <rect x="46" y="32" width="8" height="36" rx="4" fill="#39FF14" />
-                        <circle cx="50" cy="50" r="5" fill="#1A1C20" stroke="#39FF14" stroke-width="2.5" />
+                        <rect x="32" y="46" width="36" height="8" rx="4" fill="var(--neon-volt)" />
+                        <rect x="46" y="32" width="8" height="36" rx="4" fill="var(--neon-volt)" />
+                        <circle cx="50" cy="50" r="5" fill="var(--bg-deep-slate)" stroke="var(--neon-volt)"
+                            stroke-width="2.5" />
                     </g>
                 </svg>
 
@@ -1121,44 +1060,44 @@
                 <p>Every year, your best workers retire. Their decades of expertise?</p>
                 <div class="stat-highlight">Lost Legacy.</div>
                 <div class="pain-points">
-                    <div class="pain-card premium-card">
+                    <div class="card-industrial card-premium" data-accent="red">
                         <div class="card-header">
-                            <div class="icon-box">👴</div>
+                            <div class="icon-box" data-color="red">👴</div>
                             <h3 class="card-title">Retiring Workforce</h3>
                         </div>
                         <p class="card-desc">Average factory worker is 44+ years old</p>
                     </div>
-                    <div class="pain-card premium-card">
+                    <div class="card-industrial card-premium" data-accent="red">
                         <div class="card-header">
-                            <div class="icon-box">🧠</div>
+                            <div class="icon-box" data-color="red">🧠</div>
                             <h3 class="card-title">Tribal Knowledge</h3>
                         </div>
                         <p class="card-desc">Undocumented tricks that no manual captures</p>
                     </div>
-                    <div class="pain-card premium-card">
+                    <div class="card-industrial card-premium" data-accent="red">
                         <div class="card-header">
-                            <div class="icon-box">🔄</div>
+                            <div class="icon-box" data-color="red">🔄</div>
                             <h3 class="card-title">Repeat Problems</h3>
                         </div>
                         <p class="card-desc">Day shift solves it. Night shift doesn't know.</p>
                     </div>
-                    <div class="pain-card premium-card">
+                    <div class="card-industrial card-premium" data-accent="red">
                         <div class="card-header">
-                            <div class="icon-box">👶</div>
+                            <div class="icon-box" data-color="red">👶</div>
                             <h3 class="card-title">New Worker Onboarding</h3>
                         </div>
                         <p class="card-desc">6-12 months to become productive. Too slow.</p>
                     </div>
-                    <div class="pain-card premium-card">
+                    <div class="card-industrial card-premium" data-accent="red">
                         <div class="card-header">
-                            <div class="icon-box">😶</div>
+                            <div class="icon-box" data-color="red">😶</div>
                             <h3 class="card-title">The "Silent Expert"</h3>
                         </div>
                         <p class="card-desc">Seniors have no incentive to share. Skills retire with them.</p>
                     </div>
-                    <div class="pain-card premium-card">
+                    <div class="card-industrial card-premium" data-accent="red">
                         <div class="card-header">
-                            <div class="icon-box">🌐</div>
+                            <div class="icon-box" data-color="red">🌐</div>
                             <h3 class="card-title">Language Barrier</h3>
                         </div>
                         <p class="card-desc">English manuals, Hindi workers. Lost in translation.</p>
@@ -1170,45 +1109,48 @@
         <div class="slide" id="slide-3">
             <h2 style="margin-bottom: 48px;">How Elevenified Works</h2>
             <div class="solution-grid">
-                <div class="premium-card" data-color="blue">
+                <div class="card-industrial card-premium" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">📋</div>
+                        <div class="icon-box" data-color="blue">📋</div>
                         <h3 class="card-title">SOP Auto-Extraction</h3>
                     </div>
-                    <p class="card-desc"><span style="color: #00C9FF;">AI</span> extracts knowledge from PDFs
+                    <p class="card-desc"><span style="color: var(--synergy-blue);">AI</span> extracts knowledge from
+                        PDFs
                         automatically</p>
                 </div>
-                <div class="premium-card" data-color="gold">
+                <div class="card-industrial card-premium" data-accent="gold">
                     <div class="card-header">
-                        <div class="icon-box">🗣️</div>
+                        <div class="icon-box" data-color="gold">🗣️</div>
                         <h3 class="card-title">Hinglish-First</h3>
                     </div>
                     <p class="card-desc">Workers speak naturally. No translation needed.</p>
                 </div>
-                <div class="premium-card" data-color="gold">
+                <div class="card-industrial card-premium" data-accent="gold">
                     <div class="card-header">
-                        <div class="icon-box">✏️</div>
+                        <div class="icon-box" data-color="gold">✏️</div>
                         <h3 class="card-title">Voice OR Text</h3>
                     </div>
                     <p class="card-desc">Choose your input method. Both work seamlessly.</p>
                 </div>
-                <div class="premium-card" data-color="blue">
+                <div class="card-industrial card-premium" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">🎯</div>
+                        <div class="icon-box" data-color="blue">🎯</div>
                         <h3 class="card-title">Intent Classification</h3>
                     </div>
-                    <p class="card-desc"><span style="color: #00C9FF;">AI</span> knows: Capture, Search, or Clarify?</p>
+                    <p class="card-desc"><span style="color: var(--synergy-blue);">AI</span> knows: Capture, Search, or
+                        Clarify?</p>
                 </div>
-                <div class="premium-card" data-color="blue">
+                <div class="card-industrial card-premium" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">🔍</div>
+                        <div class="icon-box" data-color="blue">🔍</div>
                         <h3 class="card-title">Cross-Language Search</h3>
                     </div>
-                    <p class="card-desc"><span style="color: #00C9FF;">AI</span> finds meaning across languages.</p>
+                    <p class="card-desc"><span style="color: var(--synergy-blue);">AI</span> finds meaning across
+                        languages.</p>
                 </div>
-                <div class="premium-card" data-color="green">
+                <div class="card-industrial card-premium" data-accent="green">
                     <div class="card-header">
-                        <div class="icon-box">🏆</div>
+                        <div class="icon-box" data-color="green">🏆</div>
                         <h3 class="card-title">Expert Recognition</h3>
                     </div>
                     <p class="card-desc">Turn knowledge sharing into status. Reward the source.</p>
@@ -1222,9 +1164,9 @@
 
             <div style="display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 32px;">
                 <div style="text-align: center;">
-                    <div
-                        style="width: 100px; height: 100px; background: rgba(255, 215, 0, 0.05); border: 1px solid var(--synergy-gold); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);">
-                        <div style="font-size: 3.5rem;">📄</div>
+                    <div class="icon-box" data-color="gold"
+                        style="width: 100px; height: 100px; margin: 0 auto 16px; font-size: 3.5rem; border-radius: 20px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);">
+                        📄
                     </div>
                     <h3 style="font-size: 1rem; color: var(--synergy-gold);">PDF Manuals</h3>
                 </div>
@@ -1232,9 +1174,9 @@
                 <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
 
                 <div style="text-align: center;">
-                    <div
-                        style="width: 100px; height: 100px; background: rgba(0, 201, 255, 0.1); border: 1px solid var(--synergy-blue); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(0, 201, 255, 0.2);">
-                        <div style="font-size: 3.5rem;">⚡</div>
+                    <div class="icon-box" data-color="blue"
+                        style="width: 100px; height: 100px; margin: 0 auto 16px; font-size: 3.5rem; border-radius: 20px; box-shadow: 0 0 30px rgba(0, 201, 255, 0.2);">
+                        ⚡
                     </div>
                     <h3 style="font-size: 1rem; color: var(--synergy-blue);">AI Processing</h3>
                 </div>
@@ -1242,9 +1184,9 @@
                 <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
 
                 <div style="text-align: center;">
-                    <div
-                        style="width: 100px; height: 100px; background: rgba(255, 215, 0, 0.1); border: 2px solid var(--synergy-gold); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);">
-                        <div style="font-size: 3.5rem;">🛡️</div>
+                    <div class="icon-box" data-color="gold"
+                        style="width: 100px; height: 100px; margin: 0 auto 16px; font-size: 3.5rem; border-radius: 20px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); border-width: 2px;">
+                        🛡️
                     </div>
                     <h3 style="font-size: 1rem; color: var(--synergy-gold);">Human Verified</h3>
                 </div>
@@ -1252,9 +1194,9 @@
                 <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
 
                 <div style="text-align: center;">
-                    <div
-                        style="width: 100px; height: 100px; background: rgba(57, 255, 20, 0.1); border: 1px solid var(--neon-volt); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 40px rgba(57, 255, 20, 0.3);">
-                        <div style="font-size: 3.5rem;">🧠</div>
+                    <div class="icon-box" data-color="green"
+                        style="width: 100px; height: 100px; margin: 0 auto 16px; font-size: 3.5rem; border-radius: 20px; box-shadow: 0 0 40px rgba(57, 255, 20, 0.3);">
+                        🧠
                     </div>
                     <h3 style="font-size: 1rem; color: var(--neon-volt);">Company Brain</h3>
                 </div>
@@ -1280,8 +1222,9 @@
                     Bridging the gap between <i>"Floor Talk"</i> (Symptoms) and <i>"Technical Manuals"</i> (Solutions).
                 </p>
                 <div style="margin-top: 32px;">
-                    <p style="color: #39FF14; font-weight: 600; font-size: 1.3rem;">
-                        ✓ <span style="color: #00C9FF;">AI</span> understood perfectly. Equipment: CNC-44. Action:
+                    <p style="color: var(--neon-volt); font-weight: 600; font-size: 1.3rem;">
+                        ✓ <span style="color: var(--synergy-blue);">AI</span> understood perfectly. Equipment: CNC-44.
+                        Action:
                         Bearing change.
                     </p>
                 </div>
@@ -1299,23 +1242,23 @@
             <p style="margin-bottom: 48px;">Enterprise-grade security built for manufacturing.</p>
 
             <div class="cta-offers" style="margin-top: 24px;">
-                <div class="offer-card premium-card" data-color="blue">
+                <div class="card-industrial card-premium offer-card" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">🔒</div>
+                        <div class="icon-box" data-color="blue">🔒</div>
                         <h3 class="card-title">Secure Data Isolation</h3>
                     </div>
                     <p class="card-desc">Enterprise-grade separation. Your trade secrets remain protected.</p>
                 </div>
-                <div class="offer-card premium-card" data-color="blue">
+                <div class="card-industrial card-premium offer-card" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">🛡️</div>
+                        <div class="icon-box" data-color="blue">🛡️</div>
                         <h3 class="card-title">Role-Based Access</h3>
                     </div>
                     <p class="card-desc">Admins control everything. Workers see what they need.</p>
                 </div>
-                <div class="offer-card premium-card" data-color="blue">
+                <div class="card-industrial card-premium offer-card" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">☁️</div>
+                        <div class="icon-box" data-color="blue">☁️</div>
                         <h3 class="card-title">Enterprise Security</h3>
                     </div>
                     <p class="card-desc">HTTPS encryption, secure auth, SOC2-ready architecture.</p>
@@ -1327,8 +1270,8 @@
             <h2 style="margin-bottom: 48px;">Live Demo Flow</h2>
             <div class="demo-steps">
 
-                <div class="demo-step"
-                    style="border-top: 3px solid var(--industrial-red); box-shadow: 0 0 20px rgba(255,51,51,0.1);">
+                <div class="card-industrial demo-step" data-accent="red"
+                    style="box-shadow: 0 0 20px rgba(255,51,51,0.1);">
                     <div class="step-num" style="background: var(--industrial-red); color: white;">1</div>
                     <div class="icon" style="background: rgba(255,51,51,0.1); border: 1px solid var(--industrial-red);">
                         🔍</div>
@@ -1336,7 +1279,7 @@
                     <p>New issue. Manual has nothing. (Problem)</p>
                 </div>
 
-                <div class="demo-step" style="border-top: 3px solid var(--synergy-gold);">
+                <div class="card-industrial demo-step" data-accent="gold">
                     <div class="step-num" style="background: var(--synergy-gold); color: black;">2</div>
                     <div class="icon" style="background: rgba(255,215,0,0.1); border: 1px solid var(--synergy-gold);">
                         🗣️
@@ -1345,7 +1288,7 @@
                     <p>Voice <b>OR</b> Text. Hinglish supported.</p>
                 </div>
 
-                <div class="demo-step" style="border-top: 3px solid var(--synergy-blue);">
+                <div class="card-industrial demo-step" data-accent="blue">
                     <div class="step-num" style="background: var(--synergy-blue); color: black;">3</div>
                     <div class="icon" style="background: rgba(0,201,255,0.1); border: 1px solid var(--synergy-blue);">🤖
                     </div>
@@ -1353,8 +1296,8 @@
                     <p>Standardizes text & translates before validation.</p>
                 </div>
 
-                <div class="demo-step"
-                    style="border-top: 3px solid var(--synergy-gold); box-shadow: 0 0 30px rgba(255,215,0,0.15);">
+                <div class="card-industrial demo-step" data-accent="gold"
+                    style="box-shadow: 0 0 30px rgba(255,215,0,0.15);">
                     <div class="step-num" style="background: var(--synergy-gold); color: black;">4</div>
                     <div class="icon" style="background: rgba(255,215,0,0.1); border: 1px solid var(--synergy-gold);">
                         🛡️
@@ -1363,7 +1306,7 @@
                     <p>Review clean data. Validated by experts.</p>
                 </div>
 
-                <div class="demo-step" style="border-top: 3px solid var(--neon-volt);">
+                <div class="card-industrial demo-step" data-accent="green">
                     <div class="step-num" style="background: var(--neon-volt); color: black;">5</div>
                     <div class="icon" style="background: rgba(57,255,20,0.1); border: 1px solid var(--neon-volt);">✨
                     </div>
@@ -1379,12 +1322,12 @@
             </h3>
 
             <div class="ux-container">
-                <div class="ux-card">
+                <div class="card-industrial ux-card" data-accent="gold">
                     <div class="ux-icon">🧤</div>
                     <h3>Gloves-On UI</h3>
                     <p>High-contrast "Fat Buttons" designed for safety gear. No tiny menus. No frustration.</p>
                 </div>
-                <div class="ux-card">
+                <div class="card-industrial ux-card" data-accent="gold">
                     <div class="ux-icon">🔊</div>
                     <h3>Industrial Audio</h3>
                     <p>Built-in noise suppression and echo cancellation. Designed for noisy factory environments.</p>
@@ -1396,65 +1339,65 @@
             <h2 style="margin-bottom: 48px;">Production Ready ✅</h2>
             <div class="tech-grid">
 
-                <div class="tech-item premium-card" data-color="gold">
+                <div class="card-industrial card-premium tech-item" data-accent="gold">
                     <div class="card-header">
-                        <div class="icon-box">🎙️</div>
+                        <div class="icon-box" data-color="gold">🎙️</div>
                         <h3 class="card-title">Voice Capture</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">LIVE</span>
                 </div>
-                <div class="tech-item premium-card" data-color="gold">
+                <div class="card-industrial card-premium tech-item" data-accent="gold">
                     <div class="card-header">
-                        <div class="icon-box">⌨️</div>
+                        <div class="icon-box" data-color="gold">⌨️</div>
                         <h3 class="card-title">Text Input</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">LIVE</span>
                 </div>
-                <div class="tech-item premium-card" data-color="blue">
+                <div class="card-industrial card-premium tech-item" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">🧠</div>
+                        <div class="icon-box" data-color="blue">🧠</div>
                         <h3 class="card-title">Intent AI</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">LIVE</span>
                 </div>
-                <div class="tech-item premium-card" data-color="gold">
+                <div class="card-industrial card-premium tech-item" data-accent="gold">
                     <div class="card-header">
-                        <div class="icon-box">🇮🇳</div>
+                        <div class="icon-box" data-color="gold">🇮🇳</div>
                         <h3 class="card-title">Hinglish</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">LIVE</span>
                 </div>
-                <div class="tech-item premium-card" data-color="blue">
+                <div class="card-industrial card-premium tech-item" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">🔍</div>
+                        <div class="icon-box" data-color="blue">🔍</div>
                         <h3 class="card-title">Search</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">LIVE</span>
                 </div>
-                <div class="tech-item premium-card" data-color="green">
+                <div class="card-industrial card-premium tech-item" data-accent="green">
                     <div class="card-header">
-                        <div class="icon-box">🏆</div>
+                        <div class="icon-box" data-color="green">🏆</div>
                         <h3 class="card-title">Leaderboard</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">LIVE</span>
                 </div>
-                <div class="tech-item premium-card" data-color="green">
+                <div class="card-industrial card-premium tech-item" data-accent="green">
                     <div class="card-header">
-                        <div class="icon-box">🧪</div>
+                        <div class="icon-box" data-color="green">🧪</div>
                         <h3 class="card-title">E2E Tests</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">19/19 PASS</span>
                 </div>
-                <div class="tech-item premium-card" data-color="blue">
+                <div class="card-industrial card-premium tech-item" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">🔒</div>
+                        <div class="icon-box" data-color="blue">🔒</div>
                         <h3 class="card-title">Secure Cloud</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">LIVE</span>
                 </div>
-                <div class="tech-item premium-card" data-color="blue">
+                <div class="card-industrial card-premium tech-item" data-accent="blue">
                     <div class="card-header">
-                        <div class="icon-box">⚡</div>
+                        <div class="icon-box" data-color="blue">⚡</div>
                         <h3 class="card-title">API First</h3>
                     </div>
                     <span class="badge badge-sm badge-volt">LIVE</span>
@@ -1468,23 +1411,23 @@
                 <h1 style="font-size: 3.5rem;">Join as a Founding Partner</h1>
                 <p>We're seeking one forward-thinking plant to validate this vision.</p>
                 <div class="cta-offers">
-                    <div class="offer-card premium-card" data-color="green">
+                    <div class="card-industrial card-premium offer-card" data-accent="green">
                         <div class="card-header">
-                            <div class="icon-box">💎</div>
+                            <div class="icon-box" data-color="green">💎</div>
                             <h3 class="card-title">Lifetime Benefits</h3>
                         </div>
                         <p class="card-desc">Lock in preferred pricing forever.</p>
                     </div>
-                    <div class="offer-card premium-card" data-color="green">
+                    <div class="card-industrial card-premium offer-card" data-accent="green">
                         <div class="card-header">
-                            <div class="icon-box">🛡️</div>
+                            <div class="icon-box" data-color="green">🛡️</div>
                             <h3 class="card-title">Zero-Risk</h3>
                         </div>
                         <p class="card-desc">Free 3-Month Pilot. Prove value first.</p>
                     </div>
-                    <div class="offer-card premium-card" data-color="green">
+                    <div class="card-industrial card-premium offer-card" data-accent="green">
                         <div class="card-header">
-                            <div class="icon-box">🤝</div>
+                            <div class="icon-box" data-color="green">🤝</div>
                             <h3 class="card-title">Tailored to You</h3>
                         </div>
                         <p class="card-desc">We customize the AI to your specific SOPs.</p>
@@ -1506,7 +1449,8 @@
                     <span class="num"
                         style="background: var(--gradient-blue); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">1</span>
                     <span class="equals">=</span>
-                    <span class="result" style="color: #39FF14; text-shadow: 0 0 40px rgba(57, 255, 20, 0.6);">11</span>
+                    <span class="result"
+                        style="color: var(--neon-volt); text-shadow: 0 0 40px rgba(57, 255, 20, 0.6);">11</span>
                 </div>
                 <p style="font-size: 2rem; color: var(--foreground); margin-top: 32px;">
                     <span style="color: var(--synergy-gold);">Human</span> + <span
