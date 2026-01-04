@@ -15,16 +15,22 @@
 
   /* Safety & Status (Safety Neon) */
   --neon-volt: #39FF14;
+  --neon-volt-dark: #2ECC40;
   --neon-volt-glow: rgba(57, 255, 20, 0.4);
   --electric-amber: #FFC000;
   --electric-amber-glow: rgba(255, 192, 0, 0.4);
   --industrial-red: #FF3333;
   --industrial-red-glow: rgba(255, 51, 51, 0.4);
 
+  /* Borders */
+  --border-industrial: #3A3E45;
+
   /* The "11" Accent (AI Synergy Gradient) */
   --synergy-blue: #00C9FF;
+  --synergy-blue-dark: #0077B5;
   --synergy-blue-glow: rgba(0, 201, 255, 0.3);
   --synergy-gold: #FFD700;
+  --synergy-gold-dark: #DAA520;
   --synergy-gold-glow: rgba(255, 215, 0, 0.3);
 
   /* Shadows for Tactile Depth */
@@ -40,9 +46,14 @@
   --transition-fast: 150ms;
   --transition-normal: 300ms;
   --transition-slow: 500ms;
+
   /* Brand Identity (Gold → Blue → Green: Human + AI = Result) */
-  /* Color stops tuned for natural flow: Gold-Blue is ~40%, Blue-Green fills rest (adjacent on color wheel) */
   --gradient-brand: linear-gradient(90deg, var(--synergy-gold) 0%, var(--synergy-blue) 40%, var(--neon-volt) 100%);
+
+  /* Standard Component Gradients */
+  --gradient-volt: linear-gradient(135deg, var(--neon-volt) 0%, var(--neon-volt-dark) 100%);
+  --gradient-blue: linear-gradient(180deg, var(--synergy-blue) 0%, var(--synergy-blue-dark) 100%);
+  --gradient-gold: linear-gradient(180deg, var(--synergy-gold) 0%, var(--synergy-gold-dark) 100%);
 }
 
 /* Helper classes that use the brand gradient */
