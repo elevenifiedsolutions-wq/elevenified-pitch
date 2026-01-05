@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevenified Business Card (Back)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Added Merriweather for the serif quote -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@500;700&family=Roboto+Mono:wght@400;500&family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* =========================================
+           GLOBAL VARS (Consistent with Front)
+           ========================================= */
+        :root {
+            --bg-deep-slate: #1A1C20;
+            --bg-rubber: #25282D;
+            --foreground: #E8E8E8;
+            --foreground-muted: #8A8D93;
+            --neon-volt: #39FF14;
+            --synergy-blue: #00C9FF;
+            --synergy-gold: #FFD700;
+            --gradient-brand: linear-gradient(135deg, var(--synergy-gold) 0%, var(--synergy-blue) 50%, var(--neon-volt) 100%);
+            --card-width: 600px;
+            --card-height: 350px;
+            --card-radius: 20px;
+        }
+
+        body {
+            background-color: #000;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+            color: var(--foreground);
+        }
+
+        .card-container {
+            position: relative;
+            width: var(--card-width);
+            height: var(--card-height);
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--card-radius);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            background-color: var(--bg-rubber);
+            align-items: center;
+            padding: 40px 40px;
+            text-align: center;
+            justify-content: space-between;
+            /* Distribute vertical space */
+        }
+
+        /* Innovation: Noise Texture */
+        .noise-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: overlay;
+        }
+
+        /* Content Layer (Above Noise) */
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Top Section */
+        .top-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 90%;
+            margin-bottom: 20px;
+        }
+
+        .quote-text {
+            font-family: 'Merriweather', serif;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            font-style: italic;
+            color: #fff;
+            font-weight: 300;
+        }
+
+        .sub-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            color: var(--foreground-muted);
+            font-weight: 500;
+        }
+
+        /* Gradient Divider */
+        .gradient-line {
+            width: 60%;
+            height: 2px;
+            background: var(--gradient-brand);
+            border-radius: 2px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* QR Section */
+        .qr-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            /* Placeholder white bg for QR */
+            padding: 5px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Placeholder QR Pattern */
+        .qr-placeholder-pattern {
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(45deg, #000 25%, transparent 25%),
+                linear-gradient(-45deg, #000 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #000 75%),
+                linear-gradient(-45deg, transparent 75%, #000 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.8;
+        }
+
+        /* Brand URL */
+        .brand-url {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        .footer-text {
+            margin-top: auto;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: var(--foreground-muted);
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="noise-overlay"></div>
+
+            <div class="content-layer">
+
+                <!-- Top Message -->
+                <div class="top-section">
+                    <div class="quote-text">
+                        "When your best technician retires, does their expertise retire too?"
+                    </div>
+                    <div class="sub-text">
+                        Scan to see how Elevenified keeps shop-floor knowledge accessible.
+                    </div>
+                </div>
+
+                <!-- Separator -->
+                <div class="gradient-line"></div>
+
+                <!-- QR & Action -->
+                <div class="qr-section">
+                    <div class="qr-code">
+                        <!-- Simple CSS Pattern to simulate QR for visual -->
+                        <div class="qr-placeholder-pattern"></div>
+                    </div>
+
+                    <div class="brand-url">www.elevenified.com</div>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer-text">
+                    Industry 5.0 platform for human-first manufacturing.
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

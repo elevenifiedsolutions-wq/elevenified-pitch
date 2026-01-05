@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevenified Business Card (Final)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@500;700&family=Roboto+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* =========================================
+           GLOBAL VARS (From Design System)
+           ========================================= */
+        :root {
+            --bg-deep-slate: #1A1C20;
+            --bg-rubber: #25282D;
+            --foreground: #E8E8E8;
+            --foreground-muted: #8A8D93;
+            --neon-volt: #39FF14;
+            --synergy-blue: #00C9FF;
+            --synergy-gold: #FFD700;
+            --gradient-brand: linear-gradient(135deg, var(--synergy-gold) 0%, var(--synergy-blue) 50%, var(--neon-volt) 100%);
+            --card-width: 600px;
+            --card-height: 350px;
+            --card-radius: 20px;
+        }
+
+        body {
+            background-color: #000;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+            color: var(--foreground);
+        }
+
+        .concept-label {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--foreground-muted);
+            width: 100%;
+        }
+
+        .card-container {
+            position: relative;
+            width: var(--card-width);
+            height: var(--card-height);
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--card-radius);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            background-color: var(--bg-rubber);
+            align-items: center;
+            padding: 0;
+        }
+
+        /* Innovation: Noise Texture */
+        .noise-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: overlay;
+        }
+
+        svg {
+            overflow: visible;
+        }
+
+        .card-left {
+            flex: 0 0 40%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            /* Darker for glass feel */
+            position: relative;
+            gap: 20px;
+            padding: 20px;
+            z-index: 1;
+            /* Above noise */
+        }
+
+        /* Innovation: Gradient Separator */
+        .card-sep {
+            width: 2px;
+            height: 70%;
+            background: var(--gradient-brand);
+            opacity: 0.8;
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .card-right {
+            flex: 1;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            z-index: 1;
+        }
+
+        .right-content-group {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            text-align: right;
+        }
+
+        .founder-info {
+            text-align: right;
+        }
+
+        .founder-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .founder-title {
+            color: var(--synergy-gold);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Innovation: Code-Native Mono Font */
+        .contact-info {
+            display: grid;
+            gap: 8px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.95rem;
+            /* Print Boost */
+            color: var(--foreground);
+            letter-spacing: -0.3px;
+        }
+
+        .contact-info div {
+            padding-right: 0;
+            opacity: 0.9;
+        }
+
+        .logo-container {
+            width: 70px !important;
+            height: 70px !important;
+        }
+
+        .company-name-left {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-top: 5px;
+        }
+
+        .math-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        /* Trust: Static Glow (Reliable Power) */
+        .static-glow {
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.6), 0 0 2px rgba(57, 255, 20, 0.8);
+        }
+
+        /* Innovation: Tagline (Clean 2-Line) */
+        .tagline-left {
+            margin-top: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            /* Print Safe */
+            color: var(--foreground-muted);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SHARED DEFS (Invisible) -->
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <linearGradient id="grad-gold" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FFD700" />
+                <stop offset="100%" stop-color="#DAA520" />
+            </linearGradient>
+            <linearGradient id="grad-blue" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00C9FF" />
+                <stop offset="100%" stop-color="#0077B5" />
+            </linearGradient>
+            <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="card-container">
+
+        <div class="card">
+            <!-- Innovation: Noise Texture -->
+            <div class="noise-overlay"></div>
+
+            <div class="card-left">
+                <div class="logo-container">
+                    <!-- INLINED SVG -->
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <path d="M10 28 L50 5 L90 28 M10 72 L50 95 L90 72" fill="none" stroke="#656A75" stroke-width="8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <rect x="6" y="24" width="8" height="52" rx="4" fill="url(#grad-gold)" />
+                        <rect x="86" y="24" width="8" height="52" rx="4" fill="url(#grad-blue)" />
+                        <g stroke="#1A1C20" stroke-width="0.5">
+                            <circle cx="10" cy="28" r="2.5" fill="url(#grad-blue)" />
+                            <circle cx="10" cy="28" r="1" fill="#1A1C20" />
+                            <circle cx="10" cy="72" r="2.5" fill="url(#grad-blue)" />
+                            <circle cx="10" cy="72" r="1" fill="#1A1C20" />
+                            <circle cx="90" cy="28" r="2.5" fill="url(#grad-gold)" />
+                            <circle cx="90" cy="28" r="1" fill="#1A1C20" />
+                            <circle cx="90" cy="72" r="2.5" fill="url(#grad-gold)" />
+                            <circle cx="90" cy="72" r="1" fill="#1A1C20" />
+                        </g>
+                        <g filter="url(#neon-glow)">
+                            <rect x="32" y="46" width="36" height="8" rx="4" fill="#39FF14" />
+                            <rect x="46" y="32" width="8" height="36" rx="4" fill="#39FF14" />
+                            <circle cx="50" cy="50" r="5" fill="#1A1C20" stroke="#39FF14" stroke-width="2.5" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="company-name-left">Elevenified</div>
+
+                <div class="math-text">
+                    <span style="color:var(--synergy-gold)">1</span> + <span style="color:var(--synergy-blue)">1</span>
+                    = <span style="color:var(--neon-volt)" class="static-glow">11</span>
+                </div>
+
+                <!-- Tagline (No Pill, 2 Lines) -->
+                <div class="tagline-left">
+                    Capture <b style="color:var(--synergy-gold)">Human Expertise</b>.<br>
+                    <b style="color:var(--neon-volt)">Amplify</b> with <b style="color:var(--synergy-blue)">AI</b>.
+                </div>
+            </div>
+
+            <div class="card-sep"></div>
+
+            <div class="card-right">
+                <!-- Grouped Center Right Aligned -->
+                <div class="right-content-group">
+                    <div class="founder-info">
+                        <div class="founder-name">Siddharth</div>
+                        <div class="founder-title">Founder</div>
+                    </div>
+
+                    <div class="contact-info">
+                        <div>siddharth@elevenified.com</div>
+                        <div>+91 98765 43210</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
