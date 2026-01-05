@@ -186,11 +186,37 @@
             margin-top: 5px;
         }
 
+        /* Signature Element (Small) */
         .math-text {
+            width: 100%;
+            text-align: center;
+            /* Enforce Centering */
             font-family: 'Outfit', sans-serif;
-            font-size: 1.2rem;
+            font-size: 0.7rem;
+            /* Small signature size */
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-top: -5px;
+            /* Pull closer to Elevenified */
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        /* Caption Style for Human + AI */
+        .sub-signature {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 0.5rem;
+            /* Much smaller */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* Wider spacing for caption feel */
+            margin-top: 3px;
+            opacity: 0.5;
+            /* Lighter/Subtle */
+            font-weight: 400;
         }
 
         /* Trust: Static Glow (Reliable Power) */
@@ -205,7 +231,8 @@
             text-align: center;
             font-size: 0.9rem;
             /* Print Safe */
-            color: var(--foreground-muted);
+            color: rgba(255, 255, 255, 0.9);
+            /* High Contrast for Print */
             line-height: 1.4;
         }
     </style>
@@ -268,12 +295,16 @@
                 <div class="math-text">
                     <span style="color:var(--synergy-gold)">1</span> + <span style="color:var(--synergy-blue)">1</span>
                     = <span style="color:var(--neon-volt)" class="static-glow">11</span>
+                    <div class="sub-signature">
+                        <span style="color:var(--synergy-gold)">Human</span> + <span
+                            style="color:var(--synergy-blue)">AI</span>
+                    </div>
                 </div>
 
                 <!-- Tagline (No Pill, 2 Lines) -->
                 <div class="tagline-left">
-                    Capture <b style="color:var(--synergy-gold)">Human Expertise</b>.<br>
-                    <b style="color:var(--neon-volt)">Amplify</b> with <b style="color:var(--synergy-blue)">AI</b>.
+                    Capture <b style="color:var(--synergy-gold)">shop-floor expertise</b><br>
+                    <b style="color:var(--neon-volt)">Amplify</b> with <b style="color:var(--synergy-blue)">AI</b>
                 </div>
             </div>
 
