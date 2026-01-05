@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevenified Business Card (Back - Vertical)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@500;700&family=Roboto+Mono:wght@400;500&family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap"
+        rel="stylesheet">
+    <style>
+        /* =========================================
+           GLOBAL VARS (Vertical Variant)
+           ========================================= */
+        :root {
+            --bg-deep-slate: #1A1C20;
+            --bg-rubber: #25282D;
+            --foreground: #E8E8E8;
+            --foreground-muted: #8A8D93;
+            --neon-volt: #39FF14;
+            --synergy-blue: #00C9FF;
+            --synergy-gold: #FFD700;
+            --gradient-brand: linear-gradient(135deg, var(--synergy-gold) 0%, var(--synergy-blue) 50%, var(--neon-volt) 100%);
+
+            /* SWAPPED DIMENSIONS FOR VERTICAL */
+            --card-width: 350px;
+            --card-height: 600px;
+
+            --card-radius: 20px;
+        }
+
+        body {
+            background-color: #000;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px;
+            color: var(--foreground);
+        }
+
+        .card-container {
+            position: relative;
+            width: var(--card-width);
+            height: var(--card-height);
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--card-radius);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            background-color: var(--bg-rubber);
+            align-items: center;
+            padding: 40px 30px;
+            /* Reduced side padding slightly for narrower width */
+            text-align: center;
+            justify-content: space-between;
+        }
+
+        .noise-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+            mix-blend-mode: overlay;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .top-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .quote-text {
+            font-family: 'Merriweather', serif;
+            font-size: 1.3rem;
+            /* Print Boost */
+            /* Larger for vertical impact */
+            line-height: 1.4;
+            font-style: italic;
+            color: #fff;
+            font-weight: 300;
+        }
+
+        .sub-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            /* Print Boost */
+            color: var(--foreground-muted);
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .gradient-line {
+            width: 50%;
+            height: 2px;
+            background: var(--gradient-brand);
+            border-radius: 2px;
+            opacity: 0.8;
+            margin: 30px 0;
+            /* More spacing */
+        }
+
+        .qr-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        /* BIGGER QR CODE */
+        .qr-code {
+            width: 160px;
+            /* Significance increase from 100px */
+            height: 160px;
+            background: #fff;
+            padding: 8px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .qr-placeholder-pattern {
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(45deg, #000 25%, transparent 25%),
+                linear-gradient(-45deg, #000 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #000 75%),
+                linear-gradient(-45deg, transparent 75%, #000 75%);
+            background-size: 24px 24px;
+            /* Scaled up pattern */
+            background-position: 0 0, 0 12px, 12px -12px, -12px 0px;
+            opacity: 0.8;
+        }
+
+        .brand-url {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        /* Hook Highlight */
+        .industry-highlight {
+            font-weight: 700;
+            color: var(--neon-volt);
+            letter-spacing: 0.5px;
+        }
+
+        .footer-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            /* Print Safe >6pt */
+            color: var(--foreground-muted);
+            opacity: 0.7;
+            margin-bottom: 10px;
+            max-width: 80%;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card-container">
+        <div class="card">
+            <div class="noise-overlay"></div>
+
+            <div class="content-layer">
+
+                <!-- Top Message -->
+                <div class="top-section">
+                    <div class="quote-text">
+                        'When your best technician retires, does their expertise retire too?'
+                    </div>
+                </div>
+
+                <!-- Separator -->
+                <div class="gradient-line"></div>
+
+                <!-- QR & Action -->
+                <div class="qr-section">
+                    <div class="sub-text">
+                        Scan to capture shop-floor knowledge.
+                    </div>
+                    <div class="qr-code">
+                        <!-- Valid QR for www.elevenified.com -->
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://www.elevenified.com"
+                            alt="QR Code" style="width:100%; height:100%; border-radius: 4px;">
+                    </div>
+
+                    <div class="brand-url">www.elevenified.com</div>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer-text">
+                    <span class="industry-highlight">Industry 5.0</span> platform for human-first manufacturing.
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Hack -->
+    <div style="margin-top: 20px; font-family: 'Outfit', sans-serif; opacity: 0.5;">
+        <a href="index.html" style="color: white; text-decoration: none; border-bottom: 1px dashed white;">View Front
+            Side</a>
+    </div>
+
+</body>
+
+</html>
