@@ -477,6 +477,39 @@
                 padding: 120px 0 60px;
             }
 
+            /* Fix Founder Tags Overflow */
+            .founder-name-block div {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .tech-tag {
+                margin: 4px !important;
+                white-space: nowrap;
+                /* Prevent individual tag break */
+                font-size: 0.75rem;
+            }
+
+            /* Fix Loop Grid Alignment */
+            .loop-grid {
+                flex-direction: column;
+                gap: 24px;
+                /* Tighter gap for mobile vertical stack */
+            }
+
+            .loop-arrow {
+                transform: rotate(90deg);
+                margin: 0;
+            }
+
+            .loop-card {
+                width: 100%;
+                max-width: 260px;
+                /* Constrain width so it looks good stacked */
+            }
+
             h1 {
                 font-size: 2.2rem !important;
                 line-height: 1.2;
