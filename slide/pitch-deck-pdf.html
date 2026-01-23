@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevenified - Pitch Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Colors */
+            --bg-deep-slate: #0d0f12;
+            --bg-rubber: #1a1c20;
+            --foreground: #f0f0f0;
+            --foreground-muted: #9aa0a6;
+            --neon-volt: #39ff14;
+            --synergy-blue: #00d4ff;
+            --synergy-gold: #ffd700;
+            --industrial-red: #ff3333;
+            --border-industrial: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .page {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+            
+            .page:last-child {
+                page-break-after: auto;
+            }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-deep-slate);
+            color: var(--foreground);
+            line-height: 1.5;
+        }
+
+        /* Page Layout */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 40px 50px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--bg-deep-slate) 0%, var(--bg-rubber) 50%, var(--bg-deep-slate) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .page::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-industrial);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--neon-volt), var(--synergy-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-number {
+            font-size: 0.85rem;
+            color: var(--foreground-muted);
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--neon-volt), var(--synergy-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--foreground);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--foreground);
+        }
+
+        p {
+            font-size: 1rem;
+            color: var(--foreground-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--foreground-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cards-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .card {
+            background: rgba(26, 28, 32, 0.8);
+            border: 1px solid var(--border-industrial);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        .card-icon.red { background: rgba(255, 51, 51, 0.15); }
+        .card-icon.blue { background: rgba(0, 212, 255, 0.15); }
+        .card-icon.gold { background: rgba(255, 215, 0, 0.15); }
+        .card-icon.volt { background: rgba(57, 255, 20, 0.15); }
+
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+
+        /* Equation */
+        .equation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 40px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .equation .num {
+            color: var(--synergy-blue);
+        }
+
+        .equation .result {
+            background: linear-gradient(135deg, var(--neon-volt), var(--synergy-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 4rem;
+        }
+
+        /* Flow Steps */
+        .flow-steps {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .flow-step {
+            flex: 1;
+            background: rgba(26, 28, 32, 0.8);
+            border: 1px solid var(--border-industrial);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--foreground-muted);
+            font-size: 1.2rem;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-step .icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .flow-step h3 {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .flow-step p {
+            font-size: 0.75rem;
+            margin-bottom: 0;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: rgba(26, 28, 32, 0.8);
+            border-left: 4px solid var(--synergy-gold);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .quote-box p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--foreground);
+            margin-bottom: 0;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: rgba(57, 255, 20, 0.15);
+            color: var(--neon-volt);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            border: 1px solid rgba(57, 255, 20, 0.3);
+        }
+
+        .badge.blue {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--synergy-blue);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        /* Tech Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .tech-item {
+            background: rgba(26, 28, 32, 0.8);
+            border: 1px solid var(--border-industrial);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .tech-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .tech-item h3 {
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--neon-volt), var(--synergy-blue));
+            color: var(--bg-deep-slate);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 8px 20px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--neon-volt), #32d912);
+            color: var(--bg-deep-slate);
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 16px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            font-size: 0.95rem;
+            color: var(--foreground-muted);
+        }
+
+        .contact-info a {
+            color: var(--synergy-blue);
+            text-decoration: none;
+        }
+
+        /* Pillars */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .pillar {
+            background: rgba(26, 28, 32, 0.8);
+            border: 1px solid var(--border-industrial);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pillar .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .pillar h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--synergy-gold);
+        }
+
+        .pillar p {
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .pillar .example {
+            font-size: 0.75rem;
+            font-style: italic;
+            color: var(--foreground-muted);
+            border-top: 1px solid var(--border-industrial);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        /* Print Button */
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--neon-volt);
+            color: var(--bg-deep-slate);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1rem;
+        }
+
+        .print-button:hover {
+            opacity: 0.9;
+        }
+
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+
+        /* Content wrapper */
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-button" onclick="window.print()">📥 Download PDF</button>
+
+    <!-- PAGE 1: Cover -->
+    <div class="page">
+        <div class="header">
+            <span class="logo">Elevenified</span>
+            <span class="page-number">1/8</span>
+        </div>
+        <div class="content" style="text-align: center; padding-top: 60px;">
+            <h1 style="font-size: 3.5rem; margin-bottom: 24px;">Human + AI = Amplified Intelligence</h1>
+            <p class="subtitle" style="font-size: 1.4rem; max-width: 600px; margin: 0 auto 50px;">
+                Preserving factory expertise. Accelerating worker onboarding. Building India's manufacturing brain.
+            </p>
+            <div class="equation">
+                <span class="num">1</span>
+                <span style="color: var(--foreground-muted);">+</span>
+                <span class="num">1</span>
+                <span style="color: var(--foreground-muted);">=</span>
+                <span class="result">11</span>
+            </div>
+            <p style="margin-top: 40px; font-size: 1rem;">
+                SOPs + Tribal Knowledge = Searchable Company Brain
+            </p>
+        </div>
+    </div>
+
+    <!-- PAGE 2: The Problem -->
+    <div class="page">
+        <div class="header">
+            <span class="logo">Elevenified</span>
+            <span class="page-number">2/8</span>
+        </div>
+        <div class="content">
+            <h2>The Knowledge Crisis</h2>
+            <p class="subtitle">Every year, your best workers retire. Their decades of expertise? Gone forever.</p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon red">👴</div>
+                    <h3>Retiring Workforce</h3>
+                    <p>Average factory worker is 44+ years old. The clock is ticking on institutional knowledge.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon red">🧠</div>
+                    <h3>Tribal Knowledge</h3>
+                    <p>Undocumented tricks and fixes that no manual captures. Lost when experts leave.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon red">🔄</div>
+                    <h3>Repeat Problems</h3>
+                    <p>Day shift solves it. Night shift doesn't know. Same issue, solved repeatedly.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon red">⏱️</div>
+                    <h3>Slow Onboarding</h3>
+                    <p>6-12 months for new workers to become productive. Too slow, too expensive.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon red">🤐</div>
+                    <h3>The "Silent Expert"</h3>
+                    <p>Seniors have no incentive to share. Knowledge = job security. Skills retire with them.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon red">🌐</div>
+                    <h3>Language Barrier</h3>
+                    <p>English manuals, Hindi workers. Critical information lost in translation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: Industry 5.0 -->
+    <div class="page">
+        <div class="header">
+            <span class="logo">Elevenified</span>
+            <span class="page-number">3/8</span>
+        </div>
+        <div class="content">
+            <h2>Beyond Automation: Industry 5.0</h2>
+            <p class="subtitle">The global standard for human-first manufacturing.</p>
+            
+            <div class="pillars">
+                <div class="pillar">
+                    <div class="icon">🧑‍🔧</div>
+                    <h3>Human-Centricity</h3>
+                    <p>Technology adapts to workers, not the other way around. We capture expertise — we don't replace experts.</p>
+                    <div class="example">"When Ramesh retires, his 20 years stays in the system."</div>
+                </div>
+                <div class="pillar">
+                    <div class="icon">🌱</div>
+                    <h3>Sustainability</h3>
+                    <p>Reduced turnover = lower carbon footprint. Sustainability through human retention.</p>
+                    <div class="example">"Hiring + Training = carbon footprint. Preserving expertise = green."</div>
+                </div>
+                <div class="pillar">
+                    <div class="icon">🛡️</div>
+                    <h3>Resilience</h3>
+                    <p>Organizational memory that survives disruptions. Knowledge accessible even when experts aren't.</p>
+                    <div class="example">"COVID lockdown? Senior can't come? Knowledge still accessible."</div>
+                </div>
+            </div>
+
+            <div class="quote-box" style="margin-top: 30px;">
+                <p>"Industry 4.0 made machines smart. Industry 5.0 makes the human-machine connection smarter."</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: How It Works -->
+    <div class="page">
+        <div class="header">
+            <span class="logo">Elevenified</span>
+            <span class="page-number">4/8</span>
+        </div>
+        <div class="content">
+            <h2>How Elevenified Works</h2>
+            <p class="subtitle">Simple capture. Smart search. Human validation.</p>
+            
+            <div class="cards-grid cards-grid-3">
+                <div class="card">
+                    <div class="card-icon blue">📄</div>
+                    <h3>SOP Auto-Extraction</h3>
+                    <p>Upload your existing PDFs. AI extracts structured knowledge automatically.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon gold">🇮🇳</div>
+                    <h3>Hinglish-First</h3>
+                    <p>Workers speak naturally in Hindi, English, or mix. No translation needed.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon blue">🎤</div>
+                    <h3>Voice OR Text</h3>
+                    <p>Choose your input method. Both work seamlessly on the factory floor.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon volt">🧠</div>
+                    <h3>Intent Classification</h3>
+                    <p>AI knows: Capture new knowledge, Search existing, or Clarify with questions?</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon blue">🔍</div>
+                    <h3>Cross-Language Search</h3>
+                    <p>Hindi query finds English SOPs. English query finds Hindi tips. Seamless.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon gold">🏆</div>
+                    <h3>Expert Recognition</h3>
+                    <p>Turn knowledge sharing into status. Gamification rewards contributors.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 5: AI + Human Validation -->
+    <div class="page">
+        <div class="header">
+            <span class="logo">Elevenified</span>
+            <span class="page-number">5/8</span>
+        </div>
+        <div class="content">
+            <h2>AI Speed. Human Safety.</h2>
+            <p class="subtitle">Nothing enters the system without your approval.</p>
+            
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="icon">📄</div>
+                    <h3>PDF Manuals</h3>
+                    <p>Upload existing SOPs</p>
+                </div>
+                <div class="flow-step">
+                    <div class="icon">🤖</div>
+                    <h3>AI Processing</h3>
+                    <p>Extract & structure</p>
+                </div>
+                <div class="flow-step">
+                    <div class="icon">👨‍🔬</div>
+                    <h3>Human Verified</h3>
+                    <p>Expert approval gate</p>
+                </div>
+                <div class="flow-step">
+                    <div class="icon">🧠</div>
+                    <h3>Company Brain</h3>
+                    <p>Searchable knowledge</p>
+                </div>
+            </div>
+
+            <div class="quote-box" style="margin-top: 40px;">
+                <p>🎤 "CNC-44 mein vibration aaye toh left bearing check karo"</p>
+            </div>
+            <p style="text-align: center; margin-top: 16px;">
+                <span class="badge">✓ AI understood perfectly</span>
+                <span style="margin: 0 8px; color: var(--foreground-muted);">→</span>
+                <span style="color: var(--foreground);">Equipment: CNC-44 | Action: Bearing check | Condition: Vibration</span>
+            </p>
+
+            <h3 style="margin-top: 40px; text-align: center; color: var(--synergy-gold);">Bridging the Gap</h3>
+            <p style="text-align: center; font-size: 1rem;">
+                "Floor Talk" (Symptoms) ↔ "Technical Manuals" (Solutions)
+            </p>
+        </div>
+    </div>
+
+    <!-- PAGE 6: Security & UX -->
+    <div class="page">
+        <div class="header">
+            <span class="logo">Elevenified</span>
+            <span class="page-number">6/8</span>
+        </div>
+        <div class="content">
+            <h2>Your Data. Your Control.</h2>
+            <p class="subtitle">Enterprise-grade security built for manufacturing.</p>
+            
+            <div class="cards-grid cards-grid-3" style="margin-bottom: 40px;">
+                <div class="card">
+                    <div class="card-icon volt">🔒</div>
+                    <h3>Secure Data Isolation</h3>
+                    <p>Enterprise-grade separation. Your trade secrets remain protected.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon volt">👥</div>
+                    <h3>Role-Based Access</h3>
+                    <p>Admins control everything. Workers see only what they need.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon volt">🛡️</div>
+                    <h3>Enterprise Security</h3>
+                    <p>HTTPS encryption, secure auth, SOC2-ready architecture.</p>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 30px;">Not Another Corporate App.</h2>
+            <p class="subtitle">Built for your reality.</p>
+            
+            <div class="cards-grid cards-grid-3">
+                <div class="card">
+                    <div class="card-icon gold">🧤</div>
+                    <h3>Gloves-On UI</h3>
+                    <p>High-contrast "Fat Buttons" designed for safety gear. No tiny menus.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon gold">🔊</div>
+                    <h3>Industrial Audio</h3>
+                    <p>Built-in noise suppression and echo cancellation for factory environments.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon gold">📋</div>
+                    <h3>Your SOPs</h3>
+                    <p>We train on your equipment manuals. Your terminology. Your processes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 7: Production Ready -->
+    <div class="page">
+        <div class="header">
+            <span class="logo">Elevenified</span>
+            <span class="page-number">7/8</span>
+        </div>
+        <div class="content">
+            <h2>Production Ready ✅</h2>
+            <p class="subtitle">Not a prototype. A working system ready for pilot deployment.</p>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="icon">🎤</div>
+                    <h3>Voice Capture</h3>
+                    <span class="badge">Live</span>
+                </div>
+                <div class="tech-item">
+                    <div class="icon">⌨️</div>
+                    <h3>Text Input</h3>
+                    <span class="badge">Live</span>
+                </div>
+                <div class="tech-item">
+                    <div class="icon">🧠</div>
+                    <h3>Intent AI</h3>
+                    <span class="badge">Live</span>
+                </div>
+                <div class="tech-item">
+                    <div class="icon">🇮🇳</div>
+                    <h3>Hinglish</h3>
+                    <span class="badge">Live</span>
+                </div>
+                <div class="tech-item">
+                    <div class="icon">🔍</div>
+                    <h3>Search</h3>
+                    <span class="badge">Live</span>
+                </div>
+                <div class="tech-item">
+                    <div class="icon">🏆</div>
+                    <h3>Leaderboard</h3>
+                    <span class="badge">Live</span>
+                </div>
+                <div class="tech-item">
+                    <div class="icon">🧪</div>
+                    <h3>E2E Tests</h3>
+                    <span class="badge blue">Passing</span>
+                </div>
+                <div class="tech-item">
+                    <div class="icon">☁️</div>
+                    <h3>Secure Cloud</h3>
+                    <span class="badge blue">Active</span>
+                </div>
+                <div class="tech-item">
+                    <div class="icon">🔌</div>
+                    <h3>API First</h3>
+                    <span class="badge blue">Ready</span>
+                </div>
+            </div>
+
+            <div class="quote-box" style="margin-top: 40px; text-align: center;">
+                <p style="font-style: normal; font-size: 1.2rem; font-weight: 600;">
+                    Human + AI = Amplified. Not Replaced.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 8: CTA -->
+    <div class="page">
+        <div class="header">
+            <span class="logo">Elevenified</span>
+            <span class="page-number">8/8</span>
+        </div>
+        <div class="cta-section">
+            <span class="cta-badge">🤝 Founding Partner Program</span>
+            <h1 style="font-size: 2.5rem; margin-bottom: 20px;">Join as a Founding Partner</h1>
+            <p class="subtitle" style="max-width: 500px; margin: 0 auto 30px;">
+                We're seeking one forward-thinking plant to validate this vision.
+            </p>
+            
+            <div class="cards-grid cards-grid-3" style="max-width: 800px; margin: 0 auto 40px;">
+                <div class="card" style="text-align: center;">
+                    <div class="card-icon volt" style="margin: 0 auto 12px;">💎</div>
+                    <h3>Lifetime Benefits</h3>
+                    <p>Lock in preferred pricing forever as an early adopter.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div class="card-icon volt" style="margin: 0 auto 12px;">🎯</div>
+                    <h3>Zero-Risk</h3>
+                    <p>Free 3-Month Pilot. Prove value before commitment.</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <div class="card-icon volt" style="margin: 0 auto 12px;">⚙️</div>
+                    <h3>Tailored to You</h3>
+                    <p>We customize the AI to your specific SOPs and processes.</p>
+                </div>
+            </div>
+
+            <a href="https://forms.gle/ghjHV3ko32tfwD1J9" class="cta-button">
+                Apply for Pilot Partnership →
+            </a>
+
+            <div class="contact-info">
+                <p><strong>Siddharth</strong> — Founder</p>
+                <p>
+                    <a href="mailto:siddharth@elevenified.com">siddharth@elevenified.com</a>
+                    &nbsp;|&nbsp;
+                    <a href="https://www.elevenified.com">www.elevenified.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple print trigger
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'p') {
+                // Let default print dialog handle it
+            }
+        });
+    </script>
+</body>
+
+</html>

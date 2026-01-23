@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Elevenified - Manufacturing Knowledge, Amplified">
+    <meta property="og:image" content="https://www.elevenified.com/assets/icons/social-card.svg">
+    <meta property="og:url" content="https://www.elevenified.com">
+    <title>Elevenified | Manufacturing Intelligence</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icons/fav-icon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="design/colors.css">
+    <link rel="stylesheet" href="design/components.css">
+    <style>
+        /* --- BRAND THEME: INDUSTRIAL NEUMORPHISM --- */
+        /* --- BRAND THEME: INDUSTRIAL NEUMORPHISM --- */
+        /* All CSS variables are now imported from design/colors.css */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep-slate);
+            color: var(--foreground);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- LAYOUT SPINE --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* --- BACKGROUND FX --- */
+        .ambient-glow {
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(0, 201, 255, 0.08) 0%, rgba(255, 215, 0, 0.03) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(26, 28, 32, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--shadow-highlight);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 32px;
+            width: 32px;
+        }
+
+        /* SVG/Image Responsiveness */
+        img,
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .logo img {
+            /* Override for nav logo - maintain specific sizing */
+            max-width: none;
+        }
+
+        .brand-text {
+            font-weight: 800;
+            font-size: 1.35rem;
+            letter-spacing: -0.5px;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Standardized Mini-Button (Nav) */
+        /* Standardized Mini-Button (Nav) - See design/components.css */
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .big-equation {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        /* Semantic Colors */
+        .human-text {
+            color: var(--synergy-gold);
+            text-shadow: 0 0 25px var(--synergy-gold-glow);
+        }
+
+        .ai-text {
+            color: var(--synergy-blue);
+            text-shadow: 0 0 25px var(--synergy-blue-glow);
+        }
+
+        .result-text {
+            color: var(--neon-volt);
+            text-shadow: 0 0 35px var(--neon-volt-glow);
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: var(--foreground-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Badge margin override for hero section */
+        .hero .badge {
+            margin-top: 16px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        /* Standardized Primary Button */
+        /* Standardized Buttons - See design/components.css */
+
+        /* --- SECTIONS --- */
+        .section-spacer {
+            padding: 100px 0;
+            border-top: 1px solid var(--shadow-highlight);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .split-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .split-content p {
+            font-size: 1.15rem;
+            color: var(--foreground-muted);
+            margin-bottom: 32px;
+        }
+
+        .stat-block {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--shadow-highlight);
+        }
+
+        .stat-highlight {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--industrial-red);
+            line-height: 1;
+            text-shadow: 0 0 40px var(--industrial-red-glow);
+            text-align: center;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        /* --- FEATURE GRID --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Card layout handled by design system (.card-industrial) */
+
+        /* Typography for cards - local overrides */
+        .card-industrial h3 {
+            margin-bottom: 16px;
+            font-size: 1.3rem;
+            color: var(--foreground);
+        }
+
+        .card-industrial p {
+            color: var(--foreground-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* Icon emoji styling */
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        /* Icon glow effects for cards based on accent color */
+        .card-industrial[data-accent="gold"] .icon {
+            text-shadow: 0 0 20px var(--synergy-gold-glow);
+        }
+
+        .card-industrial[data-accent="blue"] .icon {
+            text-shadow: 0 0 20px var(--synergy-blue-glow);
+        }
+
+        .card-industrial[data-accent="green"] .icon {
+            text-shadow: 0 0 20px var(--neon-volt-glow);
+        }
+
+        /* --- HUMAN LOOP / TRUST SECTION (NEW) --- */
+        .loop-grid {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .loop-card {
+            padding: 30px 20px;
+            text-align: center;
+            width: 220px;
+        }
+
+        /* icon-box styling now comes from design/components.css */
+        .loop-card .icon-box {
+            margin: 0 auto 20px;
+        }
+
+        .loop-arrow {
+            font-size: 2rem;
+            color: var(--foreground-muted);
+            opacity: 0.5;
+        }
+
+        /* THE GATE (HERO FEATURE) */
+        .featured-gate {
+            border-color: var(--synergy-gold);
+            background: rgba(255, 215, 0, 0.03);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .featured-gate:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .gate-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--synergy-gold);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- FOUNDER SECTION --- */
+        .founder-section {
+            background: var(--bg-deep-slate);
+            padding: 80px 0;
+            border-top: 1px solid var(--shadow-highlight);
+            text-align: center;
+        }
+
+        .founder-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .founder-quote {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 24px;
+            line-height: 1.4;
+            font-style: italic;
+        }
+
+        .founder-bio {
+            color: var(--foreground-muted);
+            font-size: 1rem;
+            margin-bottom: 16px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .founder-name-block {
+            margin-top: 24px;
+            border-top: 1px solid var(--shadow-highlight);
+            padding-top: 24px;
+            display: inline-block;
+        }
+
+        .founder-name-gradient {
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1.15rem;
+            display: inline-block;
+        }
+
+        .tech-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--foreground-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 16px;
+            border-radius: 50px;
+            border: 1px solid var(--shadow-highlight);
+            margin: 0 6px;
+            vertical-align: middle;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            border-color: var(--foreground-muted);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--shadow-highlight);
+            padding: 60px 0;
+            background: var(--bg-void);
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--foreground-muted);
+            font-size: 0.9rem;
+        }
+
+        footer .small {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 960px) {
+            .split-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .stat-block {
+                justify-content: center;
+                text-align: left;
+            }
+
+            .hero {
+                padding-top: 140px;
+            }
+
+            .mobile-reverse {
+                order: -1;
+            }
+
+            .loop-grid {
+                flex-direction: column;
+                gap: 40px;
+                margin-top: 40px;
+            }
+
+            .loop-arrow {
+                transform: rotate(90deg);
+                margin: -10px 0;
+            }
+        }
+
+        /* MOBILE OPTIMIZATIONS - Tablets & Large Phones */
+        @media (max-width: 768px) {
+            nav {
+                height: 64px;
+            }
+
+            .logo img {
+                height: 32px;
+                width: 32px;
+            }
+
+            .brand-text {
+                font-size: 1.2rem;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                min-height: 48px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        /* MOBILE OPTIMIZATIONS - Small Phones */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            /* Fix Founder Tags Overflow */
+            .founder-name-block div {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .tech-tag {
+                margin: 4px !important;
+                white-space: nowrap;
+                /* Prevent individual tag break */
+                font-size: 0.75rem;
+            }
+
+            /* Fix Loop Grid Alignment */
+            .loop-grid {
+                flex-direction: column;
+                gap: 24px;
+                /* Tighter gap for mobile vertical stack */
+            }
+
+            .loop-arrow {
+                transform: rotate(90deg);
+                margin: 0;
+            }
+
+            .loop-card {
+                width: 100%;
+                max-width: 260px;
+                /* Constrain width so it looks good stacked */
+            }
+
+            h1 {
+                font-size: 2.2rem !important;
+                line-height: 1.2;
+            }
+
+            .big-equation {
+                font-size: 2rem;
+                gap: 10px;
+            }
+
+            p.subtitle {
+                font-size: 1.05rem;
+            }
+
+            .section-spacer {
+                padding: 60px 0;
+            }
+
+            .split-content h2 {
+                font-size: 2rem;
+            }
+
+            .stat-highlight {
+                font-size: 3.5rem;
+            }
+
+            .card-industrial {
+                padding: 28px;
+            }
+
+            .loop-card {
+                width: 100%;
+                max-width: 280px;
+                padding: 24px 20px;
+            }
+
+            .founder-section {
+                padding: 50px 0;
+            }
+
+            .founder-quote {
+                font-size: 1.3rem;
+                line-height: 1.4;
+            }
+
+            .tech-tag {
+                margin: 6px 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <nav>
+        <div class="container">
+            <a href="https://www.elevenified.com" class="logo">
+                <img src="assets/icons/master-icon.svg" alt="Elevenified" style="height: 40px; width: auto;">
+                <span class="brand-text">Elevenified</span>
+            </a>
+            <a href="mailto:siddharth@elevenified.com" class="btn-nav">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="big-equation">
+                <span class="human-text">1</span> + <span class="ai-text">1</span> = <span class="result-text">11</span>
+            </div>
+
+            <h1>
+                Capture <span class="human-text">Human Expertise.</span><br>
+                <span class="result-text">Amplify</span> with <span class="ai-text">AI.</span>
+            </h1>
+
+            <p class="subtitle">
+                Official SOPs + Tribal Knowledge = Amplified Intelligence.
+                <br>
+                <span class="badge badge-volt">
+                    <span class="pulse-dot"></span>
+                    PILOT STATUS: LIMITED SPOTS AVAILABLE
+                </span>
+            </p>
+
+            <div class="cta-group">
+                <a href="https://docs.google.com/forms/d/1vMGiuPPEV3FhTgP2mjC2DD-I5o-lBgy7aFwS_NUHGAU/viewform"
+                    class="btn-primary" target="_blank">
+                    Apply for Pilot &rarr;
+                </a>
+                <a href="/slide" class="btn-secondary">View Pitch Deck</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Industry 5.0 Section -->
+    <section id="industry-5" class="section-spacer" style="background: var(--bg-rubber);">
+        <div class="container">
+            <h2 class="section-title">Built for Industry 5.0</h2>
+            <p
+                style="text-align: center; max-width: 700px; margin: -30px auto 50px; color: var(--foreground-muted); font-size: 1.1rem;">
+                The global standard for human-first manufacturing. Placing <span
+                    style="color: var(--synergy-gold);">worker wellbeing</span> at the center, while driving <span
+                    style="color: var(--neon-volt);">sustainability</span> and <span
+                    style="color: var(--synergy-blue);">resilience</span>.
+            </p>
+            <div class="cards-grid">
+                <div class="card-industrial" data-accent="gold">
+                    <span class="icon" role="img" aria-label="Worker icon">🧑‍🔧</span>
+                    <h3>Human-Centricity</h3>
+                    <p>We capture knowledge, not jobs. Your senior workers become teachers, their legacy preserved
+                        forever.</p>
+                    <blockquote
+                        style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.9rem;">
+                        "When Ramesh retires, his 20 years stays in the system. He's not replaced—he's immortalized."
+                    </blockquote>
+                </div>
+                <div class="card-industrial" data-accent="green">
+                    <span class="icon" role="img" aria-label="Sustainability icon">🌱</span>
+                    <h3>Sustainability</h3>
+                    <p>Reduced turnover, faster onboarding, less scrap. Sustainability isn't just about energy—it's
+                        about keeping your people.</p>
+                    <blockquote
+                        style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.9rem;">
+                        "Hiring + Training = carbon footprint. Preserving expertise = the overlooked green factor."
+                    </blockquote>
+                </div>
+                <div class="card-industrial" data-accent="blue">
+                    <span class="icon" role="img" aria-label="Resilience icon">🛡️</span>
+                    <h3>Resilience</h3>
+                    <p>Organizational memory that survives disruptions. If an expert is sick, retires, or a lockdown
+                        hits—the plant keeps running.</p>
+                    <blockquote
+                        style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.9rem;">
+                        "COVID lockdown? Senior can't come? Knowledge accessible. Plant keeps operating."
+                    </blockquote>
+                </div>
+            </div>
+            <!-- Micro-CTA -->
+            <p style="text-align: center; margin-top: 50px;">
+                <a href="#solve" class="btn-secondary">See How It Works →</a>
+            </p>
+        </div>
+    </section>
+
+    <section class="section-spacer"
+        style="background: linear-gradient(to bottom, var(--bg-deep-slate), var(--bg-void));">
+        <div class="container">
+            <div class="split-grid">
+                <div class="split-content">
+                    <h2>The Knowledge Crisis</h2>
+                    <p>Every year, your best workers retire. Their decades of expertise—the undocumented "tricks" that
+                        keep lines running—leave with them.</p>
+
+                    <div class="stat-block">
+                        <span style="font-size: 2.5rem;">📉</span>
+                        <div>
+                            <strong style="display: block; color: var(--foreground); font-size: 1.1rem;">Knowledge
+                                Evaporation</strong>
+                            <span style="color: var(--foreground-muted); font-size: 0.9rem;">SOPs tell you WHAT to do.
+                                Tribal
+                                knowledge tells you HOW.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split-content" style="text-align: center;">
+                    <p style="color: var(--foreground-muted); margin-bottom: 10px; font-weight: 500;">When they leave,
+                        it
+                        becomes:</p>
+                    <div class="stat-highlight">LOST<br>LEGACY.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solve" class="section-spacer">
+        <div class="container">
+            <h2 class="section-title">How Elevenified Solves It</h2>
+            <div class="cards-grid">
+
+                <div class="card-industrial" data-accent="blue">
+                    <span class="icon">📄</span>
+                    <h3>SOP Auto-Extraction</h3>
+                    <p><span style="color: var(--synergy-blue)">AI</span> extracts knowledge from your existing PDF
+                        manuals automatically.</p>
+                </div>
+
+                <div class="card-industrial" data-accent="gold">
+                    <span class="icon">🗣️</span>
+                    <h3>Hinglish First</h3>
+                    <p>Workers speak naturally. No translation needed. We capture the raw "floor talk."</p>
+                </div>
+
+                <div class="card-industrial" data-accent="gold">
+                    <span class="icon">⌨️</span>
+                    <h3>Voice OR Text</h3>
+                    <p>Not everyone wants to speak. Workers can type or talk. We remove the friction.</p>
+                </div>
+
+                <div class="card-industrial" data-accent="blue">
+                    <span class="icon">🧠</span>
+                    <h3>Intent Classification</h3>
+                    <p>Our <span style="color: var(--synergy-blue)">AI</span> knows: Is this a search? A new capture?
+                        Smart disambiguation.</p>
+                </div>
+
+                <div class="card-industrial" data-accent="blue">
+                    <span class="icon">🔍</span>
+                    <h3>Cross-Language Search</h3>
+                    <p>Senior speaks in Hinglish. Trainee searches in English. The system finds the
+                        <strong>meaning</strong>.
+                    </p>
+                </div>
+
+                <div class="card-industrial" data-accent="green">
+                    <span class="icon">🏆</span>
+                    <h3>Gamification</h3>
+                    <p>Leaderboards drive adoption. The <span style="color: var(--neon-volt)">Result</span> is a smarter
+                        workforce.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section-spacer" style="background: var(--bg-rubber);">
+        <div class="container">
+            <h2 class="section-title">AI Speed. Human Safety.</h2>
+            <p
+                style="text-align: center; max-width: 700px; margin: 0 auto; color: var(--foreground-muted); font-size: 1.1rem;">
+                Manufacturing demands accuracy. We don't let AI guess. <br>
+                <span style="color: var(--synergy-gold); font-weight: 600;">Your experts</span> validate every capture
+                before it becomes a standard.
+            </p>
+
+            <div class="loop-grid">
+                <div class="card-industrial loop-card" data-accent="gold">
+                    <div class="icon-box icon-box-lg icon-box-circle" data-color="gold">🗣️</div>
+                    <h3>Capture</h3>
+                    <p>Worker records a tip via voice or text.</p>
+                </div>
+
+                <div class="loop-arrow">➝</div>
+
+                <div class="card-industrial loop-card" data-accent="blue">
+                    <div class="icon-box icon-box-lg icon-box-circle" data-color="blue">⚡</div>
+                    <h3>AI Processing</h3>
+                    <p>Standardizes grammar, tags equipment, checks safety.</p>
+                </div>
+
+                <div class="loop-arrow">➝</div>
+
+                <div class="card-industrial loop-card featured-gate" data-accent="gold">
+                    <div class="gate-badge">HUMAN LOOP</div>
+                    <div class="icon-box icon-box-lg icon-box-circle" data-color="gold"
+                        style="box-shadow: 0 0 20px var(--synergy-gold-glow);">🛡️</div>
+                    <h3 style="color: var(--synergy-gold);">Expert Gate</h3>
+                    <p>A senior supervisor reviews and approves the insight.</p>
+                </div>
+
+                <div class="loop-arrow">➝</div>
+
+                <div class="card-industrial loop-card" data-accent="green">
+                    <div class="icon-box icon-box-lg icon-box-circle" data-color="green">📚</div>
+                    <h3>Asset</h3>
+                    <p>Saved forever. Searchable by everyone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="founder-section">
+        <div class="container founder-content">
+            <p class="founder-quote">"I've spent 16 years as a curious learner in the tech industry. I noticed that
+                while we have incredible tools for machines, we lack the systems to capture the 'human intuition' that
+                actually keeps the factory running. I built this to bridge that gap."</p>
+
+            <p class="founder-bio">
+                <span class="founder-name-gradient">Siddharth</span> is a technologist passionate about <strong
+                    style="color: var(--foreground);">Intelligent Process Automation</strong>. He applies modern digital
+                solutions to
+                solve hard, persistent problems in manufacturing.
+            </p>
+
+            <div class="founder-name-block">
+                <span
+                    style="color: var(--neon-volt); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;">Founder</span>
+                <div style="margin-top: 16px;">
+                    <span class="tech-tag">Operational Excellence</span>
+                    <span class="tech-tag">Digital Transformation</span>
+                    <span class="tech-tag">Problem Solver</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Elevenified Solutions | An Industry 5.0 Solution 🇮🇳</p>
+            <p class="small">Secure • Scalable • Enterprise Ready</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
