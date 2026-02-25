@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Elevenified T-Shirt — FRONT (Print-Ready)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: #FFFFFF;
+            color: #1A1C20;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            overflow: hidden;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-align: center;
+            padding: 12mm 14mm 10mm;
+        }
+
+        /* ===== EVENT BADGE ===== */
+        .event-badge {
+            font-size: 10pt;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #0A7B3E;
+            border: 2.5px solid #0A7B3E;
+            padding: 3mm 7mm;
+            border-radius: 25px;
+            margin-bottom: 2mm;
+        }
+
+        /* ===== THE EQUATION ===== */
+        .equation {
+            font-size: 110pt;
+            font-weight: 900;
+            letter-spacing: 2px;
+            line-height: 1;
+            margin: 2mm 0;
+        }
+
+        .human {
+            color: #C8960C;
+        }
+
+        .ai {
+            color: #0088B5;
+        }
+
+        .result {
+            color: #0A7B3E;
+        }
+
+        .op {
+            color: #555555;
+        }
+
+        /* ===== BRAND NAME ===== */
+        .brand {
+            font-size: 36pt;
+            font-weight: 900;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            color: #1A1C20;
+            margin-bottom: 3mm;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            width: 80mm;
+            height: 2px;
+            background: linear-gradient(90deg, #C8960C, #0088B5, #0A7B3E);
+            margin: 4mm 0;
+            border-radius: 2px;
+        }
+
+        /* ===== HOOK ===== */
+        .hook {
+            max-width: 190mm;
+            margin: 4mm 0;
+        }
+
+        .hook-line {
+            font-size: 28pt;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #1A1C20;
+        }
+
+        .hook-line .gold {
+            color: #C8960C;
+            font-weight: 900;
+        }
+
+        .hook-line .blue {
+            color: #0088B5;
+            font-weight: 900;
+        }
+
+        .hook-punchline {
+            font-size: 34pt;
+            font-weight: 900;
+            color: #0A7B3E;
+            margin-top: 5mm;
+            line-height: 1.2;
+        }
+
+        /* ===== VOICE SECTION ===== */
+        .voice-section {
+            margin: 5mm 0;
+            padding: 5mm 10mm;
+            border-top: 2px solid #E8E8E8;
+            border-bottom: 2px solid #E8E8E8;
+            width: 100%;
+        }
+
+        .voice-headline {
+            font-size: 22pt;
+            font-weight: 700;
+            color: #1A1C20;
+            line-height: 1.4;
+        }
+
+        .voice-headline .gold {
+            color: #C8960C;
+            font-weight: 900;
+        }
+
+        .voice-headline .blue {
+            color: #0088B5;
+            font-weight: 900;
+        }
+
+        .voice-headline .green {
+            color: #0A7B3E;
+            font-weight: 900;
+        }
+
+        /* ===== DIFFERENTIATOR PILLS ===== */
+        .diff-row {
+            display: flex;
+            justify-content: center;
+            gap: 5mm;
+            flex-wrap: wrap;
+            margin: 3mm 0;
+        }
+
+        .pill {
+            font-size: 13pt;
+            font-weight: 700;
+            padding: 3mm 6mm;
+            border-radius: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        .pill.gold {
+            color: #C8960C;
+            border: 2px solid #C8960C;
+        }
+
+        .pill.blue {
+            color: #0088B5;
+            border: 2px solid #0088B5;
+        }
+
+        .pill.green {
+            color: #0A7B3E;
+            border: 2px solid #0A7B3E;
+        }
+
+        /* ===== BOTTOM ===== */
+        .bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2mm;
+        }
+
+        .website {
+            font-size: 16pt;
+            font-weight: 700;
+            color: #0088B5;
+            letter-spacing: 1px;
+        }
+
+        .mission {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #777;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- EVENT -->
+        <div class="event-badge">🤖 Global AI Fest 2026</div>
+
+        <!-- THE EQUATION -->
+        <div class="equation">
+            <span class="human">1</span>
+            <span class="op"> + </span>
+            <span class="ai">1</span>
+            <span class="op"> = </span>
+            <span class="result">11</span>
+        </div>
+
+        <!-- BRAND -->
+        <div class="brand">Elevenified</div>
+
+        <div class="divider"></div>
+
+        <!-- HOOK -->
+        <div class="hook">
+            <div class="hook-line">
+                <span class="gold">SOPs</span> tell you WHAT.
+            </div>
+            <div class="hook-line">
+                <span class="blue">Tribal Knowledge</span> tells you HOW.
+            </div>
+            <div class="hook-punchline">
+                We capture both.
+            </div>
+        </div>
+
+        <!-- VOICE DIFFERENTIATOR -->
+        <div class="voice-section">
+            <div class="voice-headline">
+                Workers <span class="gold">speak</span>. In <span class="blue">Hinglish</span>.
+            </div>
+            <div class="voice-headline">
+                AI <span class="green">listens</span>. Structures. Preserves.
+            </div>
+        </div>
+
+        <!-- PILLS -->
+        <div class="diff-row">
+            <span class="pill gold">🗣️ Voice-First</span>
+            <span class="pill blue">🇮🇳 Hinglish-Native</span>
+            <span class="pill green">🏭 Factory-Grade AI</span>
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="bottom">
+            <div class="website">www.elevenified.com</div>
+            <div class="mission">Building India's Manufacturing Memory</div>
+        </div>
+    </div>
+</body>
+
+</html>

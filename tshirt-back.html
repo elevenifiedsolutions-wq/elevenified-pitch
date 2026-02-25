@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Elevenified T-Shirt — BACK (Print-Ready)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            background: #1A1C20;
+            /* Deep Slate Background */
+            color: #FFFFFF;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            overflow: hidden;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 12mm 10mm 12mm 10mm;
+            /* Reduced top padding to 12mm, bottom to 12mm */
+            background: #1A1C20;
+            /* Deep Slate */
+            position: relative;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* OFFICIAL PRINT COLORS (CMYK-SAFE REPLACEMENTS) */
+
+        .c-gold {
+            color: #FFD700;
+        }
+
+        .c-blue {
+            color: #00C9FF;
+        }
+
+        .c-green {
+            color: #39FF14;
+        }
+
+        .c-red {
+            color: #FF3333;
+        }
+
+        .c-purple {
+            color: #D843D8;
+        }
+
+        /* Update Gradient Logic for SVGs manually if needed, but text is priority */
+
+        /* Brightened for Dark Mode */
+        .c-grey {
+            color: #656A75;
+        }
+
+        .c-white {
+            color: #FFFFFF;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            margin-bottom: 1mm;
+            width: 100%;
+            text-align: center;
+        }
+
+        .tagline {
+            font-size: 32pt;
+            /* Reduced to make room for footer */
+            font-weight: 900;
+            line-height: 1.05;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            padding: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 100%;
+        }
+
+        .tagline .gold {
+            color: #FFD700;
+        }
+
+        .tagline .blue {
+            color: #00C9FF;
+        }
+
+        /* ===== CAPABILITIES GRID ===== */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5mm;
+            /* Reduced for tighter layout */
+            width: 100%;
+            margin: 3mm 0;
+            /* Reduced margin */
+        }
+
+        .cap-item {
+            background: #25282D;
+            /* Surface */
+            border: 2px solid #3A3E45;
+            /* Border */
+            border-radius: 4mm;
+            padding: 3mm;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5mm;
+        }
+
+        .cap-item .icon {
+            font-size: 28pt;
+            /* Increased icon size */
+            margin-right: 0;
+            min-width: 10mm;
+            text-align: center;
+        }
+
+        .cap-item .text {
+            font-size: 17pt;
+            /* Increased for better readability */
+            font-weight: 700;
+            line-height: 1.1;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .cap-item .cap-tag {
+            display: block;
+            font-size: 14pt;
+            /* Increased tag size */
+            font-weight: 600;
+            margin-top: 1mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Cap Tag Colors */
+        .cap-tag.gold {
+            color: #FFD700;
+        }
+
+        .cap-tag.green {
+            color: #39FF14;
+        }
+
+        .cap-tag.blue {
+            color: #00C9FF;
+        }
+
+        .cap-tag.purple {
+            color: #D843D8;
+        }
+
+        .cap-tag.red {
+            color: #FF3333;
+        }
+
+
+        /* ===== EMOTIONAL HOOK ===== */
+        .emotional-hook {
+            font-size: 40pt;
+            /* Increased to 40pt for maximum impact */
+            font-weight: 800;
+            color: #FFFFFF;
+            margin: 4mm 0;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            width: 100%;
+            text-align: center;
+
+            /* Industrial Box Style */
+            border: 3px dashed #3A3E45;
+            background: #202226;
+            padding: 4mm;
+            border-radius: 4mm;
+        }
+
+        .emotional-hook .red {
+            color: #FF3333;
+            font-weight: 900;
+        }
+
+        .emotional-hook .gold {
+            color: #FFD700;
+            font-weight: 900;
+            text-decoration: underline;
+            text-decoration-color: #555;
+            text-underline-offset: 4px;
+        }
+
+        /* ===== QR SECTION ===== */
+        .qr-section {
+            display: flex;
+            align-items: center;
+            gap: 6mm;
+            margin-bottom: 3mm;
+            margin-top: 3mm;
+            /* Add some space above QR */
+        }
+
+        /* QR Code MUST have white background to be scannable */
+        .qr-box {
+            width: 75mm;
+            height: 75mm;
+            /* Balanced size */
+            background: #FFFFFF;
+            border: 5px solid #39FF14;
+            /* Thicker Border */
+            border-radius: 5mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.25);
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .qr-details {
+            text-align: left;
+        }
+
+        .qr-label {
+            font-size: 22pt;
+            /* Increased for better visibility */
+            font-weight: 800;
+            color: #39FF14;
+            /* Neon Green */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .qr-sub {
+            font-size: 14pt;
+            color: #BBB;
+            margin-top: 2mm;
+            font-weight: 600;
+        }
+
+        /* ===== BOTTOM ===== */
+        .bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1mm;
+            width: 100%;
+            margin-top: auto;
+            padding-top: 3mm;
+            /* Reduced to prevent footer cutoff */
+        }
+
+        .website-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4mm;
+            margin-bottom: 1mm;
+        }
+
+        .website-container svg {
+            height: 40pt;
+            width: 40pt;
+        }
+
+        .website-text {
+            font-size: 38pt;
+            /* Increased to be larger than 1+1=11 text */
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 2mm;
+            background: linear-gradient(90deg, #FFD700 0%, #00C9FF 50%, #39FF14 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            /* White shadow/glow for dark background */
+            filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+        }
+
+        .bottom-taglines {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5mm;
+            font-size: 18pt;
+            font-weight: 800;
+            color: #8A8D93;
+            text-transform: uppercase;
+            width: 100%;
+            justify-content: center;
+            border-top: 2px solid #3A3E45;
+            padding-top: 3mm;
+        }
+
+        .tag-eq {
+            font-weight: 900;
+            font-size: 26pt;
+            color: #FFFFFF;
+        }
+
+        .tag-sep {
+            margin: 0 2mm;
+            color: #555;
+            font-weight: 300;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- BRANDING HEADER -->
+        <div class="header">
+            <div class="tagline">CAPTURING <span class="gold">TRIBAL KNOWLEDGE</span><br>FOR <span
+                    class="blue">MANUFACTURING</span></div>
+        </div>
+
+        <!-- CAPABILITIES GRID -->
+        <div class="capabilities-grid">
+            <!-- Item 1 -->
+            <div class="cap-item">
+                <div class="icon">🗣️</div>
+                <div class="text">
+                    HINGLISH VOICE
+                    <span class="cap-tag gold">NOISE-PROOF</span>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="cap-item">
+                <div class="icon">🧠</div>
+                <div class="text">
+                    AI-POWERED
+                    <span class="cap-tag blue">SOPS</span>
+                </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="cap-item">
+                <div class="icon">🛡️</div>
+                <div class="text">
+                    HUMAN-IN-THE-LOOP
+                    <span class="cap-tag green">GOVERNANCE</span>
+                </div>
+            </div>
+            <!-- Item 4 -->
+            <div class="cap-item">
+                <div class="icon">🏆</div>
+                <div class="text">
+                    GAMIFIED
+                    <span class="cap-tag purple">ADOPTION</span>
+                </div>
+            </div>
+            <!-- Item 5 -->
+            <div class="cap-item">
+                <div class="icon">🚫</div>
+                <div class="text">
+                    ZERO
+                    <span class="cap-tag red">HALLUCINATIONS</span>
+                </div>
+            </div>
+            <!-- Item 6 -->
+            <div class="cap-item">
+                <div class="icon">🚀</div>
+                <div class="text">
+                    PILOT LIVE
+                    <span class="cap-tag green">IN < 5 MINS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMOTIONAL HOOK -->
+        <div class="emotional-hook">
+            ⚠️ Your best factory worker <span class="red">retires</span>.<br>
+            Does his <span class="gold">knowledge</span> stay?
+        </div>
+
+        <!-- QR -->
+        <div class="qr-section">
+            <div class="qr-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https://www.elevenified.com"
+                    alt="QR Code">
+            </div>
+            <div class="qr-details">
+                <div class="scan-label">◀ START PILOT</div>
+                <div class="qr-sub">Pitch Deck · Book Demo</div>
+            </div>
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="bottom">
+            <div class="website-container">
+                <!-- INLINE SVG LOGO (Master Icon) -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <defs>
+                        <linearGradient id="goldFill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#FFD700" />
+                            <stop offset="100%" stop-color="#DAA520" />
+                        </linearGradient>
+                        <linearGradient id="blueFill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#00C9FF" />
+                            <stop offset="100%" stop-color="#0077B5" />
+                        </linearGradient>
+                    </defs>
+
+                    <rect x="6" y="24" width="8" height="52" rx="4" fill="url(#goldFill)" />
+                    <rect x="86" y="24" width="8" height="52" rx="4" fill="url(#blueFill)" />
+                    <rect x="32" y="46" width="36" height="8" rx="4" fill="#39FF14" />
+                    <rect x="46" y="32" width="8" height="36" rx="4" fill="#39FF14" />
+                    <circle cx="50" cy="50" r="5" fill="#1A1C20" stroke="#39FF14" stroke-width="2.5" />
+
+                    <!-- Light Lines for Dark Mode -->
+                    <path d="M10 28 L50 5 L90 28 M10 72 L50 95 L90 72" fill="none" stroke="#656A75" stroke-width="4"
+                        stroke-linecap="round" stroke-linejoin="round" opacity="0.8" />
+                </svg>
+
+                <div class="website-text">www.elevenified.com</div>
+            </div>
+
+            <div class="bottom-taglines">
+                <span class="tag-eq">
+                    <span class="c-gold">1</span> <span class="c-grey">+</span>
+                    <span class="c-blue">1</span> <span class="c-grey">=</span>
+                    <span class="c-green">11</span>
+                </span>
+
+                <span class="tag-sep">•</span>
+
+                <span class="tag-text">
+                    <span class="c-gold">HUMAN</span> <span class="c-grey">+</span>
+                    <span class="c-blue">AI</span> <span class="c-grey">=</span>
+                    <span class="c-green">AMPLIFIED OUTCOMES</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

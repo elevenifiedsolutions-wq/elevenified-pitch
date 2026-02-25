@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevenified — Global AI Fest 2026 Flyer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ================================================
+           ELEVENIFIED A4 PRINTABLE FLYER
+           Team: Brand Strategist + Copywriter + Designer
+           For: Global AI Fest 2026
+           ================================================ */
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #1A1C20;
+            color: #E8E8E8;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .flyer {
+            width: 210mm;
+            height: 297mm;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ============ AMBIENT BACKGROUND ============ */
+        .flyer::before {
+            content: '';
+            position: absolute;
+            top: -50mm;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160mm;
+            height: 120mm;
+            background: radial-gradient(circle, rgba(0, 201, 255, 0.12) 0%, rgba(255, 215, 0, 0.05) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .flyer::after {
+            content: '';
+            position: absolute;
+            bottom: -30mm;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140mm;
+            height: 80mm;
+            background: radial-gradient(circle, rgba(57, 255, 20, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ============ HEADER / HERO ============ */
+        .hero {
+            text-align: center;
+            padding: 18mm 15mm 12mm;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, #0D0F12 0%, #1A1C20 100%);
+        }
+
+        .event-badge {
+            display: inline-block;
+            font-size: 7pt;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #39FF14;
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            padding: 3mm 6mm;
+            border-radius: 20px;
+            margin-bottom: 6mm;
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .equation {
+            font-size: 42pt;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 3mm;
+            line-height: 1;
+        }
+
+        .human { color: #FFD700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+        .ai { color: #00C9FF; text-shadow: 0 0 20px rgba(0, 201, 255, 0.4); }
+        .result { color: #39FF14; text-shadow: 0 0 30px rgba(57, 255, 20, 0.5); }
+        .op { color: rgba(255,255,255,0.6); }
+
+        .brand-name {
+            font-size: 20pt;
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #FFD700 0%, #00C9FF 45%, #39FF14 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 3mm;
+        }
+
+        .tagline {
+            font-size: 11pt;
+            color: #8A8D93;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============ DIVIDER ============ */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #3A3E45 30%, #3A3E45 70%, transparent 100%);
+            margin: 0 15mm;
+        }
+
+        /* ============ PROBLEM STATEMENT ============ */
+        .problem {
+            text-align: center;
+            padding: 8mm 20mm 6mm;
+            position: relative;
+            z-index: 1;
+        }
+
+        .problem-headline {
+            font-size: 13pt;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2mm;
+        }
+
+        .problem-sub {
+            font-size: 9pt;
+            color: #8A8D93;
+            line-height: 1.5;
+            max-width: 160mm;
+            margin: 0 auto;
+        }
+
+        .problem-sub strong {
+            color: #FF3333;
+        }
+
+        /* ============ FEATURES ============ */
+        .features {
+            padding: 6mm 15mm 8mm;
+            display: flex;
+            flex-direction: column;
+            gap: 5mm;
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+        }
+
+        .feature-card {
+            display: flex;
+            gap: 5mm;
+            padding: 5mm 6mm;
+            border-radius: 4mm;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            border-radius: 2px;
+        }
+
+        .feature-card.gold::before { background: #FFD700; box-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
+        .feature-card.blue::before { background: #00C9FF; box-shadow: 0 0 8px rgba(0, 201, 255, 0.4); }
+        .feature-card.green::before { background: #39FF14; box-shadow: 0 0 8px rgba(57, 255, 20, 0.4); }
+        .feature-card.red::before { background: #FF3333; box-shadow: 0 0 8px rgba(255, 51, 51, 0.3); }
+
+        .feature-icon {
+            font-size: 20pt;
+            width: 14mm;
+            height: 14mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3mm;
+            background: rgba(255, 255, 255, 0.04);
+            flex-shrink: 0;
+        }
+
+        .feature-text h3 {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1mm;
+        }
+
+        .feature-text p {
+            font-size: 8pt;
+            color: #8A8D93;
+            line-height: 1.45;
+        }
+
+        .feature-text .highlight-gold { color: #FFD700; font-weight: 600; }
+        .feature-text .highlight-blue { color: #00C9FF; font-weight: 600; }
+        .feature-text .highlight-green { color: #39FF14; font-weight: 600; }
+
+        /* ============ STATS BAR ============ */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 10mm;
+            padding: 5mm 15mm;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 16pt;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .stat-value.gold { color: #FFD700; }
+        .stat-value.blue { color: #00C9FF; }
+        .stat-value.green { color: #39FF14; }
+
+        .stat-label {
+            font-size: 6.5pt;
+            color: #8A8D93;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1mm;
+        }
+
+        /* ============ BOTTOM / CTA ============ */
+        .bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8mm 15mm 10mm;
+            background: linear-gradient(180deg, #1A1C20 0%, #0D0F12 100%);
+            position: relative;
+            z-index: 1;
+        }
+
+        .qr-section {
+            display: flex;
+            align-items: center;
+            gap: 5mm;
+        }
+
+        .qr-placeholder {
+            width: 28mm;
+            height: 28mm;
+            background: #fff;
+            border-radius: 2mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .qr-placeholder::after {
+            content: 'QR';
+            font-size: 14pt;
+            font-weight: 900;
+            color: #1A1C20;
+            letter-spacing: 2px;
+        }
+
+        .qr-label {
+            font-size: 8pt;
+            color: #8A8D93;
+        }
+
+        .qr-label strong {
+            display: block;
+            font-size: 9pt;
+            color: #fff;
+            margin-bottom: 1mm;
+        }
+
+        .qr-label .scan {
+            color: #39FF14;
+            font-weight: 600;
+            font-size: 8.5pt;
+        }
+
+        .contact-section {
+            text-align: right;
+        }
+
+        .contact-section .email {
+            font-size: 9pt;
+            color: #00C9FF;
+            font-weight: 500;
+            margin-bottom: 1mm;
+        }
+
+        .contact-section .website {
+            font-size: 8pt;
+            color: #FFD700;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .pilot-badge {
+            display: inline-block;
+            font-size: 6.5pt;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #39FF14;
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            padding: 1.5mm 4mm;
+            border-radius: 12px;
+            margin-top: 2mm;
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            text-align: center;
+            padding: 3mm 15mm 5mm;
+            background: #0D0F12;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer p {
+            font-size: 7pt;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .footer .industry {
+            color: #6A6D73;
+        }
+
+        /* ============ PRINT STYLES ============ */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flyer">
+        <!-- HERO -->
+        <div class="hero">
+            <div class="event-badge">🤖 Global AI Fest 2026</div>
+            <div class="equation">
+                <span class="human">1</span>
+                <span class="op"> + </span>
+                <span class="ai">1</span>
+                <span class="op"> = </span>
+                <span class="result">11</span>
+            </div>
+            <div class="brand-name">ELEVENIFIED</div>
+            <div class="tagline">Manufacturing Knowledge, Amplified</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PROBLEM -->
+        <div class="problem">
+            <div class="problem-headline">Your Best Workers Retire. Their Knowledge Shouldn't.</div>
+            <div class="problem-sub">
+                <strong>70% of factory knowledge</strong> is tribal — undocumented tips and tricks that keep lines running. When experts leave, it's gone forever. Elevenified captures, structures, and amplifies it with AI.
+            </div>
+        </div>
+
+        <!-- FEATURES -->
+        <div class="features">
+            <div class="feature-card gold">
+                <div class="feature-icon">🗣️</div>
+                <div class="feature-text">
+                    <h3>Voice-First Knowledge Capture</h3>
+                    <p>Workers speak naturally in <span class="highlight-gold">Hinglish</span>. AI transcribes, structures, and tags — no typing, no friction. Built for noisy, dusty factory floors.</p>
+                </div>
+            </div>
+
+            <div class="feature-card blue">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-text">
+                    <h3>AI-Powered SOP Intelligence</h3>
+                    <p>Auto-extract from PDF manuals. <span class="highlight-blue">Cross-language semantic search</span> — ask in English, find Hinglish answers. Intent-aware query handling.</p>
+                </div>
+            </div>
+
+            <div class="feature-card green">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-text">
+                    <h3>Human-in-the-Loop Governance</h3>
+                    <p>No AI hallucinations reach the floor. Expert supervisors <span class="highlight-green">approve every insight</span> before it becomes a standard. Full audit trail.</p>
+                </div>
+            </div>
+
+            <div class="feature-card red">
+                <div class="feature-icon">🏆</div>
+                <div class="feature-text">
+                    <h3>Gamified Adoption & Knowledge Graph</h3>
+                    <p>Leaderboards, badges, and streaks drive participation. Knowledge auto-links into an interconnected graph for smarter retrieval.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value gold">21+</div>
+                <div class="stat-label">AI Capabilities</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value blue">5.0</div>
+                <div class="stat-label">Industry Standard</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value green">100%</div>
+                <div class="stat-label">Data Stays Internal</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" style="color: #FF3333;">0</div>
+                <div class="stat-label">External Hallucinations</div>
+            </div>
+        </div>
+
+        <!-- BOTTOM CTA -->
+        <div class="bottom">
+            <div class="qr-section">
+                <div class="qr-placeholder"></div>
+                <div class="qr-label">
+                    <span class="scan">↑ SCAN ME</span>
+                    <strong>Connect & Learn More</strong>
+                    View pitch deck, book a demo,<br>or connect on LinkedIn
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <div class="email">siddharth@elevenified.com</div>
+                <div class="website">www.elevenified.com</div>
+                <div class="pilot-badge">🟢 Pilot Spots Available</div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p class="industry">Built for Indian Manufacturing  ·  Voice-First  ·  Multi-Tenant  ·  Enterprise Ready</p>
+        </div>
+    </div>
+</body>
+</html>
