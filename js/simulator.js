@@ -251,10 +251,152 @@
       ctx.fill();
       ctx.stroke();
 
-      // Draw Workpiece Inner Component Details
-      ctx.strokeStyle = '#2e3746';
-      ctx.lineWidth = 1.5;
-      ctx.strokeRect(px + 40, py + 30, pw - 80, ph - 60);
+      // Draw Workpiece Inner Component Details (Technical CAD Blueprint)
+      ctx.save();
+      if (currentScenarioKey === 'ev-battery') {
+        // EV Battery Module Blueprint
+        ctx.strokeStyle = '#1e2838';
+        ctx.fillStyle = '#0f131a';
+        ctx.lineWidth = 1;
+
+        // 4x2 Battery Cell Arrays
+        const cellRows = 2;
+        const cellCols = 4;
+        const cellMarginX = pw * 0.12;
+        const cellMarginY = ph * 0.28;
+        const cellW = (pw - cellMarginX * 2) / cellCols;
+        const cellH = (ph - cellMarginY * 2) / cellRows;
+
+        for (let r = 0; r < cellRows; r++) {
+          for (let c = 0; c < cellCols; c++) {
+            const cx = px + cellMarginX + c * cellW + 4;
+            const cy = py + cellMarginY + r * cellH + 4;
+            ctx.beginPath();
+            ctx.roundRect(cx, cy, cellW - 8, cellH - 8, 4);
+            ctx.fill();
+            ctx.stroke();
+
+            // Polarity Markings
+            ctx.fillStyle = (r + c) % 2 === 0 ? 'rgba(0, 229, 255, 0.4)' : 'rgba(245, 158, 11, 0.4)';
+            ctx.font = `${9 * window.devicePixelRatio}px monospace`;
+            ctx.fillText((r + c) % 2 === 0 ? '+' : '-', cx + cellW / 2 - 8, cy + cellH / 2 + 3);
+            ctx.fillStyle = '#0f131a';
+          }
+        }
+
+        // Copper Busbar Interconnects
+        ctx.strokeStyle = 'rgba(245, 158, 11, 0.35)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(px + pw * 0.32, py + ph * 0.26, pw * 0.36, ph * 0.26);
+
+        // 4x Hex Bolt Target Nodes
+        const boltCoords = [
+          { x: px + pw * 0.35, y: py + ph * 0.62 },
+          { x: px + pw * 0.65, y: py + ph * 0.62 },
+          { x: px + pw * 0.65, y: py + ph * 0.78 },
+          { x: px + pw * 0.35, y: py + ph * 0.78 }
+        ];
+        boltCoords.forEach((bc, bIdx) => {
+          ctx.beginPath();
+          ctx.arc(bc.x, bc.y, 7, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(0, 229, 255, 0.5)';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+          ctx.fillStyle = 'rgba(0, 229, 255, 0.7)';
+          ctx.font = `${8 * window.devicePixelRatio}px monospace`;
+          ctx.fillText(`${bIdx + 1}`, bc.x - 2.5, bc.y + 3);
+        });
+
+      } else if (currentScenarioKey === 'aerospace-harness') {
+        // Aerospace Avionics Circular MIL-Spec Connector Blueprint
+        const ccx = px + pw * 0.5;
+        const ccy = py + ph * 0.45;
+        const outerR = Math.min(pw, ph) * 0.32;
+
+        // Outer Locking Ring
+        ctx.strokeStyle = '#293548';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(ccx, ccy, outerR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Index Alignment Keyway Notch
+        ctx.strokeStyle = 'rgba(0, 229, 255, 0.7)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(ccx - 6, ccy - outerR);
+        ctx.lineTo(ccx + 6, ccy - outerR);
+        ctx.stroke();
+
+        // Inner Contact Insert
+        ctx.strokeStyle = '#1a222f';
+        ctx.beginPath();
+        ctx.arc(ccx, ccy, outerR * 0.75, 0, Math.PI * 2);
+        ctx.fillStyle = '#0d1017';
+        ctx.fill();
+        ctx.stroke();
+
+        // 32-Pin Gold Contact Grid
+        for (let a = 0; a < 8; a++) {
+          const ang = (a / 8) * Math.PI * 2;
+          const pinR = outerR * 0.48;
+          ctx.beginPath();
+          ctx.arc(ccx + Math.cos(ang) * pinR, ccy + Math.sin(ang) * pinR, 3, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 215, 0, 0.6)';
+          ctx.fill();
+        }
+
+        // Strain Relief Conduit Harness Lines
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(ccx, ccy + outerR);
+        ctx.quadraticCurveTo(ccx + 30, ccy + outerR + 40, px + pw * 0.7, py + ph * 0.85);
+        ctx.stroke();
+
+      } else if (currentScenarioKey === 'gearbox-assembly') {
+        // Precision Automotive Gearbox Blueprint
+        const gcx = px + pw * 0.5;
+        const gcy = py + ph * 0.48;
+        const gR = Math.min(pw, ph) * 0.36;
+
+        // Central Input Shaft Bearing Race
+        ctx.strokeStyle = '#293548';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(gcx, gcy, gR * 0.55, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Roller Bearings
+        for (let i = 0; i < 6; i++) {
+          const ang = (i / 6) * Math.PI * 2;
+          const br = gR * 0.38;
+          ctx.beginPath();
+          ctx.arc(gcx + Math.cos(ang) * br, gcy + Math.sin(ang) * br, 5, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(0, 229, 255, 0.4)';
+          ctx.fill();
+        }
+
+        // Compression Gasket Boundary Channel (Dashed)
+        ctx.strokeStyle = 'rgba(16, 185, 129, 0.45)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.strokeRect(px + pw * 0.22, py + ph * 0.2, pw * 0.56, ph * 0.56);
+        ctx.setLineDash([]);
+
+        // 2x Locating Dowel Pins
+        const dowel1 = { x: px + pw * 0.26, y: py + ph * 0.48 };
+        const dowel2 = { x: px + pw * 0.74, y: py + ph * 0.48 };
+        [dowel1, dowel2].forEach(dp => {
+          ctx.beginPath();
+          ctx.arc(dp.x, dp.y, 6, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(245, 158, 11, 0.7)';
+          ctx.stroke();
+          ctx.fillStyle = 'rgba(245, 158, 11, 0.3)';
+          ctx.fill();
+        });
+      }
+      ctx.restore();
 
       // Scanning Beam
       const scanY = py + (Math.sin(frameCount * 0.04) * 0.5 + 0.5) * ph;

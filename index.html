@@ -132,6 +132,44 @@
             Human-in-the-Loop
           </span>
         </div>
+
+        <!-- Hardware & Station Architecture Schematic -->
+        <div class="hero-hardware-schematic">
+          <div class="schematic-header">
+            <span class="schematic-tag">PHYSICAL STATION VERIFICATION LOOP</span>
+            <span class="schematic-mes-pill">✓ Zero MES Replacement · Non-Intrusive Edge Setup</span>
+          </div>
+
+          <div class="schematic-grid">
+            <div class="schematic-node">
+              <div class="schematic-node-step">01 · CAPTURE</div>
+              <div class="schematic-node-icon">📹</div>
+              <div class="schematic-node-title">Overhead Industrial Camera</div>
+              <p class="schematic-node-desc">Standard USB/GigE optical camera focused on the assembly zone with zero operator sensors.</p>
+            </div>
+
+            <div class="schematic-node">
+              <div class="schematic-node-step">02 · INFERENCE</div>
+              <div class="schematic-node-icon">⚡</div>
+              <div class="schematic-node-title">On-Prem Edge IPC</div>
+              <p class="schematic-node-desc">Industrial PC runs local vision models &amp; deterministic step rules locally in &lt;50ms.</p>
+            </div>
+
+            <div class="schematic-node">
+              <div class="schematic-node-step">03 · GUIDANCE</div>
+              <div class="schematic-node-icon">🖥️</div>
+              <div class="schematic-node-title">Operator Visual HUD</div>
+              <p class="schematic-node-desc">Immediate green/amber visual feedback on the station monitor without extra clicks.</p>
+            </div>
+
+            <div class="schematic-node">
+              <div class="schematic-node-step">04 · AUDIT TRAIL</div>
+              <div class="schematic-node-icon">🛡️</div>
+              <div class="schematic-node-title">Cryptographic Birth Certificate</div>
+              <p class="schematic-node-desc">Generates a verifiable SHA-256 evidence record of all steps completed for each serial unit.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -617,10 +655,12 @@
 
         <div class="founder-card-expanded">
           <div class="founder-avatar-block">
-            <div class="founder-avatar-circle">S</div>
+            <div class="founder-avatar-circle" style="background: rgba(0, 201, 255, 0.1); border: 1px solid var(--border-glow-cyan); display: flex; align-items: center; justify-content: center; padding: 10px;">
+              <img src="assets/icons/master-icon.svg" alt="Elevenified Engineering" style="width: 100%; height: 100%; object-fit: contain;" />
+            </div>
             <div class="founder-identity">
-              <div class="founder-name-lg">Siddharth</div>
-              <div class="founder-role-lg">Founder, Elevenified</div>
+              <div class="founder-name-lg">Founder &amp; Principal Architect</div>
+              <div class="founder-role-lg">Elevenified Engineering</div>
               <a href="mailto:siddharth@elevenified.com" class="founder-email-link">siddharth@elevenified.com</a>
             </div>
           </div>
