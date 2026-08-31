@@ -1,0 +1,341 @@
+/* ==========================================================================
+   Elevenified Vision — Interactive Workstation Simulator Styles
+   ========================================================================== */
+
+.simulator-wrapper {
+  background: var(--bg-obsidian);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 229, 255, 0.05);
+  margin-top: 32px;
+}
+
+/* Simulator Scenario Header Tabs */
+.sim-header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-dim);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.sim-scenarios {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sim-tab-btn {
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sim-tab-btn:hover {
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.sim-tab-btn.active {
+  background: rgba(0, 229, 255, 0.1);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+.sim-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--green-bright);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Simulator Grid Layout */
+.sim-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  min-height: 480px;
+  background: #080a0d;
+}
+
+/* Main Viewport & Canvas */
+.sim-viewport-container {
+  position: relative;
+  border-right: 1px solid var(--border-dim);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: radial-gradient(circle at center, #11141a 0%, #080a0d 100%);
+  overflow: hidden;
+}
+
+.sim-canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  display: block;
+}
+
+/* Live Viewport Overlay HUD */
+.sim-hud-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.hud-pill {
+  background: rgba(12, 14, 18, 0.85);
+  border: 1px solid var(--border-dim);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hud-fps {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+/* Action Control Toolbar */
+.sim-control-bar {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-dim);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sim-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sim-btn {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-obsidian);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.sim-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-active);
+}
+
+.sim-btn.primary {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--green);
+  color: var(--green-bright);
+}
+
+.sim-btn.primary:hover {
+  background: rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.sim-btn.warning {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: var(--amber);
+  color: var(--amber-bright);
+}
+
+.sim-btn.warning:hover {
+  background: rgba(245, 158, 11, 0.22);
+}
+
+.sim-btn.reset {
+  color: var(--text-muted);
+}
+
+/* Sidebar: Step Rail & Real-Time Telemetry */
+.sim-sidebar {
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.sim-sidebar-section {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.sim-sidebar-section:last-child {
+  border-bottom: none;
+  flex-grow: 1;
+}
+
+.sim-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* Step Rail List */
+.step-rail-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-item {
+  background: var(--bg-obsidian);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+}
+
+.step-item.active {
+  border-color: var(--cyan);
+  background: rgba(0, 229, 255, 0.05);
+}
+
+.step-item.satisfied {
+  border-color: var(--green);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.step-item.uncertain {
+  border-color: var(--amber);
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.step-item.failed {
+  border-color: var(--red);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.step-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.step-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.step-detail {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.step-state-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.step-state-tag.pending {
+  background: rgba(100, 116, 139, 0.15);
+  color: var(--text-muted);
+}
+
+.step-state-tag.active {
+  background: rgba(0, 229, 255, 0.15);
+  color: var(--cyan);
+}
+
+.step-state-tag.satisfied {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--green-bright);
+}
+
+.step-state-tag.uncertain {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--amber-bright);
+}
+
+.step-state-tag.failed {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--red-bright);
+}
+
+/* Real-Time SHA-256 Ledger Stream */
+.sim-ledger-stream {
+  background: #06080a;
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  max-height: 110px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ledger-log-entry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  word-break: break-all;
+}
+
+.ledger-hash-prefix {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .sim-body-grid {
+    grid-template-columns: 1fr;
+  }
+  .sim-viewport-container {
+    border-right: none;
+    border-bottom: 1px solid var(--border-dim);
+  }
+}

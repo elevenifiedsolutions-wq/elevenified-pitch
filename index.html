@@ -1,1756 +1,1147 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elevenified - Pitch</title>
-    <link rel="icon" type="image/svg+xml" href="assets/icons/fav-icon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="design/colors.css">
-    <link rel="stylesheet" href="design/components.css">
-    <style>
-        :root {
-            /* --- SLIDE-SPECIFIC VARIABLES --- */
-
-            /* 1. Structural Frame (Dark Grey) */
-            /* --industrial-grey replaced by --border-industrial in colors.css */
-
-            /* 2. Local Gradient Variants */
-            /* Moved to design/colors.css */
-            /* --gradient-volt, --gradient-blue, --gradient-gold now standardized */
-
-            /* 3. Hero Background */
-            --gradient-hero: linear-gradient(135deg, var(--bg-deep-slate) 0%, var(--bg-rubber) 50%, var(--bg-deep-slate) 100%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-deep-slate);
-            color: var(--foreground);
-            overflow: hidden;
-        }
-
-        /* Slide Container */
-        .slides-container {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .slide {
-            width: 100vw;
-            height: 100vh;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 80px 60px;
-            /* Adjusted top padding for nav */
-            position: relative;
-            background: var(--gradient-hero);
-        }
-
-        .slide.active {
-            display: flex;
-        }
-
-        /* Decorative Elements */
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, var(--synergy-blue-glow) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .slide::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--synergy-gold-glow) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        /* Typography */
-        h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: var(--gradient-brand);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 32px;
-            color: var(--foreground);
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--foreground);
-        }
-
-        p {
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--foreground-muted);
-            line-height: 1.6;
-            max-width: 800px;
-            text-align: center;
-            margin: 0 auto;
-        }
-
-        /* Hero Slide */
-        .hero-content {
-            text-align: center;
-            z-index: 10;
-        }
-
-        .logo-text {
-            font-size: 6rem;
-            font-weight: 800;
-            background: var(--gradient-brand);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 16px;
-        }
-
-        .tagline {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: var(--foreground);
-            margin-bottom: 32px;
-        }
-
-        .eleven-equation {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-            font-size: 5rem;
-            font-weight: 800;
-            margin: 40px 0;
-        }
-
-        .eleven-equation .num {
-            /* Updated to use Brand Gradients */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .eleven-equation .result {
-            background: var(--gradient-volt);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 6rem;
-            text-shadow: 0 0 60px var(--neon-volt-glow);
-        }
-
-        /* Problem Slide */
-        .problem-content {
-            max-width: 1000px;
-            text-align: center;
-            margin: 0 auto;
-        }
-
-        .stat-highlight {
-            font-size: 6rem;
-            font-weight: 800;
-            color: var(--industrial-red);
-            margin: 24px 0;
-            text-shadow: 0 0 30px rgba(255, 51, 51, 0.2);
-        }
-
-        .pain-points {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        /* =============================================
-           CARD COMPONENTS - Now using design system
-           Base: .card-industrial from design/components.css
-           Premium: .card-industrial.card-premium
-           ============================================= */
-
-        /* Card sub-elements (local to slides) */
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            margin: 0;
-            font-weight: 600;
-            color: var(--foreground);
-            text-align: left;
-        }
-
-        .card-desc {
-            font-size: 0.95rem;
-            color: var(--foreground-muted);
-            margin: 0;
-            line-height: 1.6;
-            text-align: left;
-        }
-
-        /* =============================================
-           ICON BOX - Now using design system
-           Slide-specific size override for 44x44px
-           ============================================= */
-
-        /* Local override for default icon-box size inside cards */
-        .card-industrial .icon-box {
-            width: 44px;
-            height: 44px;
-            font-size: 1.5rem;
-        }
-
-        /* =============================================
-           GRID LAYOUTS
-           ============================================= */
-
-        .solution-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        /* Language Slide */
-        .language-hero {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hinglish-example {
-            background: var(--bg-rubber);
-            border-radius: 16px;
-            padding: 40px;
-            margin: 32px 0 16px 0;
-            border-left: 4px solid var(--synergy-gold);
-            border: 1px solid var(--border-industrial);
-            /* Added industrial frame */
-            border-left-width: 4px;
-        }
-
-        .hinglish-example .speaker {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .hinglish-example .avatar {
-            width: 48px;
-            height: 48px;
-            background: var(--synergy-gold);
-            color: var(--bg-deep-slate);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .hinglish-example .quote {
-            font-size: 1.8rem;
-            font-style: italic;
-            color: var(--foreground);
-            line-height: 1.5;
-        }
-
-        .language-flags {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        .flag-badge {
-            background: var(--bg-rubber);
-            border-radius: 12px;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.1rem;
-            border: 1px solid var(--border-industrial);
-        }
-
-        /* Demo Slide */
-        .demo-steps {
-            display: flex;
-            gap: 20px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .demo-step {
-            flex: 1;
-            padding: 24px 16px;
-            text-align: center;
-        }
-
-
-
-        .demo-step .step-num {
-            position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--bg-deep-slate);
-        }
-
-        /* Connector Line */
-        .demo-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -11px;
-            width: 22px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-50%);
-            z-index: 0;
-        }
-
-        .demo-step .icon {
-            font-size: 2rem;
-            margin: 20px auto;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .demo-step h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .demo-step p {
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        /* UX Slide */
-        .ux-container {
-            display: flex;
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            margin-top: 40px;
-        }
-
-        .ux-card {
-            flex: 1;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .ux-card h3 {
-            font-size: 1.8rem;
-            margin: 24px 0 16px;
-            color: var(--synergy-gold);
-        }
-
-        .ux-card p {
-            font-size: 1.2rem;
-            max-width: 100%;
-        }
-
-        .ux-icon {
-            font-size: 5rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.2));
-        }
-
-        /* CTA Slide */
-        .cta-content {
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .cta-badge {
-            display: inline-block;
-            background: var(--gradient-volt);
-            color: var(--bg-deep-slate);
-            font-weight: 700;
-            font-size: 1rem;
-            padding: 8px 20px;
-            border-radius: 100px;
-            margin-bottom: 24px;
-        }
-
-        .cta-offers {
-            display: flex;
-            gap: 24px;
-            margin: 40px 0;
-        }
-
-        .offer-card .icon-box {
-            background: rgba(57, 255, 20, 0.1);
-            border: 1px solid rgba(57, 255, 20, 0.2);
-        }
-
-        .offer-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        /* Standardized Primary Button applied to CTA */
-        /* Slide Deck Specific Overrides */
-        .btn-primary.slide-cta {
-            padding: 20px 48px;
-            font-size: 1.5rem;
-            margin-top: 40px;
-        }
-
-        /* Navigation */
-        .nav-dots {
-            position: fixed;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
-            z-index: 100;
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .nav-dot.active {
-            background: var(--neon-volt);
-            transform: scale(1.2);
-        }
-
-        .nav-arrows {
-            position: fixed;
-            bottom: 32px;
-            right: 40px;
-            display: flex;
-            gap: 12px;
-            z-index: 100;
-        }
-
-        .nav-arrow {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--bg-rubber);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--foreground);
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .nav-arrow:hover {
-            background: var(--neon-volt);
-            border-color: var(--neon-volt);
-        }
-
-        .slide-number {
-            position: fixed;
-            bottom: 32px;
-            left: 40px;
-            font-size: 0.9rem;
-            color: var(--foreground-muted);
-            z-index: 100;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Override badge margin inside tech-item */
-        .tech-item .badge {
-            margin-top: 12px;
-            align-self: flex-start;
-        }
-
-        /* ===== UNIFIED NAVIGATION - Matches index.html ===== */
-        .unified-nav {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(26, 28, 32, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            height: 80px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .unified-nav .nav-container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .unified-nav .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            transition: opacity 0.2s ease;
-        }
-
-        .unified-nav .nav-logo:hover {
-            opacity: 0.8;
-        }
-
-        .unified-nav .nav-logo img {
-            height: 40px;
-            width: auto;
-        }
-
-        .unified-nav .nav-brand-text {
-            font-weight: 800;
-            font-size: 1.35rem;
-            letter-spacing: -0.5px;
-            background: var(--gradient-brand);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .unified-nav .nav-links {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        /* Standardized Nav Button - See design/components.css */
-        /* .nav-link replaced by .btn-nav */
-
-        /* Ensure nav sits above slide navigation */
-        .nav-dots,
-        .nav-arrows,
-        .slide-number {
-            z-index: 999;
-        }
-
-        /* Mobile Navigation Responsiveness */
-        @media (max-width: 768px) {
-            .unified-nav {
-                height: 64px;
-            }
-
-            .unified-nav .nav-logo img {
-                height: 32px;
-            }
-
-            .unified-nav .nav-brand-text {
-                font-size: 1.2rem;
-            }
-
-            .unified-nav .nav-link {
-                padding: 10px 16px;
-                font-size: 0.85rem;
-                min-height: 44px;
-                display: inline-flex;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .unified-nav .nav-container {
-                width: 92%;
-            }
-
-            .unified-nav .nav-links {
-                gap: 8px;
-            }
-
-            .unified-nav .nav-link {
-                padding: 8px 14px;
-                font-size: 0.8rem;
-            }
-
-            .unified-nav .nav-brand-text {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Accessibility improvements */
-        @media (prefers-reduced-motion: reduce) {
-
-            .unified-nav,
-            .unified-nav .nav-logo,
-            .unified-nav .nav-link {
-                transition: none;
-            }
-        }
-
-        /* Mobile slide padding adjustments */
-        @media (max-width: 768px) {
-
-            /* Enable vertical scroll on mobile */
-            body {
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-
-            .slide {
-                padding: 90px 40px 40px;
-                min-height: 100vh;
-                height: auto;
-            }
-
-            /* Typography - Tablet */
-            h1 {
-                font-size: 3rem;
-            }
-
-            h2 {
-                font-size: 2.2rem;
-            }
-
-            h3 {
-                font-size: 1.4rem;
-            }
-
-            p {
-                font-size: 1.2rem;
-                max-width: 100%;
-            }
-
-            .logo-text {
-                font-size: 4rem;
-            }
-
-            .tagline {
-                font-size: 1.8rem;
-            }
-
-            .eleven-equation {
-                font-size: 3.5rem;
-                gap: 16px;
-            }
-
-            .eleven-equation .result {
-                font-size: 4.5rem;
-            }
-
-            .stat-highlight {
-                font-size: 4rem;
-            }
-
-            /* Grid layouts - Tablet */
-            .pain-points,
-            .solution-grid,
-            .tech-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-
-            .demo-steps {
-                flex-wrap: wrap;
-            }
-
-            .demo-step {
-                flex: 1 1 calc(50% - 10px);
-            }
-
-            .ux-container {
-                flex-direction: column;
-                gap: 24px;
-            }
-
-            .cta-offers {
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            /* Navigation controls */
-            .nav-arrows {
-                right: 20px;
-                bottom: 20px;
-            }
-
-            .slide-number {
-                left: 20px;
-                bottom: 20px;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 640px) {
-
-            /* Enable vertical scroll on mobile */
-            body {
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-
-            .slides-container {
-                height: auto;
-                overflow: visible;
-            }
-
-            .slide {
-                padding: 84px 20px 80px;
-                min-height: 100vh;
-                height: auto;
-                justify-content: flex-start;
-            }
-
-            /* Typography - Mobile */
-            h1 {
-                font-size: 2.2rem;
-                margin-bottom: 16px;
-            }
-
-            h2 {
-                font-size: 1.8rem;
-                margin-bottom: 20px;
-            }
-
-            h3 {
-                font-size: 1.2rem;
-                margin-bottom: 12px;
-            }
-
-            p {
-                font-size: 1rem;
-                line-height: 1.5;
-                max-width: 100%;
-            }
-
-            .logo-text {
-                font-size: 2.8rem;
-            }
-
-            .tagline {
-                font-size: 1.4rem;
-            }
-
-            .eleven-equation {
-                font-size: 2.5rem;
-                gap: 12px;
-                margin: 24px 0;
-                flex-wrap: wrap;
-            }
-
-            .eleven-equation .result {
-                font-size: 3.2rem;
-            }
-
-            .stat-highlight {
-                font-size: 3rem;
-                margin: 16px 0;
-            }
-
-            /* Grid layouts - Mobile (single column) */
-            .pain-points,
-            .solution-grid,
-            .tech-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .demo-steps {
-                flex-direction: column;
-            }
-
-            .demo-step {
-                width: 100%;
-            }
-
-            .demo-step:not(:last-child)::after {
-                display: none;
-            }
-
-            /* Cards */
-
-
-            .card-title {
-                font-size: 1rem;
-            }
-
-            .card-desc {
-                font-size: 0.9rem;
-            }
-
-            .icon-box {
-                width: 36px;
-                height: 36px;
-                font-size: 1.2rem;
-            }
-
-            /* Language slide */
-            .hinglish-example {
-                padding: 24px;
-            }
-
-            .hinglish-example .quote {
-                font-size: 1.3rem;
-            }
-
-            .language-flags {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            /* UX cards */
-            .ux-container {
-                margin-top: 24px;
-            }
-
-            .ux-card {
-                padding: 28px 24px;
-            }
-
-            .ux-card h3 {
-                font-size: 1.4rem;
-            }
-
-            .ux-card p {
-                font-size: 1rem;
-            }
-
-            .ux-icon {
-                font-size: 3.5rem;
-            }
-
-            /* CTA slide */
-            .cta-button {
-                font-size: 1.2rem;
-                padding: 16px 32px;
-                white-space: normal;
-            }
-
-            /* Navigation controls - fixed at bottom */
-            .nav-dots {
-                bottom: 20px;
-                gap: 8px;
-            }
-
-            .nav-dot {
-                width: 8px;
-                height: 8px;
-            }
-
-            .nav-arrows {
-                right: 12px;
-                bottom: 12px;
-                gap: 8px;
-            }
-
-            .nav-arrow {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-
-            .slide-number {
-                left: 12px;
-                bottom: 12px;
-                font-size: 0.75rem;
-            }
-
-            /* Remove decorative glow elements on mobile for performance */
-            .slide::before,
-            .slide::after {
-                display: none;
-            }
-
-            /* Make content containers more mobile-friendly */
-            .problem-content,
-            .language-hero,
-            .cta-content {
-                max-width: 100%;
-            }
-
-            /* Ensure hero content centers properly */
-            .hero-content {
-                width: 100%;
-            }
-
-            /* Slide 4 - Flow diagram mobile fix */
-            #slide-4>div[style*="display: flex"] {
-                flex-direction: column !important;
-                gap: 16px !important;
-                max-width: 100% !important;
-            }
-
-            /* Arrows between flow elements - rotate to point down */
-            #slide-4>div>div[style*="font-size: 2rem"] {
-                transform: rotate(90deg);
-                margin: 0 !important;
-                font-size: 1.5rem !important;
-            }
-
-            /* Flow element boxes - make smaller on mobile */
-            #slide-4>div>div[style*="text-align: center"]>div[style*="width: 100px"] {
-                width: 80px !important;
-                height: 80px !important;
-            }
-
-            /* Flow element icons - make smaller */
-            #slide-4>div>div[style*="text-align: center"]>div>div[style*="font-size: 3.5rem"] {
-                font-size: 2.5rem !important;
-            }
-
-            /* Flow element labels */
-            #slide-4>div>div[style*="text-align: center"]>h3 {
-                font-size: 0.9rem !important;
-            }
-        }
-
-
-        /* --- Video Modal --- */
-        .video-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .video-modal.open {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            width: 90%;
-            max-width: 550px;
-            /* Portrait video optimization */
-            aspect-ratio: 9/16;
-            /* Portrait ratio based on source */
-            max-height: 90vh;
-            background: #000;
-            border-radius: 16px;
-            position: relative;
-            box-shadow: 0 0 40px rgba(57, 255, 20, 0.2);
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            border: 1px solid var(--border-industrial);
-        }
-
-        /* Adjust for landscape if video is landscape, but source was 552x1000 which is portrait */
-        @media (min-aspect-ratio: 1/1) {
-            .modal-content {
-                aspect-ratio: auto;
-                height: 90vh;
-                width: auto;
-            }
-        }
-
-        .video-modal.open .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            color: white;
-            font-size: 2rem;
-            line-height: 1;
-            cursor: pointer;
-            border: none;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .modal-close:hover {
-            background: var(--industrial-red);
-            transform: rotate(90deg);
-        }
-
-        .modal-video {
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-            outline: none;
-            object-fit: contain;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO Metadata -->
+  <title>Elevenified-Vision — Digital Verification for Manual Assembly</title>
+  <meta name="description" content="On-premise computer vision that verifies manual assembly steps and creates a digital record of what happened at the station. Pre-pilot — seeking manufacturing partners.">
+  <meta name="keywords" content="manufacturing quality, assembly step verification, computer vision manufacturing, SOP compliance, digital work instructions, industrial edge AI, manufacturing audit trail, on-premise AI, Elevenified-Vision">
+  <meta name="author" content="Elevenified">
+  <link rel="canonical" href="https://elevenified.com">
+
+  <!-- OpenGraph Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elevenified.com">
+  <meta property="og:title" content="Elevenified-Vision — Digital Verification for Manual Assembly">
+  <meta property="og:description" content="On-premise computer vision that verifies manual assembly steps and creates a digital record of what happened at the station.">
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Elevenified-Vision — Digital Verification for Manual Assembly">
+  <meta name="twitter:description" content="On-premise computer vision that verifies manual assembly steps and creates a digital record of what happened at the station.">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Elevenified-Vision",
+    "applicationCategory": "IndustrialSoftwareApplication",
+    "operatingSystem": "Linux, Embedded Edge, On-Premise Industrial PC",
+    "description": "On-premise computer vision that verifies manual assembly steps and creates a digital record of what happened at the station.",
+    "offers": {
+      "@type": "Offer",
+      "price": "Contact for Pilot",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Elevenified",
+      "url": "https://elevenified.com",
+      "email": "siddharth@elevenified.com"
+    }
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/fav-icon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/simulator.css">
 </head>
-
 <body>
-    <!-- UNIFIED NAVIGATION -->
-    <nav class="unified-nav" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <!-- Logo + Brand -->
-            <a href="https://www.elevenified.com" class="nav-logo" aria-label="Elevenified Home">
-                <img src="assets/icons/master-icon.svg" alt="Elevenified Logo">
-                <span class="nav-brand-text" aria-hidden="true">Elevenified</span>
-            </a>
 
-            <!-- Navigation Links -->
-            <div class="nav-links">
-                <button id="open-demo-btn" class="btn-nav"
-                    style="background: transparent; border: 1px solid var(--neon-volt); color: var(--neon-volt); margin-right: 12px; cursor: pointer;">
-                    <span style="margin-right: 6px;">▶</span> Quick Look
-                </button>
-                <a href="https://forms.gle/Sczzy25JUXdb3MxV7" target="_blank" class="btn-nav">Contact</a>
-            </div>
-        </div>
-    </nav>
+  <!-- ============================================================
+       SITE NAVIGATION
+  ============================================================ -->
+  <header class="site-header" id="site-header">
+    <div class="nav-container">
+      <div class="brand-wrapper">
+        <a href="#" class="brand-logo" aria-label="Elevenified-Vision Home">
+          <div class="brand-icon">
+            <img src="assets/icons/master-icon.svg" alt="Elevenified" width="32" height="32" />
+          </div>
+          <span class="brand-title">Elevenified</span>
+          <span class="brand-tag">VISION</span>
+        </a>
+      </div>
 
-    <div class="slides-container">
-        <div class="slide active" id="slide-1">
-            <div class="hero-content">
-                <svg viewBox="0 0 100 100" width="220" height="220"
-                    style="margin-bottom: 24px; filter: drop-shadow(0 0 60px rgba(255, 215, 0, 0.3)) drop-shadow(0 0 40px rgba(0, 201, 255, 0.2));">
-                    <defs>
-                        <linearGradient id="goldFill" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="var(--synergy-gold)" />
-                            <stop offset="100%" stop-color="var(--synergy-gold-dark)" />
-                        </linearGradient>
-                        <linearGradient id="blueFill" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="var(--synergy-blue)" />
-                            <stop offset="100%" stop-color="var(--synergy-blue-dark)" />
-                        </linearGradient>
-                        <filter id="neonBolt" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="2" result="blur" />
-                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                        </filter>
-                    </defs>
-                    <rect x="6" y="24" width="8" height="52" rx="4" fill="url(#goldFill)" />
-                    <rect x="86" y="24" width="8" height="52" rx="4" fill="url(#blueFill)" />
-                    <path d="M10 28 L50 5 L90 28" fill="none" stroke="var(--border-industrial)" stroke-width="8"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M10 72 L50 95 L90 72" fill="none" stroke="var(--border-industrial)" stroke-width="8"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                    <g>
-                        <circle cx="10" cy="28" r="3.5" fill="url(#blueFill)" stroke="var(--bg-deep-slate)"
-                            stroke-width="0.5" />
-                        <circle cx="10" cy="28" r="1.5" fill="var(--bg-deep-slate)" />
-                        <circle cx="10" cy="72" r="3.5" fill="url(#blueFill)" stroke="var(--bg-deep-slate)"
-                            stroke-width="0.5" />
-                        <circle cx="10" cy="72" r="1.5" fill="var(--bg-deep-slate)" />
-                        <circle cx="90" cy="28" r="3.5" fill="url(#goldFill)" stroke="var(--bg-deep-slate)"
-                            stroke-width="0.5" />
-                        <circle cx="90" cy="28" r="1.5" fill="var(--bg-deep-slate)" />
-                        <circle cx="90" cy="72" r="3.5" fill="url(#goldFill)" stroke="var(--bg-deep-slate)"
-                            stroke-width="0.5" />
-                        <circle cx="90" cy="72" r="1.5" fill="var(--bg-deep-slate)" />
-                    </g>
-                    <g filter="url(#neonBolt)">
-                        <rect x="32" y="46" width="36" height="8" rx="4" fill="var(--neon-volt)" />
-                        <rect x="46" y="32" width="8" height="36" rx="4" fill="var(--neon-volt)" />
-                        <circle cx="50" cy="50" r="5" fill="var(--bg-deep-slate)" stroke="var(--neon-volt)"
-                            stroke-width="2.5" />
-                    </g>
-                </svg>
+      <nav class="nav-links-wrapper" aria-label="Main navigation">
+        <ul class="nav-menu">
+          <li><a href="#problem" class="nav-link">Problem</a></li>
+          <li><a href="#simulator" class="nav-link">See It Work</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#pilot" class="nav-link">Pilot</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
 
-                <div class="logo-text">Elevenified</div>
-                <div class="tagline">Manufacturing Knowledge, Amplified</div>
-
-                <div class="eleven-equation">
-                    <span class="num"
-                        style="background: var(--gradient-gold); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);">1</span>
-
-                    <span class="equals">+</span>
-
-                    <span class="num"
-                        style="background: var(--gradient-blue); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 20px rgba(0, 201, 255, 0.4);">1</span>
-
-                    <span class="equals">=</span>
-
-                    <span class="result"
-                        style="color: var(--neon-volt); text-shadow: 0 0 40px rgba(57, 255, 20, 0.6);">11</span>
-                </div>
-                <p style="margin-top: 32px;"><span style="color: var(--synergy-gold);">Human</span> + <span
-                        style="color: var(--synergy-blue);">AI</span> = <span style="color: var(--neon-volt);">Amplified
-                        Intelligence</span>
-                </p>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-2">
-            <div class="problem-content">
-                <h2>The Knowledge Crisis</h2>
-                <p>Every year, your best workers retire. Their decades of expertise?</p>
-                <div class="stat-highlight">Lost Legacy.</div>
-                <div class="pain-points">
-                    <div class="card-industrial card-premium" data-accent="red">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="red">👴</div>
-                            <h3 class="card-title">Retiring Workforce</h3>
-                        </div>
-                        <p class="card-desc">Average factory worker is 44+ years old</p>
-                    </div>
-                    <div class="card-industrial card-premium" data-accent="red">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="red">🧠</div>
-                            <h3 class="card-title">Tribal Knowledge</h3>
-                        </div>
-                        <p class="card-desc">Undocumented tricks that no manual captures</p>
-                    </div>
-                    <div class="card-industrial card-premium" data-accent="red">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="red">🔄</div>
-                            <h3 class="card-title">Repeat Problems</h3>
-                        </div>
-                        <p class="card-desc">Day shift solves it. Night shift doesn't know.</p>
-                    </div>
-                    <div class="card-industrial card-premium" data-accent="red">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="red">👶</div>
-                            <h3 class="card-title">New Worker Onboarding</h3>
-                        </div>
-                        <p class="card-desc">6-12 months to become productive. Too slow.</p>
-                    </div>
-                    <div class="card-industrial card-premium" data-accent="red">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="red">😶</div>
-                            <h3 class="card-title">The "Silent Expert"</h3>
-                        </div>
-                        <p class="card-desc">Seniors have no incentive to share. Skills retire with them.</p>
-                    </div>
-                    <div class="card-industrial card-premium" data-accent="red">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="red">🌐</div>
-                            <h3 class="card-title">Language Barrier</h3>
-                        </div>
-                        <p class="card-desc">English manuals, Hindi workers. Lost in translation.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-3">
-            <h2 style="margin-bottom: 24px;">Beyond Automation: Industry 5.0</h2>
-            <p style="margin-bottom: 48px;">The global standard for human-first manufacturing.</p>
-
-            <div class="solution-grid">
-                <div class="card-industrial card-premium" data-accent="gold">
-                    <div class="card-header">
-                        <div class="icon-box icon-box-md" data-color="gold" aria-label="Human-Centricity icon">👷</div>
-                        <h3 class="card-title">Human-Centricity</h3>
-                    </div>
-                    <p class="card-desc">Technology adapts to workers, not the other way around. We capture expertise—we
-                        don't replace experts.</p>
-                    <p class="card-quote"
-                        style="margin-top: auto; padding-top: 12px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.85rem;">
-                        "When Ramesh retires, his 20 years stays in the system."</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="green">
-                    <div class="card-header">
-                        <div class="icon-box icon-box-md" data-color="green" aria-label="Sustainability icon">🌱</div>
-                        <h3 class="card-title">Sustainability</h3>
-                    </div>
-                    <p class="card-desc">Reduced turnover = lower carbon footprint. Sustainability through human
-                        retention.</p>
-                    <p class="card-quote"
-                        style="margin-top: auto; padding-top: 12px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.85rem;">
-                        "Hiring + Training = carbon footprint. Preserving expertise = green."</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box icon-box-md" data-color="blue" aria-label="Resilience icon">🛡️</div>
-                        <h3 class="card-title">Resilience</h3>
-                    </div>
-                    <p class="card-desc">Organizational memory that survives disruptions. If Ramesh is sick, the
-                        knowledge is still there.</p>
-                    <p class="card-quote"
-                        style="margin-top: auto; padding-top: 12px; border-top: 1px solid var(--shadow-highlight); font-style: italic; color: var(--foreground-muted); font-size: 0.85rem;">
-                        "COVID lockdown? Senior can't come? Knowledge accessible."</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-4">
-            <h2 style="margin-bottom: 48px;">How Elevenified Works</h2>
-            <div class="solution-grid">
-                <div class="card-industrial card-premium" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">📋</div>
-                        <h3 class="card-title">SOP Auto-Extraction</h3>
-                    </div>
-                    <p class="card-desc"><span style="color: var(--synergy-blue);">AI</span> extracts knowledge from
-                        PDFs
-                        automatically</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="gold">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="gold">🗣️</div>
-                        <h3 class="card-title">Hinglish-First</h3>
-                    </div>
-                    <p class="card-desc">Workers speak naturally. No translation needed.</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="gold">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="gold">✏️</div>
-                        <h3 class="card-title">Voice OR Text</h3>
-                    </div>
-                    <p class="card-desc">Choose your input method. Both work seamlessly.</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">🎯</div>
-                        <h3 class="card-title">Intent Classification</h3>
-                    </div>
-                    <p class="card-desc"><span style="color: var(--synergy-blue);">AI</span> knows: Capture, Search, or
-                        Clarify?</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">🔍</div>
-                        <h3 class="card-title">Cross-Language Search</h3>
-                    </div>
-                    <p class="card-desc"><span style="color: var(--synergy-blue);">AI</span> finds meaning across
-                        languages.</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="green">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="green">🏆</div>
-                        <h3 class="card-title">Expert Recognition</h3>
-                    </div>
-                    <p class="card-desc">Turn knowledge sharing into status. Reward the source.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-5">
-            <h2 style="margin-bottom: 24px;">AI Speed. Human Safety.</h2>
-            <p style="margin-bottom: 48px;">Nothing enters the system without your approval.</p>
-
-            <div style="display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 32px;">
-                <div style="text-align: center;">
-                    <div class="icon-box" data-color="gold"
-                        style="width: 100px; height: 100px; margin: 0 auto 16px; font-size: 3.5rem; border-radius: 20px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.15);">
-                        📄
-                    </div>
-                    <h3 style="font-size: 1rem; color: var(--synergy-gold);">PDF Manuals</h3>
-                </div>
-
-                <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
-
-                <div style="text-align: center;">
-                    <div class="icon-box" data-color="blue"
-                        style="width: 100px; height: 100px; margin: 0 auto 16px; font-size: 3.5rem; border-radius: 20px; box-shadow: 0 0 30px rgba(0, 201, 255, 0.2);">
-                        ⚡
-                    </div>
-                    <h3 style="font-size: 1rem; color: var(--synergy-blue);">AI Processing</h3>
-                </div>
-
-                <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
-
-                <div style="text-align: center;">
-                    <div class="icon-box" data-color="gold"
-                        style="width: 100px; height: 100px; margin: 0 auto 16px; font-size: 3.5rem; border-radius: 20px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); border-width: 2px;">
-                        🛡️
-                    </div>
-                    <h3 style="font-size: 1rem; color: var(--synergy-gold);">Human Verified</h3>
-                </div>
-
-                <div style="font-size: 2rem; color: var(--foreground-muted); opacity: 0.5;">➝</div>
-
-                <div style="text-align: center;">
-                    <div class="icon-box" data-color="green"
-                        style="width: 100px; height: 100px; margin: 0 auto 16px; font-size: 3.5rem; border-radius: 20px; box-shadow: 0 0 40px rgba(57, 255, 20, 0.3);">
-                        🧠
-                    </div>
-                    <h3 style="font-size: 1rem; color: var(--neon-volt);">Company Brain</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-6">
-            <div class="language-hero">
-                <h2>Hinglish-First 🇮🇳</h2>
-                <p>Workers speak naturally. No translation needed.</p>
-                <div class="hinglish-example">
-                    <div class="speaker">
-                        <div class="avatar">👷</div>
-                        <div class="name">Ramesh, Senior Technician</div>
-                    </div>
-                    <div class="quote">
-                        "CNC-44 mein bahut vibration aa raha tha, high speed pe. Maine spindle bearing change kiya, ab
-                        theek hai."
-                    </div>
-                </div>
-                <p
-                    style="margin-top: 24px; color: var(--foreground-muted); font-size: 1.1rem; border: 1px dashed rgba(255,255,255,0.2); padding: 12px; border-radius: 8px; display: inline-block;">
-                    Bridging the gap between <i>"Floor Talk"</i> (Symptoms) and <i>"Technical Manuals"</i> (Solutions).
-                </p>
-                <div style="margin-top: 32px;">
-                    <p style="color: var(--neon-volt); font-weight: 600; font-size: 1.3rem;">
-                        ✓ <span style="color: var(--synergy-blue);">AI</span> understood perfectly. Equipment: CNC-44.
-                        Action:
-                        Bearing change.
-                    </p>
-                </div>
-
-                <div class="language-flags">
-                    <div class="flag-badge"><span class="emoji">🗣️</span> Hindi Voice</div>
-                    <div class="flag-badge"><span class="emoji">⌨️</span> Romanized Input</div>
-                    <div class="flag-badge"><span class="emoji">🔍</span> Cross-Language Search</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-7">
-            <h2 style="margin-bottom: 24px;">Your Data. Your Control.</h2>
-            <p style="margin-bottom: 48px;">Enterprise-grade security built for manufacturing.</p>
-
-            <div class="cta-offers" style="margin-top: 24px;">
-                <div class="card-industrial card-premium offer-card" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">🔒</div>
-                        <h3 class="card-title">Secure Data Isolation</h3>
-                    </div>
-                    <p class="card-desc">Enterprise-grade separation. Your trade secrets remain protected.</p>
-                </div>
-                <div class="card-industrial card-premium offer-card" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">🛡️</div>
-                        <h3 class="card-title">Role-Based Access</h3>
-                    </div>
-                    <p class="card-desc">Admins control everything. Workers see what they need.</p>
-                </div>
-                <div class="card-industrial card-premium offer-card" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">☁️</div>
-                        <h3 class="card-title">Enterprise Security</h3>
-                    </div>
-                    <p class="card-desc">HTTPS encryption, secure auth, SOC2-ready architecture.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-8">
-            <h2 style="margin-bottom: 48px;">Live Demo Flow</h2>
-            <div class="demo-steps">
-
-                <div class="card-industrial demo-step" data-accent="red"
-                    style="box-shadow: 0 0 20px rgba(255,51,51,0.1);">
-                    <div class="step-num" style="background: var(--industrial-red); color: white;">1</div>
-                    <div class="icon" style="background: rgba(255,51,51,0.1); border: 1px solid var(--industrial-red);">
-                        🔍</div>
-                    <h3 style="color: var(--industrial-red);">Search Gap</h3>
-                    <p>New issue. Manual has nothing. (Problem)</p>
-                </div>
-
-                <div class="card-industrial demo-step" data-accent="gold">
-                    <div class="step-num" style="background: var(--synergy-gold); color: black;">2</div>
-                    <div class="icon" style="background: rgba(255,215,0,0.1); border: 1px solid var(--synergy-gold);">
-                        🗣️
-                    </div>
-                    <h3 style="color: var(--synergy-gold);">Capture</h3>
-                    <p>Voice <b>OR</b> Text. Hinglish supported.</p>
-                </div>
-
-                <div class="card-industrial demo-step" data-accent="blue">
-                    <div class="step-num" style="background: var(--synergy-blue); color: black;">3</div>
-                    <div class="icon" style="background: rgba(0,201,255,0.1); border: 1px solid var(--synergy-blue);">🤖
-                    </div>
-                    <h3 style="color: var(--synergy-blue);">AI Polish</h3>
-                    <p>Standardizes text & translates before validation.</p>
-                </div>
-
-                <div class="card-industrial demo-step" data-accent="gold"
-                    style="box-shadow: 0 0 30px rgba(255,215,0,0.15);">
-                    <div class="step-num" style="background: var(--synergy-gold); color: black;">4</div>
-                    <div class="icon" style="background: rgba(255,215,0,0.1); border: 1px solid var(--synergy-gold);">
-                        🛡️
-                    </div>
-                    <h3 style="color: var(--synergy-gold);">Expert Gate</h3>
-                    <p>Review clean data. Validated by experts.</p>
-                </div>
-
-                <div class="card-industrial demo-step" data-accent="green">
-                    <div class="step-num" style="background: var(--neon-volt); color: black;">5</div>
-                    <div class="icon" style="background: rgba(57,255,20,0.1); border: 1px solid var(--neon-volt);">✨
-                    </div>
-                    <h3 style="color: var(--neon-volt);">Unified Result</h3>
-                    <p>Hindi search now finds this proven tip!</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-9">
-            <h2 style="margin-bottom: 16px;">Not Another Corporate App.</h2>
-            <h3 style="margin-bottom: 32px; font-weight: 300; color: var(--foreground);">Built for <span
-                    style="color: var(--synergy-gold); font-style: italic; font-weight: 600;">Your</span> Reality.
-            </h3>
-
-            <div class="solution-grid">
-                <div class="card-industrial card-premium" data-accent="gold">
-                    <div class="card-header">
-                        <div class="icon-box icon-box-md" data-color="gold" aria-label="Gloves-On UI icon">🧤</div>
-                        <h3 class="card-title">Gloves-On UI</h3>
-                    </div>
-                    <p class="card-desc">High-contrast "Fat Buttons" designed for safety gear. No tiny menus. No
-                        frustration.</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box icon-box-md" data-color="blue" aria-label="Factory-Grade Audio icon">🔊
-                        </div>
-                        <h3 class="card-title">Factory-Grade Audio</h3>
-                    </div>
-                    <p class="card-desc">Voice capture that adapts to your environment. Built-in noise handling for real
-                        factory floors.</p>
-                </div>
-                <div class="card-industrial card-premium" data-accent="green">
-                    <div class="card-header">
-                        <div class="icon-box icon-box-md" data-color="green" aria-label="Your SOPs icon">📋</div>
-                        <h3 class="card-title">Your SOPs</h3>
-                    </div>
-                    <p class="card-desc">We train on <strong>your</strong> equipment manuals. Your terminology. Your
-                        processes. Not generic content.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-10">
-            <h2 style="margin-bottom: 48px;">Production Ready ✅</h2>
-            <div class="tech-grid">
-
-                <div class="card-industrial card-premium tech-item" data-accent="gold">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="gold">🎙️</div>
-                        <h3 class="card-title">Voice Capture</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">LIVE</span>
-                </div>
-                <div class="card-industrial card-premium tech-item" data-accent="gold">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="gold">⌨️</div>
-                        <h3 class="card-title">Text Input</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">LIVE</span>
-                </div>
-                <div class="card-industrial card-premium tech-item" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">🧠</div>
-                        <h3 class="card-title">Intent AI</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">LIVE</span>
-                </div>
-                <div class="card-industrial card-premium tech-item" data-accent="gold">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="gold">🇮🇳</div>
-                        <h3 class="card-title">Hinglish</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">LIVE</span>
-                </div>
-                <div class="card-industrial card-premium tech-item" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">🔍</div>
-                        <h3 class="card-title">Search</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">LIVE</span>
-                </div>
-                <div class="card-industrial card-premium tech-item" data-accent="green">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="green">🏆</div>
-                        <h3 class="card-title">Leaderboard</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">LIVE</span>
-                </div>
-                <div class="card-industrial card-premium tech-item" data-accent="green">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="green">🧪</div>
-                        <h3 class="card-title">E2E Tests</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">TESTED</span>
-                </div>
-                <div class="card-industrial card-premium tech-item" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">🔒</div>
-                        <h3 class="card-title">Secure Cloud</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">LIVE</span>
-                </div>
-                <div class="card-industrial card-premium tech-item" data-accent="blue">
-                    <div class="card-header">
-                        <div class="icon-box" data-color="blue">⚡</div>
-                        <h3 class="card-title">API First</h3>
-                    </div>
-                    <span class="badge badge-sm badge-volt">LIVE</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-11">
-            <div class="cta-content">
-                <div class="cta-badge">INDUSTRY 5.0 PILOT PROGRAM</div>
-                <h1 style="font-size: 3.5rem;">Join the Industry 5.0 Pilot Program</h1>
-                <p>We're seeking one forward-thinking plant to field-test this prototype.</p>
-                <div class="cta-offers">
-                    <div class="card-industrial card-premium offer-card" data-accent="green">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="green">💎</div>
-                            <h3 class="card-title">Early Innovator Access</h3>
-                        </div>
-                        <p class="card-desc">First-mover advantage with Voice AI in your industrial cluster.</p>
-                    </div>
-                    <div class="card-industrial card-premium offer-card" data-accent="green">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="green">🛡️</div>
-                            <h3 class="card-title">Non-Intrusive Trial</h3>
-                        </div>
-                        <p class="card-desc">No-Cost Field Study. Prove value first.</p>
-                    </div>
-                    <div class="card-industrial card-premium offer-card" data-accent="green">
-                        <div class="card-header">
-                            <div class="icon-box" data-color="green">🤝</div>
-                            <h3 class="card-title">Tailored to You</h3>
-                        </div>
-                        <p class="card-desc">We customize the AI to your specific SOPs.</p>
-                    </div>
-                </div>
-                <a href="https://forms.gle/ghjHV3ko32tfwD1J9" target="_blank" rel="noopener noreferrer"
-                    class="btn-primary slide-cta">Request Beta Access →</a>
-            </div>
-        </div>
-
-        <div class="slide" id="slide-12">
-
-            <div class="hero-content">
-                <div class="logo-text">Elevenified</div>
-                <div class="eleven-equation" style="margin: 24px 0;">
-                    <span class="num"
-                        style="background: var(--gradient-gold); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">1</span>
-                    <span class="equals">+</span>
-                    <span class="num"
-                        style="background: var(--gradient-blue); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">1</span>
-                    <span class="equals">=</span>
-                    <span class="result"
-                        style="color: var(--neon-volt); text-shadow: 0 0 40px rgba(57, 255, 20, 0.6);">11</span>
-                </div>
-                <p style="font-size: 2rem; color: var(--foreground); margin-top: 32px;">
-                    <span style="color: var(--synergy-gold);">Human</span> + <span
-                        style="color: var(--synergy-blue);">AI</span> = <span
-                        style="color: var(--neon-volt);">Amplified. Not Replaced.</span>
-                </p>
-                <p style="margin-top: 48px; font-size: 1.2rem;">
-                    Questions? Let's talk.
-                </p>
-            </div>
-
-        </div>
+      <div class="nav-cta-group">
+        <a href="#simulator" class="btn btn-outline btn-sm nav-demo-btn">See Demo</a>
+        <a href="#pilot" class="btn btn-primary btn-sm nav-cta-btn" data-open-pilot-modal>Pilot →</a>
+        <button class="mobile-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">☰</button>
+      </div>
     </div>
+  </header>
 
-    <div class="slide-number"><span id="current-slide">1</span> / <span id="total-slides">12</span></div>
+  <main>
 
-    <div class="nav-dots">
-        <div class="nav-dot active" data-slide="1"></div>
-        <div class="nav-dot" data-slide="2"></div>
-        <div class="nav-dot" data-slide="3"></div>
-        <div class="nav-dot" data-slide="4"></div>
-        <div class="nav-dot" data-slide="5"></div>
-        <div class="nav-dot" data-slide="6"></div>
-        <div class="nav-dot" data-slide="7"></div>
-        <div class="nav-dot" data-slide="8"></div>
-        <div class="nav-dot" data-slide="9"></div>
-        <div class="nav-dot" data-slide="10"></div>
-        <div class="nav-dot" data-slide="11"></div>
-        <div class="nav-dot" data-slide="12"></div>
+    <!-- ============================================================
+         01 — HERO
+    ============================================================ -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="section-eyebrow">Digital Verification for Manual Assembly</div>
+        <h1 class="hero-title">
+          Make Every Critical<br>
+          <span class="highlight">Assembly Step Verifiable.</span>
+        </h1>
+        <p class="hero-subtitle">
+          On-premise computer vision that verifies manual assembly steps in real time
+          and creates a digital record of what happened at the station.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#simulator" class="btn btn-primary" id="hero-cta-see-it-work">See It Work →</a>
+          <a href="#pilot" class="btn btn-secondary" data-open-pilot-modal id="hero-cta-explore-pilot">Explore a Pilot →</a>
+        </div>
+
+        <div class="hero-proof-strip">
+          <span class="proof-point">
+            <span class="proof-icon">●</span>
+            On-Premise Runtime
+          </span>
+          <span class="proof-divider">·</span>
+          <span class="proof-point">
+            <span class="proof-icon">●</span>
+            No MES Replacement
+          </span>
+          <span class="proof-divider">·</span>
+          <span class="proof-point">
+            <span class="proof-icon">●</span>
+            Human-in-the-Loop
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         02 — THE MANUFACTURING BLINDSPOT
+    ============================================================ -->
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">The Manufacturing Blindspot</div>
+          <h2>Machines Are Instrumented.<br>Manual Assembly Often Isn't.</h2>
+          <p class="section-subtitle">
+            Modern factories instrument machines, sensors, MES and production data.
+            But many critical manual assembly steps still depend on operator checklists,
+            visual inspection, and signatures.
+          </p>
+          <p class="section-subtitle" style="margin-top: 12px; font-size: 1.05rem; color: var(--text-primary);">
+            When something goes wrong later, the question isn't only <em>what happened?</em><br>
+            It's: <strong style="color: var(--cyan);">"Can you prove what actually happened at the station?"</strong>
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <div class="problem-card instrumented">
+            <span class="card-tag instrumented">The Instrumented Line</span>
+            <h3>Machines Log Every Millisecond</h3>
+            <p>
+              Your MES and digital records track machine torque, temperature, and barcodes
+              down to the second. If a tool drifts, an alarm fires immediately.
+            </p>
+          </div>
+
+          <div class="problem-card blindspot">
+            <span class="card-tag blindspot">The Human Gap</span>
+            <h3>The Clipboard Blindspot</h3>
+            <p>
+              When an operator seats a seal, routes a harness, or tightens a critical fastener,
+              the entire proof is a checkmark and a signature on paper.
+            </p>
+          </div>
+
+          <div class="problem-card recall">
+            <span class="card-tag recall">The Audit Risk</span>
+            <h3>The Unprovable Audit Trail</h3>
+            <p>
+              When a defect escapes or a warranty claim arrives, engineering teams cannot
+              reconstruct what the operator actually saw or did — only that the box was signed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         03 — SEE IT WORK (Simulator — Primary Conversion Element)
+    ============================================================ -->
+    <section class="section sim-section" id="simulator" style="background: rgba(12, 14, 18, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Product Walkthrough</div>
+          <h2>See How the Verification Loop Works.</h2>
+          <p class="section-subtitle">
+            This is a prototype demonstration — not a live production deployment.
+            Walk through a simulated assembly station to see the verification flow,
+            step tracking, and exception handling before speaking to anyone.
+          </p>
+          <div class="sim-demo-disclaimer">⚠ This demonstration runs entirely in your browser using scripted scenarios — no real camera or hardware is connected.</div>
+        </div>
+
+        <!-- Workstation Simulator Widget -->
+        <div class="simulator-wrapper">
+          <div class="sim-header">
+            <div class="sim-scenarios">
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-right: 6px;">SCENARIOS:</span>
+              <button class="sim-tab-btn active" data-scenario="ev-battery">EV Battery Module</button>
+              <button class="sim-tab-btn" data-scenario="aerospace-harness">Aerospace Avionics Harness</button>
+              <button class="sim-tab-btn" data-scenario="gearbox-assembly">Precision Gearbox</button>
+            </div>
+            <div class="sim-status-badge">
+              <span class="status-dot"></span>
+              <span>Simulated Edge Runtime: Active</span>
+            </div>
+          </div>
+
+          <div class="sim-body-grid">
+            <!-- Viewport Canvas -->
+            <div class="sim-viewport-container">
+              <div class="sim-hud-overlay">
+                <div class="hud-pill">
+                  <span>CAMERA 01: TOP-DOWN VIEW (SIMULATED)</span>
+                </div>
+                <div class="hud-pill">
+                  <span>HUD FEED: <strong class="hud-fps">LIVE SIMULATION</strong></span>
+                </div>
+              </div>
+
+              <canvas id="simCanvas" class="sim-canvas"></canvas>
+
+              <!-- Action Controls -->
+              <div class="sim-control-bar">
+                <div class="sim-btn-group">
+                  <button id="simBtnNominal" class="sim-btn primary">▶ Nominal Cycle</button>
+                  <button id="simBtnDefect" class="sim-btn warning">⚠ Sequence Violation</button>
+                  <button id="simBtnOcclude" class="sim-btn">◎ Camera Obstruction</button>
+                </div>
+                <button id="simBtnReset" class="sim-btn reset">↺ Reset</button>
+              </div>
+            </div>
+
+            <!-- Sidebar: Steps & Hash Stream -->
+            <div class="sim-sidebar">
+              <div class="sim-sidebar-section">
+                <div class="sim-section-title">SOP Step Verification Rail</div>
+                <ul id="stepRailList" class="step-rail-list">
+                  <!-- Dynamically populated by simulator.js -->
+                </ul>
+              </div>
+
+              <div class="sim-sidebar-section">
+                <div class="sim-section-title">Cryptographic Evidence Ledger</div>
+                <div id="simLedgerStream" class="sim-ledger-stream">
+                  <!-- Dynamically populated by simulator.js -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         04 — WHAT CHANGES AT THE STATION? (Before/After Toggle)
+    ============================================================ -->
+    <section class="section" id="what-changes">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">The Difference on the Floor</div>
+          <h2>What Changes at the Station?</h2>
+          <p class="section-subtitle">
+            Elevenified-Vision sits alongside your existing production process.
+            No MES replacement. No line disruption. Just a digital layer over the step that wasn't captured before.
+          </p>
+        </div>
+
+        <!-- New side-by-side visual comparison layout -->
+        <div class="ba-split-wrapper">
+          <div class="ba-split-col ba-col-today">
+            <div class="ba-col-header">
+              <span class="ba-col-tag ba-tag-today">TODAY</span>
+              <h3>Without Digital Verification</h3>
+            </div>
+            <div class="ba-row-list">
+              <div class="ba-row ba-row-bad">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✗</span>
+                  <span class="ba-row-process">Operator performs step</span>
+                </div>
+                <span class="ba-row-outcome">Checklist &amp; manual signature only</span>
+              </div>
+              <div class="ba-row ba-row-bad">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✗</span>
+                  <span class="ba-row-process">Step completion recorded</span>
+                </div>
+                <span class="ba-row-outcome">Based on what operator reports</span>
+              </div>
+              <div class="ba-row ba-row-bad">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✗</span>
+                  <span class="ba-row-process">Audit trail</span>
+                </div>
+                <span class="ba-row-outcome">Paper / PDF — hard to search, hard to verify</span>
+              </div>
+              <div class="ba-row ba-row-bad">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✗</span>
+                  <span class="ba-row-process">Supervisor sign-off</span>
+                </div>
+                <span class="ba-row-outcome">Based on reported data, not observed</span>
+              </div>
+              <div class="ba-row ba-row-bad">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✗</span>
+                  <span class="ba-row-process">Defect or warranty claim arrives</span>
+                </div>
+                <span class="ba-row-outcome">"Did they actually perform the step?"</span>
+              </div>
+              <div class="ba-row ba-row-bad">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✗</span>
+                  <span class="ba-row-process">New operator guidance</span>
+                </div>
+                <span class="ba-row-outcome">No real-time visual step guidance</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ba-split-divider">
+            <div class="ba-split-divider-line"></div>
+            <div class="ba-split-divider-vs">VS</div>
+            <div class="ba-split-divider-line"></div>
+          </div>
+
+          <div class="ba-split-col ba-col-vision">
+            <div class="ba-col-header">
+              <span class="ba-col-tag ba-tag-vision">WITH ELEVENIFIED-VISION</span>
+              <h3>With Digital Verification</h3>
+            </div>
+            <div class="ba-row-list">
+              <div class="ba-row ba-row-good">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✓</span>
+                  <span class="ba-row-process">Operator performs step</span>
+                </div>
+                <span class="ba-row-outcome">Camera observes, rules verify in real time</span>
+              </div>
+              <div class="ba-row ba-row-good">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✓</span>
+                  <span class="ba-row-process">Step completion recorded</span>
+                </div>
+                <span class="ba-row-outcome">Timestamped digital record — objective, not reported</span>
+              </div>
+              <div class="ba-row ba-row-good">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✓</span>
+                  <span class="ba-row-process">Audit trail</span>
+                </div>
+                <span class="ba-row-outcome">Hash-linked records — searchable &amp; exportable</span>
+              </div>
+              <div class="ba-row ba-row-good">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✓</span>
+                  <span class="ba-row-process">Supervisor review</span>
+                </div>
+                <span class="ba-row-outcome">Based on observed data — every decision logged</span>
+              </div>
+              <div class="ba-row ba-row-good">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✓</span>
+                  <span class="ba-row-process">Defect or warranty claim arrives</span>
+                </div>
+                <span class="ba-row-outcome">Point-in-time evidence retrieved in seconds</span>
+              </div>
+              <div class="ba-row ba-row-good">
+                <div class="ba-row-left">
+                  <span class="ba-row-marker">✓</span>
+                  <span class="ba-row-process">New operator guidance</span>
+                </div>
+                <span class="ba-row-outcome">Real-time visual step prompts at the station</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         05 — HOW IT WORKS (6-Step Workflow)
+    ============================================================ -->
+    <section class="section" id="how-it-works" style="background: rgba(12, 14, 18, 0.35);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">The Verification Loop</div>
+          <h2>How It Works</h2>
+          <p class="section-subtitle">
+            Six steps from operator action to digital evidence.
+            Each step is deterministic — not probabilistic.
+          </p>
+        </div>
+
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <div class="workflow-step-num">01</div>
+            <div class="workflow-step-content">
+              <h3>Operator performs the step</h3>
+              <p>The operator works normally at their station. No wearables, no special tooling.</p>
+            </div>
+          </div>
+          <div class="workflow-connector"></div>
+
+          <div class="workflow-step">
+            <div class="workflow-step-num">02</div>
+            <div class="workflow-step-content">
+              <h3>Camera observes</h3>
+              <p>A mounted camera tracks parts, tools, and hand placement. Runs fully on-premise — no cloud, no latency.</p>
+            </div>
+          </div>
+          <div class="workflow-connector"></div>
+
+          <div class="workflow-step">
+            <div class="workflow-step-num">03</div>
+            <div class="workflow-step-content">
+              <h3>Rules verify</h3>
+              <p>A deterministic rule engine checks that the step happened in the correct sequence, location, and duration. No guessing.</p>
+            </div>
+          </div>
+          <div class="workflow-connector"></div>
+
+          <div class="workflow-step">
+            <div class="workflow-step-num">04</div>
+            <div class="workflow-step-content">
+              <h3>Exception detected</h3>
+              <p>If something doesn't match — wrong sequence, missing part, obstruction — the system signals immediately. The line is not stopped blindly.</p>
+            </div>
+          </div>
+          <div class="workflow-connector"></div>
+
+          <div class="workflow-step">
+            <div class="workflow-step-num">05</div>
+            <div class="workflow-step-content">
+              <h3>Human resolves</h3>
+              <p>The operator or supervisor reviews the exception. Their decision — including the reason — is recorded. Machines verify. Humans decide.</p>
+            </div>
+          </div>
+          <div class="workflow-connector"></div>
+
+          <div class="workflow-step">
+            <div class="workflow-step-num">06</div>
+            <div class="workflow-step-content">
+              <h3>Evidence recorded</h3>
+              <p>Every step, every timestamp, every exception and resolution is written to a hash-linked audit record. Available for export at any time.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progressive disclosure for engineers -->
+        <div class="tech-disclosure">
+          <button class="tech-disclosure-toggle" id="techDisclosureBtn" aria-expanded="false">
+            <span>For engineers — technical architecture details</span>
+            <span class="tech-disclosure-arrow">▸</span>
+          </button>
+          <div class="tech-disclosure-content" id="techDisclosureContent">
+            <div class="pillars-grid">
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                </div>
+                <h3>Real-Time Edge Computer Vision</h3>
+                <p>Tracks parts, tools, and hand placement at the assembly station. Runs locally on workstation hardware — no cloud dependency.</p>
+                <span class="pillar-metric-tag">On-Device Local Processing</span>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <h3>Deterministic Rule Engine</h3>
+                <p>Verifies steps using deterministic state logic — step order, hold times, spatial positions. Predictable and auditable by design.</p>
+                <span class="pillar-metric-tag">Rule-based, not generative AI</span>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <h3>Hash-Linked Evidence Ledger</h3>
+                <p>Mathematically links timestamps, step outcomes, and supervisor sign-offs. Designed around established data-integrity principles.</p>
+                <span class="pillar-metric-tag">SHA-256 Hash-Chained Records</span>
+              </div>
+
+              <div class="pillar-card">
+                <div class="pillar-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <h3>No-Code SOP Authoring Studio</h3>
+                <p>Record a standard assembly run, outline target regions on screen, and compile station inspection rules — without writing code.</p>
+                <span class="pillar-metric-tag">Designed for rapid teach-in</span>
+              </div>
+            </div>
+
+            <div class="arch-constraints-strip">
+              <div class="arch-constraint-item">
+                <span class="arch-constraint-label">Deployment</span>
+                <span class="arch-constraint-val">Runtime: on-premise, offline-compatible once configured</span>
+              </div>
+              <div class="arch-constraint-item">
+                <span class="arch-constraint-label">Hardware</span>
+                <span class="arch-constraint-val">Works with standard edge hardware · Specific requirements confirmed during pilot setup</span>
+              </div>
+              <div class="arch-constraint-item">
+                <span class="arch-constraint-label">Data integrity</span>
+                <span class="arch-constraint-val">Designed around established data-integrity principles</span>
+              </div>
+              <div class="arch-constraint-item">
+                <span class="arch-constraint-label">MES integration</span>
+                <span class="arch-constraint-val">JSON / CSV export from Supervisor UI · Purpose-built connectors on roadmap</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         06 — MACHINES VERIFY. HUMANS DECIDE.
+    ============================================================ -->
+    <section class="section" id="trust">
+      <div class="container">
+        <div class="trust-banner">
+          <div class="trust-quote">
+            <div class="section-eyebrow" style="margin-bottom: 12px;">Human-in-the-Loop</div>
+            <h3>Machines Verify.<br>Humans Decide.</h3>
+            <p>
+              Elevenified-Vision is designed to support operators and supervisors — not replace them.
+              The system detects the defined assembly condition, signals exceptions, and records human decisions when intervention is required.
+            </p>
+            <p style="margin-top: 12px; font-size: 0.95rem; color: var(--text-muted);">
+              The line is never stopped blindly by the system. Every override, confirmation,
+              and supervisor resolution is recorded with credentials and tied to the unit record.
+            </p>
+          </div>
+
+          <div class="trust-points">
+            <div class="trust-point-item">
+              <div class="trust-point-icon">✓</div>
+              <div>
+                <h4>Advisory, Non-Gating Signaling</h4>
+                <p>If camera visibility dips or hands partially block the view, the line never halts blindly. The system escalates to an operator visual check.</p>
+              </div>
+            </div>
+
+            <div class="trust-point-item">
+              <div class="trust-point-icon">✓</div>
+              <div>
+                <h4>Supervisor Review Queue</h4>
+                <p>Uncertain cycles are routed to an asynchronous supervisor review queue — preserving line takt time while maintaining full inspection coverage.</p>
+              </div>
+            </div>
+
+            <div class="trust-point-item">
+              <div class="trust-point-icon">✓</div>
+              <div>
+                <h4>Human Attestation Recorded</h4>
+                <p>Every manual override, confirmation, or supervisor resolution is recorded with user credentials and tied to the permanent unit record.</p>
+              </div>
+            </div>
+
+            <div class="trust-point-item">
+              <div class="trust-point-icon">✓</div>
+              <div>
+                <h4>AI Where It Accelerates. Rules Where It Decides.</h4>
+                <p>AI assists during initial SOP teach-in to draft step definitions with human engineers in the loop. On the live floor, verification runs purely on deterministic, auditable rules — never opaque models.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         07 — FOUNDER CREDIBILITY
+    ============================================================ -->
+    <section class="section founder-section" id="founder" style="background: rgba(12, 14, 18, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Built by an Enterprise Technology Practitioner</div>
+          <h2>Built from 15+ Years of<br>Enterprise Technology Experience.</h2>
+          <p class="section-subtitle">
+            Elevenified-Vision is being built by a founder with 15+ years of experience
+            working with enterprise customers across technology, digitization, and automation initiatives.
+            That experience shaped a simple belief: industrial technology has to work within real operational
+            environments — not just in a lab or demo.
+          </p>
+        </div>
+
+        <div class="founder-cred-strip">
+          <div class="founder-cred-item">
+            <div class="founder-cred-num">15+</div>
+            <div class="founder-cred-label">Years of enterprise technology experience</div>
+          </div>
+          <div class="founder-cred-divider"></div>
+          <div class="founder-cred-item">
+            <div class="founder-cred-num">✦</div>
+            <div class="founder-cred-label">Digitization + Automation<br>helping enterprise customers modernize operational processes</div>
+          </div>
+          <div class="founder-cred-divider"></div>
+          <div class="founder-cred-item">
+            <div class="founder-cred-num">→</div>
+            <div class="founder-cred-label">Now: Manufacturing<br>applying that experience to manual assembly verification</div>
+          </div>
+        </div>
+
+        <div class="founder-card-expanded">
+          <div class="founder-avatar-block">
+            <div class="founder-avatar-circle">S</div>
+            <div class="founder-identity">
+              <div class="founder-name-lg">Siddharth</div>
+              <div class="founder-role-lg">Founder, Elevenified</div>
+              <a href="mailto:siddharth@elevenified.com" class="founder-email-link">siddharth@elevenified.com</a>
+            </div>
+          </div>
+          <div class="founder-quote-block">
+            <div class="founder-quote-text">
+              "We built Elevenified-Vision because the hardest, most variable part of modern manufacturing is still verified with a pen. If you run a high-precision line where defect escape is not an option, we'd like to install a pilot station on your floor."
+            </div>
+          </div>
+        </div>
+
+        <div class="trust-indicator-bar">
+          <span class="trust-indicator-item">DPIIT Recognized</span>
+          <span class="trust-indicator-sep">·</span>
+          <span class="trust-indicator-item">Indian Company</span>
+          <span class="trust-indicator-sep">·</span>
+          <span class="trust-indicator-item">On-Premise Architecture</span>
+          <span class="trust-indicator-sep">·</span>
+          <span class="trust-indicator-item">Working Prototype</span>
+          <span class="trust-indicator-sep">·</span>
+          <span class="trust-indicator-item">Founder-Led Engineering</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         08 — WHAT'S BUILT TODAY (Feature Status with Filter)
+    ============================================================ -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Engineering Transparency</div>
+          <h2>What's Built Today</h2>
+          <p class="section-subtitle">
+            An honest view of where the platform is. Every feature below is labeled by its
+            actual state — not by where we want it to be.
+          </p>
+        </div>
+
+        <div class="feature-filter-bar" role="tablist" aria-label="Filter features by status">
+          <button class="feature-filter-btn active" data-filter="all" role="tab" aria-selected="true" id="filter-all">All</button>
+          <button class="feature-filter-btn" data-filter="demonstrated" role="tab" aria-selected="false" id="filter-demonstrated">🟢 Built</button>
+          <button class="feature-filter-btn" data-filter="in-validation" role="tab" aria-selected="false" id="filter-in-validation">🔵 In Validation</button>
+          <button class="feature-filter-btn" data-filter="pilot-dependent" role="tab" aria-selected="false" id="filter-pilot-dependent">🟡 Pilot-Dependent</button>
+        </div>
+
+        <div class="feature-wall-grid">
+          <div class="wall-card" data-status="demonstrated">
+            <div class="wall-card-header">
+              <span class="wall-card-title">Deterministic Temporal Rule Engine</span>
+              <span class="status-badge demonstrated">🟢 BUILT</span>
+            </div>
+            <p class="wall-card-desc">Evaluates step order, hold times, and spatial positions using deterministic, predictable state logic.</p>
+          </div>
+
+          <div class="wall-card" data-status="demonstrated">
+            <div class="wall-card-header">
+              <span class="wall-card-title">SHA-256 Hash-Linked Evidence Ledger</span>
+              <span class="status-badge demonstrated">🟢 BUILT</span>
+            </div>
+            <p class="wall-card-desc">Creates hash-chained records mathematically binding timestamps, step outcomes, and supervisor sign-offs.</p>
+          </div>
+
+          <div class="wall-card" data-status="demonstrated">
+            <div class="wall-card-header">
+              <span class="wall-card-title">Studio Visual SOP Authoring &amp; Teach-In</span>
+              <span class="status-badge demonstrated">🟢 BUILT</span>
+            </div>
+            <p class="wall-card-desc">Record a standard assembly run, outline target regions on screen, and compile station inspection rules automatically.</p>
+          </div>
+
+          <div class="wall-card" data-status="demonstrated">
+            <div class="wall-card-header">
+              <span class="wall-card-title">Multi-Site Fleet Control Plane</span>
+              <span class="status-badge demonstrated">🟢 BUILT</span>
+            </div>
+            <p class="wall-card-desc">Manage plant sites, line stations, and inspection rules across multiple factory locations from a unified dashboard.</p>
+          </div>
+
+          <div class="wall-card" data-status="demonstrated">
+            <div class="wall-card-header">
+              <span class="wall-card-title">Station Serial &amp; Unit Tracking</span>
+              <span class="status-badge demonstrated">🟢 BUILT</span>
+            </div>
+            <p class="wall-card-desc">Associates each inspection cycle with a specific serialized unit ID entered at the operator station.</p>
+          </div>
+
+          <div class="wall-card" data-status="demonstrated">
+            <div class="wall-card-header">
+              <span class="wall-card-title">Point-in-Time JSON &amp; CSV Audit Exports</span>
+              <span class="status-badge demonstrated">🟢 BUILT</span>
+            </div>
+            <p class="wall-card-desc">Export verified evidence records in structured JSON or CSV format directly from the Supervisor UI.</p>
+          </div>
+
+          <div class="wall-card" data-status="in-validation">
+            <div class="wall-card-header">
+              <span class="wall-card-title">On-Device Industrial Edge Hardware</span>
+              <span class="status-badge in-validation">🔵 IN VALIDATION</span>
+            </div>
+            <p class="wall-card-desc">Testing on industrial PCs and embedded edge devices with standard USB3 and network IP cameras.</p>
+          </div>
+
+          <div class="wall-card" data-status="in-validation">
+            <div class="wall-card-header">
+              <span class="wall-card-title">Zero-Lock Camera Sharing</span>
+              <span class="status-badge in-validation">🔵 IN VALIDATION</span>
+            </div>
+            <p class="wall-card-desc">Shared-memory frame server allows live inspection, teach-in recording, and supervisor preview to share one camera without device lockouts.</p>
+          </div>
+
+          <div class="wall-card" data-status="pilot-dependent">
+            <div class="wall-card-header">
+              <span class="wall-card-title">Industry-Specific Object Libraries</span>
+              <span class="status-badge pilot-dependent">🟡 PILOT-DEPENDENT</span>
+            </div>
+            <p class="wall-card-desc">Pre-built part and tool class libraries for specific manufacturing domains. Custom libraries are definable in Studio today; starter packs require pilot workflows to build.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         09 — FOUNDING PILOT PROGRAM
+    ============================================================ -->
+    <section class="section" id="pilot" style="background: rgba(12, 14, 18, 0.4);">
+      <div class="container">
+        <div class="pilot-cta-box">
+          <div class="section-eyebrow" style="margin-bottom: 16px;">Founding Pilot Program</div>
+          <h2>Looking for 3–5<br>Manufacturing Pilot Partners</h2>
+          <p>
+            Elevenified-Vision is moving from engineering validation to real-world factory validation.
+            We're looking for a small number of manufacturing teams willing to test the system on a real assembly process.
+          </p>
+          <p style="margin-top: 8px;">
+            <strong>Ideal pilot:</strong> one station, one process, one measurable problem.
+          </p>
+
+          <!-- What We Bring / What Partner Provides -->
+          <div class="pilot-exchange-grid">
+            <div class="pilot-exchange-card">
+              <div class="pilot-exchange-heading">What we bring</div>
+              <ul class="pilot-exchange-list">
+                <li>Vision system &amp; camera setup</li>
+                <li>Verification workflow configuration</li>
+                <li>Local / on-premise deployment</li>
+                <li>SOP teach-in &amp; rule compilation</li>
+                <li>Audit &amp; evidence generation</li>
+                <li>Founder-led engineering support</li>
+              </ul>
+            </div>
+            <div class="pilot-exchange-card">
+              <div class="pilot-exchange-heading">What the partner provides</div>
+              <ul class="pilot-exchange-list">
+                <li>One suitable assembly or inspection process</li>
+                <li>Access to the station &amp; environment</li>
+                <li>Operator &amp; process feedback</li>
+                <li>A defined validation period</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 4-Step Pilot Progression -->
+          <div class="pilot-steps-row">
+            <div class="pilot-step-item">
+              <div class="pilot-step-num">1</div>
+              <div class="pilot-step-text"><strong>Select one process</strong><br>Identify a repetitive manual assembly or inspection step.</div>
+            </div>
+            <div class="pilot-step-arrow">→</div>
+            <div class="pilot-step-item">
+              <div class="pilot-step-num">2</div>
+              <div class="pilot-step-text"><strong>Configure the station</strong><br>Camera, workstation, and verification rules.</div>
+            </div>
+            <div class="pilot-step-arrow">→</div>
+            <div class="pilot-step-item">
+              <div class="pilot-step-num">3</div>
+              <div class="pilot-step-text"><strong>Run alongside production</strong><br>Validate against real operators and real conditions.</div>
+            </div>
+            <div class="pilot-step-arrow">→</div>
+            <div class="pilot-step-item">
+              <div class="pilot-step-num">4</div>
+              <div class="pilot-step-text"><strong>Measure the result</strong><br>Verification accuracy, exceptions, and audit evidence.</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px;">
+            <a href="#pilot" class="btn btn-primary" data-open-pilot-modal id="pilot-apply-btn">Apply for Pilot Partnership</a>
+            <a href="mailto:siddharth@elevenified.com?subject=Elevenified-Vision%20Pilot%20Inquiry" class="btn btn-secondary" id="pilot-email-btn">✉ Talk to the Founder</a>
+          </div>
+
+          <div class="founder-signature-card">
+            <div class="founder-quote">
+              "We built Elevenified-Vision because the hardest, most variable part of modern manufacturing is still verified with a pen. If you run a high-precision line where defect escape is not an option, we'd love to install a pilot station on your floor."
+            </div>
+            <div class="founder-meta">
+              <span class="founder-name">Siddharth</span>
+              <span class="founder-title">Founder, Elevenified &bull; <a href="mailto:siddharth@elevenified.com" style="color: var(--cyan); text-decoration: none;">siddharth@elevenified.com</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         10 — FAQ (Manufacturing-First)
+    ============================================================ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Common Questions</div>
+          <h2>What Manufacturing Teams Ask</h2>
+          <p class="section-subtitle">
+            Plain answers to the questions plant managers, operations leads, and quality engineers ask first.
+          </p>
+        </div>
+
+        <div class="faq-list">
+
+          <!-- Manufacturing-first questions -->
+          <div class="faq-group-label">Operations &amp; Deployment</div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Is this going to stop my production line?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                No. The system is designed to signal, not to gate. If the camera loses confidence — obstruction, lighting change, partial occlusion — the cycle is escalated to a supervisor review queue rather than halting the line. Production continues while the exception is reviewed asynchronously.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Do I need to replace my existing MES or quality system?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                No. Elevenified-Vision is designed to sit alongside your existing systems — not replace them. It generates JSON and CSV audit exports that your team can import into existing MES, SCADA, or EBR systems. You start at one station. Nothing else changes.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Does production data leave the factory?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Production data does not leave the factory. The runtime — what operators interact with at the station — runs locally and does not transmit production records externally. Device registration and SOP configuration require connectivity, but both are setup activities that happen before production begins. Once configured, day-to-day verification data stays on your factory hardware.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can we start with only one workstation?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Yes. That's the intended starting point. One process, one station, one measurable problem. The pilot is designed to be minimal footprint: one camera at the workstation, SOP configured for that specific step. No plant-wide rollout required to validate.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What kinds of assembly processes are suitable?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Good first candidates: manual assembly verification, correct part placement, fastener sequence verification, connector and harness assembly, presence/absence checks, and final manual inspection steps. The common thread is: a repeatable, defined step where the current proof is a checklist or signature.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What does a pilot actually involve?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                We identify one process together, configure the station, and run the system alongside your existing production — not instead of it. The founder is directly involved in setup and support. At the end, you have a clear measurement of verification accuracy, exceptions flagged, and a complete digital audit trail for that process.
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical questions -->
+          <div class="faq-group-label" style="margin-top: 32px;">Technical Questions</div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How long does it take to set up a new assembly step or station?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Elevenified-Vision Studio is designed so that authoring a new manual assembly SOP takes hours, not months — not weeks of integration work. An engineer records a golden-run assembly, outlines target regions on screen, and the rule compiler generates the station inspection profile. We'll validate actual setup time as part of the pilot.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Where does AI fit in, and does it make verification decisions on the line?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                AI is strictly an acceleration tool during configuration — it never makes verification decisions on your live production line. We use AI during SOP authoring and visual teach-in to help engineers outline target regions, recommend temporal hold times, and generate draft step criteria with human engineers always in the loop. Once compiled into a station profile, verification runs 100% on explicit, deterministic state rules.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What happens if lighting changes or hands block the camera?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                The line is never halted blindly by a visual noise event. If confidence drops below a defined threshold, the system flags the cycle for supervisor review rather than stopping production. The operator can continue; the supervisor reviews the flagged cycle asynchronously and records their decision.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What edge hardware and camera specifications are required?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Hardware requirements are confirmed during pilot setup and depend on the specific process, workstation geometry, and environment. The system is designed to work with standard, widely-available industrial edge hardware and cameras — not proprietary equipment. We size this together during the pilot scoping conversation.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How does Elevenified-Vision integrate with our existing MES, EBR, or quality systems?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                Elevenified-Vision provides human-readable audit reports and downloadable JSON/CSV data extracts through the Supervisor UI — structured files your team can import into existing MES, SCADA, or Electronic Batch Record systems. Purpose-built, turnkey connectors for specific platforms are on the roadmap, not available today.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Is Elevenified-Vision internet-connected or require cloud access?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" role="region">
+              <div class="faq-answer-inner">
+                The runtime — what workers use at the station during production — is offline-compatible once the device is registered and the process is configured. Initial device registration and SOP configuration require internet connectivity. But these are one-time setup steps. After that, production verification, evidence recording, and operator guidance all run locally with no internet dependency.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       SITE FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="brand-logo" style="margin-bottom: 12px;">
+            <div class="brand-icon">
+              <img src="assets/icons/master-icon.svg" alt="Elevenified" width="28" height="28" />
+            </div>
+            <span class="brand-title">Elevenified</span>
+            <span class="brand-tag">VISION</span>
+          </a>
+          <p>
+            Digital verification for manual manufacturing.<br>
+            On-premise computer vision that creates a digital record of what happened at the station.
+          </p>
+          <p class="footer-status-note">
+            Pre-pilot · Seeking founding manufacturing partners · 2026
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Platform</h4>
+          <ul class="footer-links">
+            <li><a href="#problem">The Problem</a></li>
+            <li><a href="#simulator">See It Work</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#features">Feature Status</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Pilot</h4>
+          <ul class="footer-links">
+            <li><a href="#pilot" data-open-pilot-modal>Apply for Pilot</a></li>
+            <li><a href="#founder">About the Founder</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:siddharth@elevenified.com?subject=Elevenified-Vision%20Contact">siddharth@elevenified.com</a></li>
+            <li><a href="#pilot" data-open-pilot-modal>Founding Pilot Intake</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Elevenified. All rights reserved.</div>
+        <div>Elevenified-Vision · Digital verification for manual manufacturing.</div>
+      </div>
     </div>
+  </footer>
 
-    <div class="nav-arrows">
-        <button class="nav-arrow" id="prev-btn">←</button>
-        <button class="nav-arrow" id="next-btn">→</button>
+  <!-- ============================================================
+       FLOATING STICKY CTA
+  ============================================================ -->
+  <div class="floating-cta" id="floatingCta" aria-hidden="true">
+    <div class="floating-cta-inner">
+      <span class="floating-cta-text">Have a process worth testing?</span>
+      <a href="#pilot" class="floating-cta-link" data-open-pilot-modal>Talk to us →</a>
     </div>
+    <button class="floating-cta-close" id="floatingCtaClose" aria-label="Dismiss">×</button>
+  </div>
 
-    <script>
-        let currentSlide = 1;
-        const totalSlides = 12;
+  <!-- ============================================================
+       PILOT INTAKE MODAL
+  ============================================================ -->
+  <div id="pilotModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="pilotModalTitle" aria-modal="true">
+    <div class="modal-card">
+      <button id="closePilotModal" class="modal-close" aria-label="Close Modal">&times;</button>
+      <div class="section-eyebrow">Founding Pilot Program</div>
+      <h3 id="pilotModalTitle" style="font-size: 1.5rem; margin-bottom: 6px;">Apply for Factory Pilot</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 12px;">
+        Connect directly with the founder to evaluate a pilot station on your assembly floor.
+        One station. One process. No MES replacement.
+      </p>
 
-        function showSlide(n) {
-            if (n < 1) n = 1;
-            if (n > totalSlides) n = totalSlides;
+      <div style="background: rgba(0, 229, 255, 0.06); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 18px; font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <span>Direct Email: <strong style="color: var(--text-primary);">siddharth@elevenified.com</strong></span>
+        <a href="mailto:siddharth@elevenified.com?subject=Elevenified-Vision%20Pilot%20Inquiry" style="color: var(--cyan); text-decoration: none; font-weight: 600;">✉ Direct Mail →</a>
+      </div>
 
-            currentSlide = n;
+      <form id="pilotIntakeForm" class="intake-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="intakeName">Full Name *</label>
+          <input type="text" id="intakeName" class="form-input" placeholder="e.g. Priya Sharma" required autocomplete="name">
+        </div>
 
-            document.querySelectorAll('.slide').forEach((slide, i) => {
-                slide.classList.remove('active');
-                if (i === n - 1) slide.classList.add('active');
-            });
+        <div class="form-group">
+          <label class="form-label" for="intakeCompany">Company *</label>
+          <input type="text" id="intakeCompany" class="form-input" placeholder="e.g. Apex Manufacturing" required autocomplete="organization">
+        </div>
 
-            document.querySelectorAll('.nav-dot').forEach((dot, i) => {
-                dot.classList.remove('active');
-                if (i === n - 1) dot.classList.add('active');
-            });
+        <div class="form-group">
+          <label class="form-label" for="intakeRole">Your Role *</label>
+          <select id="intakeRole" class="form-select" required>
+            <option value="">Select your role</option>
+            <option value="plant-head">Plant Head / VP Operations</option>
+            <option value="mfg-engineer">Manufacturing / Process Engineer</option>
+            <option value="quality">Quality Manager / Director</option>
+            <option value="ops-manager">Operations Manager</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
 
-            document.getElementById('current-slide').textContent = n;
+        <div class="form-group">
+          <label class="form-label" for="intakeIndustry">Industry</label>
+          <select id="intakeIndustry" class="form-select">
+            <option value="automotive">Automotive / EV</option>
+            <option value="aerospace">Aerospace / Defence</option>
+            <option value="medtech">Medical Devices</option>
+            <option value="electronics">Precision Electronics</option>
+            <option value="industrial">Industrial Equipment</option>
+            <option value="other">Other Manufacturing</option>
+          </select>
+        </div>
 
-            // Handle branding logo visibility (hide on first slide)
-            const brandingLogo = document.querySelector('.branding-logo');
-            if (brandingLogo) {
-                if (n === 1) {
-                    brandingLogo.style.opacity = '0';
-                    brandingLogo.style.pointerEvents = 'none';
-                } else {
-                    brandingLogo.style.opacity = '1';
-                    brandingLogo.style.pointerEvents = 'auto';
-                }
-            }
-        }
+        <div class="form-group">
+          <label class="form-label" for="intakeProcess">What process would you like to evaluate?</label>
+          <input type="text" id="intakeProcess" class="form-input" placeholder="e.g. connector harness assembly, fastener sequence on battery module">
+        </div>
 
-        document.getElementById('prev-btn').addEventListener('click', () => showSlide(currentSlide - 1));
-        document.getElementById('next-btn').addEventListener('click', () => showSlide(currentSlide + 1));
+        <div class="form-group">
+          <label class="form-label" for="intakeEmail">Work Email *</label>
+          <input type="email" id="intakeEmail" class="form-input" placeholder="priya@company.com" required autocomplete="email">
+        </div>
 
-        document.querySelectorAll('.nav-dot').forEach(dot => {
-            dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.slide)));
-        });
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;" id="pilotSubmitBtn">
+          Submit Application via Email
+        </button>
+      </form>
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') showSlide(currentSlide + 1);
-            if (e.key === 'ArrowLeft') showSlide(currentSlide - 1);
-        });
+      <div id="intakeSuccessBanner" class="form-success-banner">
+        <h4>✓ Pilot Application Prepared</h4>
+        <p style="font-size: 0.88rem; margin: 8px 0 12px 0; color: var(--text-secondary);">
+          Your application has been formatted and your email client has been opened to send directly to <strong>siddharth@elevenified.com</strong>.
+        </p>
+        <div id="fallbackMailtoContainer" style="margin-top: 12px;"></div>
+      </div>
+    </div>
+  </div>
 
-        let touchStartX = 0;
-        document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
-        document.addEventListener('touchend', e => {
-            const diff = touchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) showSlide(currentSlide + 1);
-                else showSlide(currentSlide - 1);
-            }
-        });
-
-        showSlide(1);
-    </script>
+  <!-- Scripts -->
+  <script src="js/simulator.js"></script>
+  <script src="js/app.js"></script>
 </body>
-
-<!-- Video Modal -->
-<div class="video-modal" id="video-modal" role="dialog" aria-modal="true">
-    <div class="modal-content">
-        <button class="modal-close" id="close-modal" aria-label="Close modal">&times;</button>
-        <video class="modal-video" id="demo-video" controls playsinline>
-            <source src="assets/video/quick-demo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const modal = document.getElementById('video-modal');
-        const openBtn = document.getElementById('open-demo-btn');
-        const closeBtn = document.getElementById('close-modal');
-        const video = document.getElementById('demo-video');
-
-        function openModal() {
-            modal.classList.add('open');
-            video.play().catch(e => console.log('Autoplay prevented:', e));
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
-
-        function closeModal() {
-            modal.classList.remove('open');
-            video.pause();
-            video.currentTime = 0;
-            document.body.style.overflow = '';
-        }
-
-        if (openBtn) {
-            openBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openModal();
-            });
-        }
-
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeModal);
-        }
-
-        // Close on backdrop click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('open')) {
-                closeModal();
-            }
-        });
-    });
-</script>
-</body>
-
 </html>
